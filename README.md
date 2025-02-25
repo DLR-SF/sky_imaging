@@ -5,7 +5,7 @@ Overview
 ------------------------------
 This repository provides a comprehensive set of tools for processing and analyzing all-sky images. It includes utilities for data acquisition, preprocessing, anomaly detection, geometric calibration, and combining sky images with sensor data for advanced analysis and visualization. Designed for machine learning (ML) applications, atmospheric studies, and environmental monitoring, this toolkit streamlines the workflow from raw data to meaningful insights.
 
-A detailed documentation can be found [here](https://dlr-sf.github.com/sky_imaging)
+A detailed documentation can be found [here](https://dlr-sf.github.io/sky_imaging)
 
 Features
 ------------------------------

@@ -1,0 +1,21 @@
+
+name: Page deployment
+on: [push]
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+      - name: Install dependencies
+        run: pip install sphinx myst-parser sphinx-autoapi sphinx-jsonschema
+      - name: Sphinx build
+        run: sphinx-build --keep-going docs _build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_branch: gh-pages
+          publish_dir: _build/
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force_orphan: true
