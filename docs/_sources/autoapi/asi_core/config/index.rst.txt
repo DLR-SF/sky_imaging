@@ -1,0 +1,56 @@
+asi_core.config
+===============
+
+.. py:module:: asi_core.config
+
+.. autoapi-nested-parse::
+
+   Configuration for ASI tasks
+
+   The configuration is expected to be stored as `pyranocam.yaml` in the current directory.
+   It should be formatted as YAML file.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   asi_core.config._config
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   asi_core.config.load_config
+   asi_core.config.get
+
+
+Module Contents
+---------------
+
+.. py:data:: _config
+   :value: None
+
+
+.. py:function:: load_config(filename: Union[str, pathlib.Path, None] = None) -> None
+
+   Load PyranoCam configuration from the given filename or the default location.
+
+   :param filename: Where to load configuration from. If nothing is given, ``pyranocam.yaml`` is asserted.
+
+
+.. py:function:: get(key: Optional[str] = None, default: Any = None) -> Any
+
+   Retrieve a configuration value.
+
+   If configuration is not yet loaded, this is done automatically.
+
+   :param key: Name of the configuration section to load. If nothing is passed, the whole config dict will be returned.
+   :param default: Default value to return if the key is not present.
+   :return: The requested configuration section.
+
+

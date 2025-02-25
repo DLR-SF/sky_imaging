@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>asi_core.visualization.timeseries &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="asi_core.visualization.video" href="../video/index.html" />
+    <link rel="prev" title="asi_core.visualization.masking" href="../masking/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../video/index.html" title="asi_core.visualization.video"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../masking/index.html" title="asi_core.visualization.masking"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >asi_core</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" accesskey="U">asi_core.visualization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.visualization.timeseries</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-asi_core.visualization.timeseries">
+<span id="asi-core-visualization-timeseries"></span><h1>asi_core.visualization.timeseries<a class="headerlink" href="#module-asi_core.visualization.timeseries" title="Link to this heading">¶</a></h1>
+<p>This module provides functions to visualize timeseries data.</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.visualization.timeseries.heatmap_missing_data" title="asi_core.visualization.timeseries.heatmap_missing_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">heatmap_missing_data</span></code></a>(missing_timestamps[, start_date, ...])</p></td>
+<td><p>Generate a heatmap displaying the distribution of missing data over time.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.visualization.timeseries.plot_data_distributions" title="asi_core.visualization.timeseries.plot_data_distributions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_data_distributions</span></code></a>(df, columns, n_rows[, df_ref, ...])</p></td>
+<td><p>Plot histogram of data in subplots.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.visualization.timeseries.heatmap_missing_data">
+<span class="sig-prename descclassname"><span class="pre">asi_core.visualization.timeseries.</span></span><span class="sig-name descname"><span class="pre">heatmap_missing_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">missing_timestamps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hour'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'date'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.timeseries.heatmap_missing_data" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a heatmap displaying the distribution of missing data over time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>missing_timestamps</strong> (<em>pandas.Series</em>) – A pandas Series of timestamps representing missing data occurrences.</p></li>
+<li><p><strong>start_date</strong> (<em>str</em><em> or </em><em>datetime</em><em>, </em><em>optional</em>) – The start of the time range for the heatmap. Defaults to the earliest timestamp in <cite>missing_timestamps</cite>.</p></li>
+<li><p><strong>end_date</strong> (<em>str</em><em> or </em><em>datetime</em><em>, </em><em>optional</em>) – The end of the time range for the heatmap. Defaults to the latest timestamp in <cite>missing_timestamps</cite>.</p></li>
+<li><p><strong>hour_min</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum hour of the day to include in the heatmap (default is 6).</p></li>
+<li><p><strong>hour_max</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum hour of the day to include in the heatmap (default is 20).</p></li>
+<li><p><strong>y_dim</strong> (<em>str</em><em>, </em><em>optional</em>) – The variable to use for the y-axis (default is ‘hour’).</p></li>
+<li><p><strong>x_dim</strong> (<em>str</em><em>, </em><em>optional</em>) – The variable to use for the x-axis (default is ‘date’).</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – The title of the heatmap. Defaults to ‘Heatmap of Missing Data’.</p></li>
+<li><p><strong>interactive</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, generates an interactive heatmap using <cite>hvplot</cite>; otherwise, generates a static heatmap using <cite>seaborn</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A heatmap figure displaying missing data patterns over time.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure or holoviews.element.HeatMap</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.visualization.timeseries.plot_data_distributions">
+<span class="sig-prename descclassname"><span class="pre">asi_core.visualization.timeseries.</span></span><span class="sig-name descname"><span class="pre">plot_data_distributions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(20,</span> <span class="pre">12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.timeseries.plot_data_distributions" title="Link to this definition">¶</a></dt>
+<dd><p>Plot histogram of data in subplots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – dataframe containing timeseries data.</p></li>
+<li><p><strong>columns</strong> – list of column names.</p></li>
+<li><p><strong>n_rows</strong> – number of rows in figure.</p></li>
+<li><p><strong>df_ref</strong> – reference dataframe (requires the same columns).</p></li>
+<li><p><strong>figsize</strong> – figure size.</p></li>
+<li><p><strong>title</strong> – title of figure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>figure object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">asi_core.visualization.timeseries</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#asi_core.visualization.timeseries.heatmap_missing_data"><code class="docutils literal notranslate"><span class="pre">heatmap_missing_data()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.timeseries.plot_data_distributions"><code class="docutils literal notranslate"><span class="pre">plot_data_distributions()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../masking/index.html"
+                          title="previous chapter">asi_core.visualization.masking</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../video/index.html"
+                          title="next chapter">asi_core.visualization.video</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/autoapi/asi_core/visualization/timeseries/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../video/index.html" title="asi_core.visualization.video"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../masking/index.html" title="asi_core.visualization.masking"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >asi_core</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" >asi_core.visualization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.visualization.timeseries</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

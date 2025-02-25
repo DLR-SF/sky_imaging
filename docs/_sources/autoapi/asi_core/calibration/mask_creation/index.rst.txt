@@ -1,0 +1,137 @@
+asi_core.calibration.mask_creation
+==================================
+
+.. py:module:: asi_core.calibration.mask_creation
+
+.. autoapi-nested-parse::
+
+   A small tool to create ASI masks manually.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   asi_core.calibration.mask_creation.parser
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   asi_core.calibration.mask_creation.ObstacleMaskDetection
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   asi_core.calibration.mask_creation.adjust_gamma
+
+
+Module Contents
+---------------
+
+.. py:function:: adjust_gamma(image, gamma=1.0)
+
+   Only for improved visibility, for radiometric evaluations reconsider
+
+   Taken from https://pyimagesearch.com/2015/10/05/opencv-gamma-correction/
+
+   Build a lookup table mapping the pixel values [0, 255] to their adjusted gamma values and apply it.
+
+   :param image: Input RGB image
+   :param gamma: Gamma scalar parameter
+   :return: Gamma-corrected image
+
+
+.. py:class:: ObstacleMaskDetection
+
+   Handles the manual creation of an ASI mask to obscure obstacles in the ASI's field of view
+
+
+   .. py:attribute:: max_intensity
+
+
+   .. py:attribute:: params_cv_detection
+
+
+   .. py:attribute:: image_pxl_size
+
+
+   .. py:attribute:: image_path
+
+
+   .. py:attribute:: save_name
+
+
+   .. py:attribute:: orig_img
+
+
+   .. py:attribute:: mask
+
+
+   .. py:attribute:: gui_add_to_mask
+      :value: [[]]
+
+
+
+   .. py:attribute:: gui_remove_from_mask
+      :value: [[]]
+
+
+
+   .. py:attribute:: gui_previous_event
+      :value: None
+
+
+
+   .. py:method:: detect_mask_cv(params=None)
+
+      Applies computer vision methods to automatically detect a mask of obstacles obscuring the sky in the ASI image.
+
+      :param params: Configuration parameters to the algorithm
+      :return: automatically detected mask, dtype boolean, shape of greyscaled RGB input image
+
+
+
+   .. py:method:: click_and_crop(event, x, y, f, cb)
+
+      From user clicks polygons are created indicating image areas to be masked or not.
+
+
+
+   .. py:method:: apply_polygons()
+
+      Area inside polygon specified by the user is added to or removed from the mask.
+
+
+
+   .. py:method:: refine_manually()
+
+      Lets user specify image regions to be added or removed from mask.
+
+
+
+   .. py:method:: apply_mask()
+
+      Applies mask to image used for mask creation
+
+
+
+   .. py:method:: save_mask_and_docu()
+
+      Saves the mask in legacy format and docu information
+
+      The following is saved:
+      - A mat file which contains the mask and the path to the image based on which it was created
+      - A jpg image file visualizing the masked areas in the original image
+
+
+
+.. py:data:: parser
+

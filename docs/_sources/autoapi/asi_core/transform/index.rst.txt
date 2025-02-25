@@ -1,0 +1,128 @@
+asi_core.transform
+==================
+
+.. py:module:: asi_core.transform
+
+.. autoapi-nested-parse::
+
+   This module implements image transformations that can be applied to all-sky images.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   asi_core.transform.check_image_array_dimensions
+   asi_core.transform.resize_image_batch
+   asi_core.transform.resize_image
+   asi_core.transform.mask_image_batch
+   asi_core.transform.mask_image
+   asi_core.transform.asi_index_cropping
+   asi_core.transform.asi_undistortion
+   asi_core.transform.get_zenith_cropping
+   asi_core.transform.get_mask_cropping
+
+
+Module Contents
+---------------
+
+.. py:function:: check_image_array_dimensions(array, height, width)
+
+   Determines the dimensions (N, H, W, C) of an input array representing 
+   a single image or a batch of images.
+
+   :param array: np.ndarray, the input array to analyze.
+   :param height: int, the known height of the images.
+   :param width: int, the known width of the images.
+   :return: tuple (N, H, W, C) where N and/or C may be None.
+
+
+.. py:function:: resize_image_batch(image_batch, resize)
+
+   Resize a batch of images.
+
+   :param image_batch: np.array of shape [N, H, W], [N, H, W, 1], or [N, H, W, C].
+   :param resize: tuple (H, W) representing the desired dimensions.
+   :return: np.array of resized batch.
+
+
+.. py:function:: resize_image(image, resize)
+
+   Resize a single image.
+
+   :param image: np.array of shape [HxW], [HxWx1], or [HxWxC].
+   :param resize: tuple (H, W) representing the desired dimensions.
+   :return: np.array of resized image.
+
+
+.. py:function:: mask_image_batch(image_batch, camera_mask, assign_to_masked_pxls=0)
+
+   Applies a camera mask to a batch of images.
+
+   :param image_batch: np.array of images [NxHxWxC] or [NxHxW].
+   :param camera_mask: np.array of camera mask [HxW].
+   :param assign_to_masked_pxls: value to assign to masked-out pixels.
+   :return: np.array of same shape as batch where non-masked region is set to zero.
+
+
+.. py:function:: mask_image(image, camera_mask, assign_to_masked_pxls=0)
+
+   Applies a camera mask to a single image.
+
+   :param batch: np.array of images [NxHxWxC] or [NxHxW].
+   :param camera_mask: np.array of camera mask [HxW].
+   :param assign_to_masked_pxls: value to assign to masked-out pixels.
+   :return: np.array of same shape as batch where non-masked region is set to zero.
+
+
+.. py:function:: asi_index_cropping(asi, crop_x, crop_y, channel_first=False)
+
+   Crops a given array along the x and y dimensions.
+
+   :param asi: The input image to be cropped.
+   :param crop_x: The x-coordinates of the crop.
+   :param crop_y: The y-coordinates of the crop.
+   :param channel_first: Whether the color channel of the input image is the first dimension.
+   :return: The cropped array
+
+
+.. py:function:: asi_undistortion(asi, lookup_table)
+
+   Undistorts ASI array according to mapping in lookup_table.
+
+   :param asi: np.array of image(s) [NxWxHxC] or [WxHxC]
+   :param look_up_table: dict
+          lookup_table['mapx']: ndarray [W'xH']
+          lookup_table['mapy']: ndarray [W'xH']
+   :return: np.array of undistorted asi [NxW'xH'xC] (or [W'xH'xC])
+
+
+.. py:function:: get_zenith_cropping(elevation_matrix, min_ele=0)
+
+   Generates a cropping mask based on the maximum elevation angle.
+
+   :param elevation_matrix: ndarray
+       A matrix of elevation values for each pixel.
+   :param min_ele: float, optional
+       The minimum elevation angle in degrees. Defaults to 0.
+   :return:
+       crop_mask_x (slice)
+           The x-coordinate slice for cropping.
+       crop_mask_y (slice)
+           The y-coordinate slice for cropping.
+
+
+.. py:function:: get_mask_cropping(camera_mask)
+
+   Crops ASI array according to camera mask.
+
+   :param camera_mask: ndarray of camera mask [WxH] (binary -> 1 eqauls mask pixel)
+   :return:
+       crop_mask_x (slice)
+           The x-coordinate slice for cropping.
+       crop_mask_y (slice)
+           The y-coordinate slice for cropping.
+
+

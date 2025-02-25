@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>asi_core.calibration.celestial_bodies &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="asi_core.calibration.mask_creation" href="../mask_creation/index.html" />
+    <link rel="prev" title="asi_core.calibration.__main__" href="../__main__/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../mask_creation/index.html" title="asi_core.calibration.mask_creation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../__main__/index.html" title="asi_core.calibration.__main__"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >asi_core</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" accesskey="U">asi_core.calibration</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.calibration.celestial_bodies</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-asi_core.calibration.celestial_bodies">
+<span id="asi-core-calibration-celestial-bodies"></span><h1>asi_core.calibration.celestial_bodies<a class="headerlink" href="#module-asi_core.calibration.celestial_bodies" title="Link to this heading">¶</a></h1>
+<p>Tools to detect the position of celestial bodies in images and to calculate their position in the sky astronomically</p>
+<p>This functionality itself was introduced and described by
+Niklas Blum, Paul Matteschk, Yann Fabel, Bijan Nouri, Roberto Roman, Luis F. Zarzalejo, Juan Carlos Antuna-Sanchez,
+Stefan Wilbert “Geometric Calibration of All-Sky Cameras Using Sun and Moon Positions: A Comprehensive Analysis”,
+Solar Energy (in review).</p>
+<p>When using the tools of this module in any publication or other work, make sure to reference this publication.</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.THRESHOLDS_MOON_WDR" title="asi_core.calibration.celestial_bodies.THRESHOLDS_MOON_WDR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">THRESHOLDS_MOON_WDR</span></code></a></p></td>
+<td><p>Thresholds to be used when detecting Moon in 8-bit HDR JPGs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.THRESHOLDS_MOON" title="asi_core.calibration.celestial_bodies.THRESHOLDS_MOON"><code class="xref py py-obj docutils literal notranslate"><span class="pre">THRESHOLDS_MOON</span></code></a></p></td>
+<td><p>Thresholds to be used when detecting Moon in regular (LDR) JPGs</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.THRESHOLDS_SUN" title="asi_core.calibration.celestial_bodies.THRESHOLDS_SUN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">THRESHOLDS_SUN</span></code></a></p></td>
+<td><p>Thresholds to be used when detecting Sun</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector" title="asi_core.calibration.celestial_bodies.CelestialBodyDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CelestialBodyDetector</span></code></a></p></td>
+<td><p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Moon" title="asi_core.calibration.celestial_bodies.Moon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Moon</span></code></a></p></td>
+<td><p>Detects the Moon in ASI images and calculates its spherical coordinates from astronomy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Sun" title="asi_core.calibration.celestial_bodies.Sun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sun</span></code></a></p></td>
+<td><p>Detects the Sun in ASI images and calculates its spherical coordinates from astronomy.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Venus" title="asi_core.calibration.celestial_bodies.Venus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Venus</span></code></a></p></td>
+<td><p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Sirius" title="asi_core.calibration.celestial_bodies.Sirius"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sirius</span></code></a></p></td>
+<td><p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Canopus" title="asi_core.calibration.celestial_bodies.Canopus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Canopus</span></code></a></p></td>
+<td><p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.AlphaCentauri" title="asi_core.calibration.celestial_bodies.AlphaCentauri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AlphaCentauri</span></code></a></p></td>
+<td><p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Arcturus" title="asi_core.calibration.celestial_bodies.Arcturus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Arcturus</span></code></a></p></td>
+<td><p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Vega" title="asi_core.calibration.celestial_bodies.Vega"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vega</span></code></a></p></td>
+<td><p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.THRESHOLDS_MOON_WDR">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">THRESHOLDS_MOON_WDR</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.THRESHOLDS_MOON_WDR" title="Link to this definition">¶</a></dt>
+<dd><p>Thresholds to be used when detecting Moon in 8-bit HDR JPGs</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.THRESHOLDS_MOON">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">THRESHOLDS_MOON</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.THRESHOLDS_MOON" title="Link to this definition">¶</a></dt>
+<dd><p>Thresholds to be used when detecting Moon in regular (LDR) JPGs</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.THRESHOLDS_SUN">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">THRESHOLDS_SUN</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.THRESHOLDS_SUN" title="Link to this definition">¶</a></dt>
+<dd><p>Thresholds to be used when detecting Sun</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">CelestialBodyDetector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresholds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector" title="Link to this definition">¶</a></dt>
+<dd><p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the celestial body</p></li>
+<li><p><strong>lat</strong> – Latitude of the observer/ ASI in decimal degrees north</p></li>
+<li><p><strong>lon</strong> – Longitude of the observer/ ASI in decimal degrees east</p></li>
+<li><p><strong>alt</strong> – Altitude above sea level</p></li>
+<li><p><strong>center</strong> – Center of the fisheye lens in the ASI image</p></li>
+<li><p><strong>diameter</strong> – Diameter of the exposed area in the ASI image</p></li>
+<li><p><strong>exp_time</strong> – Required exposure time of used images</p></li>
+<li><p><strong>thresholds</strong> – Thresholds of criteria to classify a valid contour</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.lat">
+<span class="sig-name descname"><span class="pre">lat</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.lat" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.lon">
+<span class="sig-name descname"><span class="pre">lon</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.lon" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.alt">
+<span class="sig-name descname"><span class="pre">alt</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.alt" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.center">
+<span class="sig-name descname"><span class="pre">center</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.center" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.diameter">
+<span class="sig-name descname"><span class="pre">diameter</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.diameter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.exp_time">
+<span class="sig-name descname"><span class="pre">exp_time</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.exp_time" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.observer">
+<span class="sig-name descname"><span class="pre">observer</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.observer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.body">
+<span class="sig-name descname"><span class="pre">body</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.body" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.timestamps">
+<span class="sig-name descname"><span class="pre">timestamps</span></span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.timestamps" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector._set_thresholds">
+<span class="sig-name descname"><span class="pre">_set_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thresholds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector._set_thresholds" title="Link to this definition">¶</a></dt>
+<dd><p>Sets thresholds for orb detection specific to a celestial body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>thresholds</strong> – Dict of threshold values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector._create_observer">
+<span class="sig-name descname"><span class="pre">_create_observer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector._create_observer" title="Link to this definition">¶</a></dt>
+<dd><p>Creates and configures an ephem Observer instance.</p>
+<p>return: Observer instance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector._create_body">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_create_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector._create_body" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a celestial body from ephem</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.calculate_azimuth_elevation">
+<span class="sig-name descname"><span class="pre">calculate_azimuth_elevation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.calculate_azimuth_elevation" title="Link to this definition">¶</a></dt>
+<dd><p>Calculates the celestial body’s spherical coordinates for the current timestamp</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timestamp</strong> – timezone-aware datetime to calculate orb coordinates for</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>azimuth and elevation angle of the orb in degree</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.CelestialBodyDetector.detect_celestial_body">
+<span class="sig-name descname"><span class="pre">detect_celestial_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.detect_celestial_body" title="Link to this definition">¶</a></dt>
+<dd><p>Detects the position of a celestial body in an image using thresholding and contour detection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>img</strong> – (numpy.ndarray) image to analyze.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>x and y pixel coordinates of the celestial body’s center if detected or None if not detected.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Moon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">Moon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_moon_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_moon_ele</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_sun_ele_night</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresholds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Moon" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector" title="asi_core.calibration.celestial_bodies.CelestialBodyDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CelestialBodyDetector</span></code></a></p>
+<p>Detects the Moon in ASI images and calculates its spherical coordinates from astronomy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lat</strong> – Latitude of the observer/ ASI in decimal degrees north</p></li>
+<li><p><strong>lon</strong> – Longitude of the observer/ ASI in decimal degrees east</p></li>
+<li><p><strong>alt</strong> – Altitude above sea level</p></li>
+<li><p><strong>center</strong> – Center of the fisheye lens in the ASI image</p></li>
+<li><p><strong>diameter</strong> – Diameter of the exposed area in the ASI image</p></li>
+<li><p><strong>exp_time</strong> – Required exposure time of used images</p></li>
+<li><p><strong>min_moon_phase</strong> – Minimum moon illumination in ]0, 1[ from which timestamps are evaluated</p></li>
+<li><p><strong>min_moon_ele</strong> – Minimum moon elevation in degree from which timestamps are evaluated</p></li>
+<li><p><strong>max_sun_ele_night</strong> – Maximum sun elevation in degree up to which timestamps are evaluated (should be negative)</p></li>
+<li><p><strong>thresholds</strong> – Thresholds of criteria to classify a valid contour</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Moon.min_moon_phase">
+<span class="sig-name descname"><span class="pre">min_moon_phase</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.8</span></em><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Moon.min_moon_phase" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Moon.min_orb_ele">
+<span class="sig-name descname"><span class="pre">min_orb_ele</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Moon.min_orb_ele" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Moon.max_sun_ele_night">
+<span class="sig-name descname"><span class="pre">max_sun_ele_night</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-6</span></em><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Moon.max_sun_ele_night" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Moon._create_body">
+<span class="sig-name descname"><span class="pre">_create_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Moon._create_body" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the celestial body Moon</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Moon._set_thresholds">
+<span class="sig-name descname"><span class="pre">_set_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thresholds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Moon._set_thresholds" title="Link to this definition">¶</a></dt>
+<dd><p>Set thresholds for orb detection specific to the Moon</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>thresholds</strong> – dict of thresholds or None or ‘wdr’. The latter two apply predefined parameter sets</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Moon.timestamps_from_moon_period">
+<span class="sig-name descname"><span class="pre">timestamps_from_moon_period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">timedelta(minutes=1)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Moon.timestamps_from_moon_period" title="Link to this definition">¶</a></dt>
+<dd><p>Get the most recent full moon period before the requested timestamp</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp_period</strong> – Requested date, moon period closest to that date will be determined</p></li>
+<li><p><strong>sampling_time</strong> – Time difference between images of the moon period evaluated</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Sun">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">Sun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">160</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_sun_ele_day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresholds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Sun" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector" title="asi_core.calibration.celestial_bodies.CelestialBodyDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CelestialBodyDetector</span></code></a></p>
+<p>Detects the Sun in ASI images and calculates its spherical coordinates from astronomy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lat</strong> – Latitude of the observer/ ASI in decimal degrees north</p></li>
+<li><p><strong>lon</strong> – Longitude of the observer/ ASI in decimal degrees east</p></li>
+<li><p><strong>alt</strong> – Altitude above sea level</p></li>
+<li><p><strong>center</strong> – Center of the fisheye lens in the ASI image</p></li>
+<li><p><strong>diameter</strong> – Diameter of the exposed area in the ASI image</p></li>
+<li><p><strong>exp_time</strong> – Required exposure time of used images</p></li>
+<li><p><strong>min_sun_ele_day</strong> – Minimum sun elevation in degree from which timestamps are evaluated</p></li>
+<li><p><strong>thresholds</strong> – Thresholds of criteria to classify a valid contour</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Sun.min_orb_ele">
+<span class="sig-name descname"><span class="pre">min_orb_ele</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Sun.min_orb_ele" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Sun._create_body">
+<span class="sig-name descname"><span class="pre">_create_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Sun._create_body" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the celestial body Sun</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Sun._set_thresholds">
+<span class="sig-name descname"><span class="pre">_set_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thresholds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Sun._set_thresholds" title="Link to this definition">¶</a></dt>
+<dd><p>Set thresholds for orb detection specific to the Sun</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Sun.timestamps_from_daytime">
+<span class="sig-name descname"><span class="pre">timestamps_from_daytime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Sun.timestamps_from_daytime" title="Link to this definition">¶</a></dt>
+<dd><p>Gets a range of timestamps excluding any times with too low sun elevation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp_start</strong> – First timestamp of the period</p></li>
+<li><p><strong>timestamp_end</strong> – Last timestamp of the period</p></li>
+<li><p><strong>sampling_time</strong> – Time difference between images of the sun period evaluated</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Venus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">Venus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Venus" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector" title="asi_core.calibration.celestial_bodies.CelestialBodyDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CelestialBodyDetector</span></code></a></p>
+<p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the celestial body</p></li>
+<li><p><strong>lat</strong> – Latitude of the observer/ ASI in decimal degrees north</p></li>
+<li><p><strong>lon</strong> – Longitude of the observer/ ASI in decimal degrees east</p></li>
+<li><p><strong>alt</strong> – Altitude above sea level</p></li>
+<li><p><strong>center</strong> – Center of the fisheye lens in the ASI image</p></li>
+<li><p><strong>diameter</strong> – Diameter of the exposed area in the ASI image</p></li>
+<li><p><strong>exp_time</strong> – Required exposure time of used images</p></li>
+<li><p><strong>thresholds</strong> – Thresholds of criteria to classify a valid contour</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Venus._create_body">
+<span class="sig-name descname"><span class="pre">_create_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Venus._create_body" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the celestial body Venus</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Venus._set_thresholds">
+<span class="sig-name descname"><span class="pre">_set_thresholds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Venus._set_thresholds" title="Link to this definition">¶</a></dt>
+<dd><p>Set thresholds for orb detection specific to Venus</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Sirius">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">Sirius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Sirius" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector" title="asi_core.calibration.celestial_bodies.CelestialBodyDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CelestialBodyDetector</span></code></a></p>
+<p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the celestial body</p></li>
+<li><p><strong>lat</strong> – Latitude of the observer/ ASI in decimal degrees north</p></li>
+<li><p><strong>lon</strong> – Longitude of the observer/ ASI in decimal degrees east</p></li>
+<li><p><strong>alt</strong> – Altitude above sea level</p></li>
+<li><p><strong>center</strong> – Center of the fisheye lens in the ASI image</p></li>
+<li><p><strong>diameter</strong> – Diameter of the exposed area in the ASI image</p></li>
+<li><p><strong>exp_time</strong> – Required exposure time of used images</p></li>
+<li><p><strong>thresholds</strong> – Thresholds of criteria to classify a valid contour</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Sirius._create_body">
+<span class="sig-name descname"><span class="pre">_create_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Sirius._create_body" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the celestial body Sirius</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Sirius._set_thresholds">
+<span class="sig-name descname"><span class="pre">_set_thresholds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Sirius._set_thresholds" title="Link to this definition">¶</a></dt>
+<dd><p>Set thresholds for orb detection specific to Sirius</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Canopus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">Canopus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Canopus" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector" title="asi_core.calibration.celestial_bodies.CelestialBodyDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CelestialBodyDetector</span></code></a></p>
+<p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the celestial body</p></li>
+<li><p><strong>lat</strong> – Latitude of the observer/ ASI in decimal degrees north</p></li>
+<li><p><strong>lon</strong> – Longitude of the observer/ ASI in decimal degrees east</p></li>
+<li><p><strong>alt</strong> – Altitude above sea level</p></li>
+<li><p><strong>center</strong> – Center of the fisheye lens in the ASI image</p></li>
+<li><p><strong>diameter</strong> – Diameter of the exposed area in the ASI image</p></li>
+<li><p><strong>exp_time</strong> – Required exposure time of used images</p></li>
+<li><p><strong>thresholds</strong> – Thresholds of criteria to classify a valid contour</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Canopus._create_body">
+<span class="sig-name descname"><span class="pre">_create_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Canopus._create_body" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the celestial body Canopus</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Canopus._set_thresholds">
+<span class="sig-name descname"><span class="pre">_set_thresholds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Canopus._set_thresholds" title="Link to this definition">¶</a></dt>
+<dd><p>Set thresholds for orb detection specific to the Canopus</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.AlphaCentauri">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">AlphaCentauri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.AlphaCentauri" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector" title="asi_core.calibration.celestial_bodies.CelestialBodyDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CelestialBodyDetector</span></code></a></p>
+<p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the celestial body</p></li>
+<li><p><strong>lat</strong> – Latitude of the observer/ ASI in decimal degrees north</p></li>
+<li><p><strong>lon</strong> – Longitude of the observer/ ASI in decimal degrees east</p></li>
+<li><p><strong>alt</strong> – Altitude above sea level</p></li>
+<li><p><strong>center</strong> – Center of the fisheye lens in the ASI image</p></li>
+<li><p><strong>diameter</strong> – Diameter of the exposed area in the ASI image</p></li>
+<li><p><strong>exp_time</strong> – Required exposure time of used images</p></li>
+<li><p><strong>thresholds</strong> – Thresholds of criteria to classify a valid contour</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.AlphaCentauri._create_body">
+<span class="sig-name descname"><span class="pre">_create_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.AlphaCentauri._create_body" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the celestial body Alpha Centauri</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.AlphaCentauri._set_thresholds">
+<span class="sig-name descname"><span class="pre">_set_thresholds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.AlphaCentauri._set_thresholds" title="Link to this definition">¶</a></dt>
+<dd><p>Set thresholds for orb detection specific to the AlphaCentauri</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Arcturus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">Arcturus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Arcturus" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector" title="asi_core.calibration.celestial_bodies.CelestialBodyDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CelestialBodyDetector</span></code></a></p>
+<p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the celestial body</p></li>
+<li><p><strong>lat</strong> – Latitude of the observer/ ASI in decimal degrees north</p></li>
+<li><p><strong>lon</strong> – Longitude of the observer/ ASI in decimal degrees east</p></li>
+<li><p><strong>alt</strong> – Altitude above sea level</p></li>
+<li><p><strong>center</strong> – Center of the fisheye lens in the ASI image</p></li>
+<li><p><strong>diameter</strong> – Diameter of the exposed area in the ASI image</p></li>
+<li><p><strong>exp_time</strong> – Required exposure time of used images</p></li>
+<li><p><strong>thresholds</strong> – Thresholds of criteria to classify a valid contour</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Arcturus._create_body">
+<span class="sig-name descname"><span class="pre">_create_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Arcturus._create_body" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the celestial body Arcturus</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Arcturus._set_thresholds">
+<span class="sig-name descname"><span class="pre">_set_thresholds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Arcturus._set_thresholds" title="Link to this definition">¶</a></dt>
+<dd><p>Set thresholds for orb detection specific to the Arcturus</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Vega">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.celestial_bodies.</span></span><span class="sig-name descname"><span class="pre">Vega</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Vega" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector" title="asi_core.calibration.celestial_bodies.CelestialBodyDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CelestialBodyDetector</span></code></a></p>
+<p>Detects celestial bodies in ASI images and calculates their spherical coordinates from astronomy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the celestial body</p></li>
+<li><p><strong>lat</strong> – Latitude of the observer/ ASI in decimal degrees north</p></li>
+<li><p><strong>lon</strong> – Longitude of the observer/ ASI in decimal degrees east</p></li>
+<li><p><strong>alt</strong> – Altitude above sea level</p></li>
+<li><p><strong>center</strong> – Center of the fisheye lens in the ASI image</p></li>
+<li><p><strong>diameter</strong> – Diameter of the exposed area in the ASI image</p></li>
+<li><p><strong>exp_time</strong> – Required exposure time of used images</p></li>
+<li><p><strong>thresholds</strong> – Thresholds of criteria to classify a valid contour</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Vega._create_body">
+<span class="sig-name descname"><span class="pre">_create_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Vega._create_body" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the celestial body Vega</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.celestial_bodies.Vega._set_thresholds">
+<span class="sig-name descname"><span class="pre">_set_thresholds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.celestial_bodies.Vega._set_thresholds" title="Link to this definition">¶</a></dt>
+<dd><p>Set thresholds for orb detection specific to the Vega</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">asi_core.calibration.celestial_bodies</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.THRESHOLDS_MOON_WDR"><code class="docutils literal notranslate"><span class="pre">THRESHOLDS_MOON_WDR</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.THRESHOLDS_MOON"><code class="docutils literal notranslate"><span class="pre">THRESHOLDS_MOON</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.THRESHOLDS_SUN"><code class="docutils literal notranslate"><span class="pre">THRESHOLDS_SUN</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.name"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.name</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.lat"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.lat</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.lon"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.lon</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.alt"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.alt</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.center"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.center</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.diameter"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.diameter</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.exp_time"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.exp_time</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.observer"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.observer</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.body"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.body</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.timestamps"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.timestamps</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector._set_thresholds"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector._set_thresholds()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector._create_observer"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector._create_observer()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector._create_body"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector._create_body()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.calculate_azimuth_elevation"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.calculate_azimuth_elevation()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.CelestialBodyDetector.detect_celestial_body"><code class="docutils literal notranslate"><span class="pre">CelestialBodyDetector.detect_celestial_body()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Moon"><code class="docutils literal notranslate"><span class="pre">Moon</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Moon.min_moon_phase"><code class="docutils literal notranslate"><span class="pre">Moon.min_moon_phase</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Moon.min_orb_ele"><code class="docutils literal notranslate"><span class="pre">Moon.min_orb_ele</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Moon.max_sun_ele_night"><code class="docutils literal notranslate"><span class="pre">Moon.max_sun_ele_night</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Moon._create_body"><code class="docutils literal notranslate"><span class="pre">Moon._create_body()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Moon._set_thresholds"><code class="docutils literal notranslate"><span class="pre">Moon._set_thresholds()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Moon.timestamps_from_moon_period"><code class="docutils literal notranslate"><span class="pre">Moon.timestamps_from_moon_period()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Sun"><code class="docutils literal notranslate"><span class="pre">Sun</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Sun.min_orb_ele"><code class="docutils literal notranslate"><span class="pre">Sun.min_orb_ele</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Sun._create_body"><code class="docutils literal notranslate"><span class="pre">Sun._create_body()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Sun._set_thresholds"><code class="docutils literal notranslate"><span class="pre">Sun._set_thresholds()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Sun.timestamps_from_daytime"><code class="docutils literal notranslate"><span class="pre">Sun.timestamps_from_daytime()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Venus"><code class="docutils literal notranslate"><span class="pre">Venus</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Venus._create_body"><code class="docutils literal notranslate"><span class="pre">Venus._create_body()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Venus._set_thresholds"><code class="docutils literal notranslate"><span class="pre">Venus._set_thresholds()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Sirius"><code class="docutils literal notranslate"><span class="pre">Sirius</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Sirius._create_body"><code class="docutils literal notranslate"><span class="pre">Sirius._create_body()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Sirius._set_thresholds"><code class="docutils literal notranslate"><span class="pre">Sirius._set_thresholds()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Canopus"><code class="docutils literal notranslate"><span class="pre">Canopus</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Canopus._create_body"><code class="docutils literal notranslate"><span class="pre">Canopus._create_body()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Canopus._set_thresholds"><code class="docutils literal notranslate"><span class="pre">Canopus._set_thresholds()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.AlphaCentauri"><code class="docutils literal notranslate"><span class="pre">AlphaCentauri</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.AlphaCentauri._create_body"><code class="docutils literal notranslate"><span class="pre">AlphaCentauri._create_body()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.AlphaCentauri._set_thresholds"><code class="docutils literal notranslate"><span class="pre">AlphaCentauri._set_thresholds()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Arcturus"><code class="docutils literal notranslate"><span class="pre">Arcturus</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Arcturus._create_body"><code class="docutils literal notranslate"><span class="pre">Arcturus._create_body()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Arcturus._set_thresholds"><code class="docutils literal notranslate"><span class="pre">Arcturus._set_thresholds()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Vega"><code class="docutils literal notranslate"><span class="pre">Vega</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Vega._create_body"><code class="docutils literal notranslate"><span class="pre">Vega._create_body()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.celestial_bodies.Vega._set_thresholds"><code class="docutils literal notranslate"><span class="pre">Vega._set_thresholds()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../__main__/index.html"
+                          title="previous chapter">asi_core.calibration.__main__</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../mask_creation/index.html"
+                          title="next chapter">asi_core.calibration.mask_creation</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/autoapi/asi_core/calibration/celestial_bodies/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../mask_creation/index.html" title="asi_core.calibration.mask_creation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../__main__/index.html" title="asi_core.calibration.__main__"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >asi_core</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" >asi_core.calibration</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.calibration.celestial_bodies</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

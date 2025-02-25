@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>asi_core.calibration.self_calibration &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="asi_core.camera" href="../../camera/index.html" />
+    <link rel="prev" title="asi_core.calibration.process_self_calibration" href="../process_self_calibration/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../camera/index.html" title="asi_core.camera"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../process_self_calibration/index.html" title="asi_core.calibration.process_self_calibration"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >asi_core</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" accesskey="U">asi_core.calibration</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.calibration.self_calibration</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-asi_core.calibration.self_calibration">
+<span id="asi-core-calibration-self-calibration"></span><h1>asi_core.calibration.self_calibration<a class="headerlink" href="#module-asi_core.calibration.self_calibration" title="Link to this heading">¶</a></h1>
+<p>Tools for the geometric self calibration of all-sky imagers</p>
+<p>The internal camera model assumed by the calibration is described by:
+Scaramuzza, D., et al. (2006). A Toolbox for Easily Calibrating Omnidirectional Cameras. RSJ International Conference
+on Intelligent Robots and Systems  Beijing, China.</p>
+<p>The external camera orientation is defined according to:
+Luhmann, T. (2000). Nahbereichsphotogrammetrie: Grundlagen, Methoden und Anwendungen. Heidelberg, Germany, Wichmann
+Verlag.</p>
+<p>The self-calibration functionality itself was introduced and described by
+Niklas Blum, Paul Matteschk, Yann Fabel, Bijan Nouri, Roberto Roman, Luis F. Zarzalejo, Juan Carlos Antuna-Sanchez,
+Stefan Wilbert “Geometric Calibration of All-Sky Cameras Using Sun and Moon Positions: A Comprehensive Analysis”,
+Solar Energy (in review).</p>
+<p>When using this self-calibration in any publication or other work, make sure to reference the latter publication.</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.self_calibration.q25_ss_means" title="asi_core.calibration.self_calibration.q25_ss_means"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q25_ss_means</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.self_calibration.q25_ss_std" title="asi_core.calibration.self_calibration.q25_ss_std"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q25_ss_std</span></code></a></p></td>
+<td><p>statistics taken from Rafal Broda's evaluation of PyranoCam Q25 cameras start values and search range should be tested</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration" title="asi_core.calibration.self_calibration.Calibration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Calibration</span></code></a></p></td>
+<td><p>Provides the ASI self-calibration functionality.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.self_calibration.CenterDetector" title="asi_core.calibration.self_calibration.CenterDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CenterDetector</span></code></a></p></td>
+<td><p>Provides functionality to detect and visualize the center of the exposed area of an ASI image.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.self_calibration.plot_orb_positions" title="asi_core.calibration.self_calibration.plot_orb_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_orb_positions</span></code></a>(orb_observations_path, ...[, ...])</p></td>
+<td><p>Creates and saves a plot which compares expected and found orb pixel positions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.self_calibration.get_background_img_and_plot" title="asi_core.calibration.self_calibration.get_background_img_and_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_background_img_and_plot</span></code></a>(camera, orb_obs_file, ...)</p></td>
+<td><p>Find background image and plot all found and expected orb positions over this image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.self_calibration.find_center_via_cam_model" title="asi_core.calibration.self_calibration.find_center_via_cam_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_center_via_cam_model</span></code></a>(calibrator, orb_data[, ...])</p></td>
+<td><p>Determines all parameters of the camera model iteratively refining the lens center image coordinates</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.q25_ss_means">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.self_calibration.</span></span><span class="sig-name descname"><span class="pre">q25_ss_means</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.q25_ss_means" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.q25_ss_std">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.self_calibration.</span></span><span class="sig-name descname"><span class="pre">q25_ss_std</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(5.4,</span> <span class="pre">2.89e-05,</span> <span class="pre">3.066e-08)</span></em><a class="headerlink" href="#asi_core.calibration.self_calibration.q25_ss_std" title="Link to this definition">¶</a></dt>
+<dd><p>statistics taken from Rafal Broda’s evaluation of PyranoCam Q25 cameras start values and search range should be tested
+if a new camera type needs to be calibrated. For the same camera type, calibration parameters do not vary a lot.
+The second polynomial coefficient (a_1 of a_0 + a_1*x + a_2*x^2 + a_3*x^3) is assumed to be zero which holds for
+hyperbolic and parabolic mirrors or fisheye cameras according to Scaramuzza (2006).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.self_calibration.</span></span><span class="sig-name descname"><span class="pre">Calibration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">processed_timestamps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ss_expected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'mean':</span> <span class="pre">q25_ss_means,</span> <span class="pre">'std':</span> <span class="pre">q25_ss_std}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eor_expected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'mean':</span> <span class="pre">(0,</span> <span class="pre">np.pi,</span> <span class="pre">np.pi</span> <span class="pre">/</span> <span class="pre">2),</span> <span class="pre">'min':</span> <span class="pre">(-np.pi</span> <span class="pre">/</span> <span class="pre">4,</span> <span class="pre">np.pi</span> <span class="pre">*</span> <span class="pre">3</span> <span class="pre">/</span> <span class="pre">4,</span> <span class="pre">-2</span> <span class="pre">*</span> <span class="pre">np.pi),</span> <span class="pre">'max':</span> <span class="pre">(np.pi</span> <span class="pre">/</span> <span class="pre">4,</span> <span class="pre">np.pi</span> <span class="pre">*</span> <span class="pre">5</span> <span class="pre">/</span> <span class="pre">4,</span> <span class="pre">4</span> <span class="pre">*</span> <span class="pre">np.pi</span> <span class="pre">-</span> <span class="pre">1e-05)}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_outliers_above_percentile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">99</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_rel_dist_mask_orb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_orb_quality_indicators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration" title="Link to this definition">¶</a></dt>
+<dd><p>Provides the ASI self-calibration functionality.</p>
+<p>The functionality is:</p>
+<ul class="simple">
+<li><p>Detecting celestial bodies i.e. orbs</p></li>
+<li><p>Transforming spherical coordinates of orbs into pixel coordinates</p></li>
+<li><p>Calculating residuals between expected and found orb positions in ASI image</p></li>
+<li><p>Optimizing external and internal calibration</p></li>
+<li><p>Looping over timestamps</p></li>
+<li><p>Visualizing results</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>processed_timestamps</strong> – One (datetime, timezone-aware) or preferably all processed timestamps as pd.Series
+or similar (subclass of pandas.core.base.IndexOpsMixin)</p></li>
+<li><p><strong>ss_expected</strong> – Specifies the mean values and the ranges within which coefficients of ss are optimized.</p></li>
+<li><p><strong>eor_expected</strong> – Specifies the mean values and the ranges within which Euler angles are optimized.</p></li>
+<li><p><strong>ignore_outliers_above_percentile</strong> – Percentile of the deviation used in the calibration. Observations with
+deviations beyond this will be sorted out.</p></li>
+<li><p><strong>min_rel_dist_mask_orb</strong> – Threshold for minimum required distance between orb center and mask relative to
+orb diameter</p></li>
+<li><p><strong>save_orb_quality_indicators</strong> – If True, save geometric parameters with each orb observation which
+indicate the observation’s quality</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.camera">
+<span class="sig-name descname"><span class="pre">camera</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.camera" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.ocam">
+<span class="sig-name descname"><span class="pre">ocam</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.ocam" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.orb_observations">
+<span class="sig-name descname"><span class="pre">orb_observations</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.orb_observations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.ss_expected">
+<span class="sig-name descname"><span class="pre">ss_expected</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.ss_expected" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.eor_expected">
+<span class="sig-name descname"><span class="pre">eor_expected</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.eor_expected" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.ignore_outliers_above_percentile">
+<span class="sig-name descname"><span class="pre">ignore_outliers_above_percentile</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">99</span></em><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.ignore_outliers_above_percentile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.min_rel_dist_mask_orb">
+<span class="sig-name descname"><span class="pre">min_rel_dist_mask_orb</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.5</span></em><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.min_rel_dist_mask_orb" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.save_orb_quality_indicators">
+<span class="sig-name descname"><span class="pre">save_orb_quality_indicators</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.save_orb_quality_indicators" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.bounds_eor">
+<span class="sig-name descname"><span class="pre">bounds_eor</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.bounds_eor" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.bounds_eor_ior">
+<span class="sig-name descname"><span class="pre">bounds_eor_ior</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.bounds_eor_ior" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.bounds_eor_ior_center">
+<span class="sig-name descname"><span class="pre">bounds_eor_ior_center</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.bounds_eor_ior_center" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.x_center_expected">
+<span class="sig-name descname"><span class="pre">x_center_expected</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.x_center_expected" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.y_center_expected">
+<span class="sig-name descname"><span class="pre">y_center_expected</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.y_center_expected" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.optimize_eor">
+<span class="sig-name descname"><span class="pre">optimize_eor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orientation_init</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.optimize_eor" title="Link to this definition">¶</a></dt>
+<dd><p>Calls optimizer to minimize calc_residual_eor setting only the EOR’s angles as free parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_observations</strong> – dataframe of detected orbs with identified pixel coordinates and spherical coordinates
+from astronomy</p></li>
+<li><p><strong>orientation_init</strong> – Initial guess of the Euler angles determining the ASI’s external orientation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results of the optimization see scio.minimize</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.optimize_eor_ior">
+<span class="sig-name descname"><span class="pre">optimize_eor_ior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orientation_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ocam_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_various_azimuths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.optimize_eor_ior" title="Link to this definition">¶</a></dt>
+<dd><p>Calls optimizer to minimize calc_residual_eor_ior setting the EOR’s angles and the coefficients of ss of the
+internal calibration as free parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_observations</strong> – dataframe of detected orbs with identified pixel coordinates and spherical coordinates
+from astronomy</p></li>
+<li><p><strong>orientation_init</strong> – Initial guess of the Euler angles determining the ASI’s external orientation</p></li>
+<li><p><strong>ocam_init</strong> – Initial guess of camera’s internal calibration in particular of the coefficients of ss</p></li>
+<li><p><strong>test_various_azimuths</strong> – If True, loop over azimuth angles which represent 360° rotation of ASI around
+vertical axis</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results of the optimization see scio.minimize</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.optimize_eor_ior_center">
+<span class="sig-name descname"><span class="pre">optimize_eor_ior_center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orientation_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ocam_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.optimize_eor_ior_center" title="Link to this definition">¶</a></dt>
+<dd><p>WARNING THIS FUNCTION WAS NOT TESTED PROPERLY YET. DON’T USE IT.</p>
+<p>Calls optimizer to minimize calc_residual_eor_ior setting the EOR’s angles and the coefficients of ss of the
+internal calibration and image center as free parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_observations</strong> – dataframe of detected orbs with identified pixel coordinates and spherical coordinates
+from astronomy</p></li>
+<li><p><strong>orientation_init</strong> – Initial guess of the Euler angles determining the ASI’s external orientation</p></li>
+<li><p><strong>ocam_init</strong> – Initial guess of camera’s internal calibration in particular of the coefficients of ss</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results of the optimization see scio.minimize</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.calc_residual_eor_ior_center">
+<span class="sig-name descname"><span class="pre">calc_residual_eor_ior_center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orientation_ior_center</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.calc_residual_eor_ior_center" title="Link to this definition">¶</a></dt>
+<dd><p>Calculates deviation metric of the difference between expected and found coordinates of celestial bodies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orientation_ior_center</strong> – Array of the three Euler angles and coefficients no. 0, 2, 3 of ss and x_center,
+y_center</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Deviation used as target for the optimization</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.calc_residual_eor_ior">
+<span class="sig-name descname"><span class="pre">calc_residual_eor_ior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orientation_ior</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.calc_residual_eor_ior" title="Link to this definition">¶</a></dt>
+<dd><p>Calculates deviation metric of the difference between expected and found coordinates of celestial bodies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orientation_ior</strong> – Array of the three Euler angles and coefficients no. 0, 2, 3 of ss</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Deviation used as target for the optimization</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.calc_residual_eor">
+<span class="sig-name descname"><span class="pre">calc_residual_eor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.calc_residual_eor" title="Link to this definition">¶</a></dt>
+<dd><p>Calculates deviation metric of the difference between expected and found coordinates of celestial bodies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orientation</strong> – Array of the three Euler angles</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Deviation used as target for the optimization</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.angles_to_pixels">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">angles_to_pixels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ocam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.angles_to_pixels" title="Link to this definition">¶</a></dt>
+<dd><p>Transforms angle coordinates of a celestial body seen by a camera into pixel coordinates on the chip</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_observations</strong> – dataframe with columns azimuth and elevation indicating the positions of one or
+more celestial bodies observed at one or more timestamps</p></li>
+<li><p><strong>ocam</strong> – Ocam object describing the ASI’s camera model and internal calibration</p></li>
+<li><p><strong>eor</strong> – (array) External orientation of the ASI indicated by the 3 Euler angles</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pixel coordinates of the celestial body in the camera image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.angles_pixels_to_vector_deviation">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">angles_pixels_to_vector_deviation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ocam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_outliers_above_percentile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_found_angles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.angles_pixels_to_vector_deviation" title="Link to this definition">¶</a></dt>
+<dd><p>Calculates root mean squared deviation between detected and expected orb coordinates in cartesian coordinates.</p>
+<p>Transforms angle coordinates of a celestial body seen by a camera and pixel coordinates of detected body to
+cartesian coordinates, calculates area spun up by both vectors and calculates root mean square of all areas
+(i.e. deviations).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_observations</strong> – dataframe with columns azimuth and elevation indicating the positions of one or
+more celestial bodies observed at one or more timestamps</p></li>
+<li><p><strong>ocam</strong> – Ocam object describing the ASI’s camera model and internal calibration</p></li>
+<li><p><strong>eor</strong> – (array) External orientation of the ASI indicated by the 3 Euler angles</p></li>
+<li><p><strong>ignore_outliers_above_percentile</strong> – If number between 0 and 100 is provided observations with deviation
+above corresponding percentile are excluded from calculation of deviation/ optimization</p></li>
+<li><p><strong>compute_found_angles</strong> – If True, return azimuth and elevation angles of found orb positions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Root mean square deviation from all orb observations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.get_deviation">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_deviation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_outliers_above_percentile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">99</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.get_deviation" title="Link to this definition">¶</a></dt>
+<dd><p>Calculates deviation metric between found and astronomically expected orb positions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_observations</strong> – Dataframe with expected ‘expected_x, <a href="#id1"><span class="problematic" id="id2">*</span></a>_y’ and found orb positions ‘found_x, <a href="#id3"><span class="problematic" id="id4">*</span></a>_y’ as
+columns</p></li>
+<li><p><strong>ignore_outliers_above_percentile</strong> – (in percent) If not None and between 0 and 100, datapoints with a
+deviation above this percentile (e.g. above 99%) are ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Deviation metric</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.find_orb_positions">
+<span class="sig-name descname"><span class="pre">find_orb_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.find_orb_positions" title="Link to this definition">¶</a></dt>
+<dd><p>Detects orb positions for multiple timestamps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>detector</strong> – CelestialBodyDetector instance</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe of orb observations with columns timestamp, found pixel position of the orb and expected</p>
+</dd>
+</dl>
+<p>elevation and azimuth angle of the orb in degree.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.get_all_orb_positions">
+<span class="sig-name descname"><span class="pre">get_all_orb_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_detectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file=f'orb_observations.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_temp=True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.get_all_orb_positions" title="Link to this definition">¶</a></dt>
+<dd><p>Loads or detects orb positions of multiple types, especially sun and moon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_detectors</strong> – list of CelestialBodyDetector instances</p></li>
+<li><p><strong>output_file</strong> – path to save dataframe of orb observations to</p></li>
+<li><p><strong>reset_temp</strong> – reprocess orb positions and do not load previously saved dataframes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe of orb observations with columns timestamp, found pixel position of the orb and expected</p>
+</dd>
+</dl>
+<p>elevation and azimuth angle of the orb in degree.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.Calibration.compute_and_save_azimuth_elevation">
+<span class="sig-name descname"><span class="pre">compute_and_save_azimuth_elevation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ocam_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_ele_evaluated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_orientation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_npy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.Calibration.compute_and_save_azimuth_elevation" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the azimuth and elevation matrices, and optionally saves them as .npy files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ocam_model</strong> – Updated ocam model.</p></li>
+<li><p><strong>min_ele_evaluated</strong> – Updated minimum elevation evaluated.</p></li>
+<li><p><strong>external_orientation</strong> – Updated external orientation.</p></li>
+<li><p><strong>save_npy</strong> – Boolean flag to save the matrices as .npy files.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.plot_orb_positions">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.self_calibration.</span></span><span class="sig-name descname"><span class="pre">plot_orb_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_observations_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path_figure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'found_and_expected_orb_positions_after_calibration.png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_area_diameter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outliers_above_percentile_ignored_in_calib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">99</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.plot_orb_positions" title="Link to this definition">¶</a></dt>
+<dd><p>Creates and saves a plot which compares expected and found orb pixel positions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_observations_path</strong> – Path to load dataframe of expected and found orb positions from</p></li>
+<li><p><strong>background_image_path</strong> – Path to background image laid under plot</p></li>
+<li><p><strong>output_path_figure</strong> – Path to save the figure to</p></li>
+<li><p><strong>exp_area_diameter</strong> – Diameter of the exposed area in the fisheye image</p></li>
+<li><p><strong>center_x</strong> – x-coordinate of the center of the ASI image</p></li>
+<li><p><strong>center_y</strong> – y-coordinate of the center of the ASI image</p></li>
+<li><p><strong>outliers_above_percentile_ignored_in_calib</strong> – Percentile of outliers to be filtered to recalculate deviation
+metric received in calibration</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.get_background_img_and_plot">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.self_calibration.</span></span><span class="sig-name descname"><span class="pre">get_background_img_and_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orb_obs_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outliers_above_percentile_ignored_in_calib</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.get_background_img_and_plot" title="Link to this definition">¶</a></dt>
+<dd><p>Find background image and plot all found and expected orb positions over this image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>camera</strong> – AllSkyImager instance</p></li>
+<li><p><strong>orb_obs_file</strong> – csv file containing dataframe of found and expected orb positions</p></li>
+<li><p><strong>exp_time</strong> – [microseconds], exposure time of the background image</p></li>
+<li><p><strong>image_file_name</strong> – Identifier to be used as first part of the saved figure’s name</p></li>
+<li><p><strong>outliers_above_percentile_ignored_in_calib</strong> – Percentile of outliers to be filtered to recalculate deviation
+metric received in calibration</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.CenterDetector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.calibration.self_calibration.</span></span><span class="sig-name descname"><span class="pre">CenterDetector</span></span><a class="headerlink" href="#asi_core.calibration.self_calibration.CenterDetector" title="Link to this definition">¶</a></dt>
+<dd><p>Provides functionality to detect and visualize the center of the exposed area of an ASI image.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.CenterDetector.max_intensity">
+<span class="sig-name descname"><span class="pre">max_intensity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">255</span></em><a class="headerlink" href="#asi_core.calibration.self_calibration.CenterDetector.max_intensity" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.CenterDetector.max_threshold_value">
+<span class="sig-name descname"><span class="pre">max_threshold_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">250</span></em><a class="headerlink" href="#asi_core.calibration.self_calibration.CenterDetector.max_threshold_value" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.CenterDetector.gaussian_blur_kernel">
+<span class="sig-name descname"><span class="pre">gaussian_blur_kernel</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(5,</span> <span class="pre">5)</span></em><a class="headerlink" href="#asi_core.calibration.self_calibration.CenterDetector.gaussian_blur_kernel" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.CenterDetector.find_best_threshold">
+<span class="sig-name descname"><span class="pre">find_best_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_contour_area_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.CenterDetector.find_best_threshold" title="Link to this definition">¶</a></dt>
+<dd><p>Finds the boundary of a fisheye image’s exposed area by maximizing the circularity of the detected contours.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> – Image based on which center is detected.</p></li>
+<li><p><strong>min_contour_area_ratio</strong> – (float) Minimum contour area ratio to consider for circle detection.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple of the best threshold value (int), and a list of pixel coordinates indicating the best contour
+found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.CenterDetector.find_fisheye_circle_center">
+<span class="sig-name descname"><span class="pre">find_fisheye_circle_center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_contour_area_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_visualization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.CenterDetector.find_fisheye_circle_center" title="Link to this definition">¶</a></dt>
+<dd><p>Finds the center and radius of a fisheye image’s exposed area.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> – image used to detect center</p></li>
+<li><p><strong>min_contour_area_ratio</strong> – (float) Minimum contour area ratio to consider for circle detection.</p></li>
+<li><p><strong>save_visualization</strong> – If true, a visualization of the found image center is created and saved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Center coordinates of the fisheye circle (tuple), exposed radius and diameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.CenterDetector.visualize_center">
+<span class="sig-name descname"><span class="pre">visualize_center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_contour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_image_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fisheye_rim.jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.CenterDetector.visualize_center" title="Link to this definition">¶</a></dt>
+<dd><p>Visualizes the position of the fisheye objective’s center in the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> – Background image</p></li>
+<li><p><strong>best_contour</strong> – Contour indicating the most reasonable boundary of the fisheye’s exposed area</p></li>
+<li><p><strong>center_x</strong> – x-coordinate of the ASI image’s center</p></li>
+<li><p><strong>center_y</strong> – y-coordinate of the ASI image’s center</p></li>
+<li><p><strong>output_image_path</strong> – Path to save the figure to</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.CenterDetector.find_center_timerange">
+<span class="sig-name descname"><span class="pre">find_center_timerange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">timedelta(hours=2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">160</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.CenterDetector.find_center_timerange" title="Link to this definition">¶</a></dt>
+<dd><p>Loops over range of timestamps, detecting the average image center in all respective images</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>camera</strong> – Camera object to load images with</p></li>
+<li><p><strong>start</strong> – First timestamp processed</p></li>
+<li><p><strong>end</strong> – Last timestamp processed</p></li>
+<li><p><strong>sampling_time</strong> – Time difference between evaluated images</p></li>
+<li><p><strong>exp_time</strong> – Required exposure time of considered images</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mean values of the image center’s x and y coordinates and radius of the exposed area</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.calibration.self_calibration.find_center_via_cam_model">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.self_calibration.</span></span><span class="sig-name descname"><span class="pre">find_center_via_cam_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">calibrator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orb_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rel_center_dev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slow_but_roubst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.self_calibration.find_center_via_cam_model" title="Link to this definition">¶</a></dt>
+<dd><p>Determines all parameters of the camera model iteratively refining the lens center image coordinates</p>
+<p>Reuses the optimization algorithm of the lens center of Scaramuzza 2006 however calling our calibration procedure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>calibrator</strong> – calibrator instance</p></li>
+<li><p><strong>orb_data</strong> – Dataframe of image- and astronomy-based orb positions</p></li>
+<li><p><strong>x_samples</strong> – Number of sample points in each iterations mesh grid of test points in x-direction</p></li>
+<li><p><strong>y_samples</strong> – Number of sample points in each iterations mesh grid of test points in x-direction</p></li>
+<li><p><strong>max_rel_center_dev</strong> – Maximum expected deviation of the lens center’s image coordinates from the image center
+as fraction of the image side height and width</p></li>
+<li><p><strong>number_iterations</strong> – Number of refinement iterations for center detection</p></li>
+<li><p><strong>slow_but_roubst</strong> – If True, don’t use options to speed up process. Make sure that process converges.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>calibrator instance with refined lens center position (x_center, y_center)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">asi_core.calibration.self_calibration</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.q25_ss_means"><code class="docutils literal notranslate"><span class="pre">q25_ss_means</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.q25_ss_std"><code class="docutils literal notranslate"><span class="pre">q25_ss_std</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration"><code class="docutils literal notranslate"><span class="pre">Calibration</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.camera"><code class="docutils literal notranslate"><span class="pre">Calibration.camera</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.ocam"><code class="docutils literal notranslate"><span class="pre">Calibration.ocam</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.orb_observations"><code class="docutils literal notranslate"><span class="pre">Calibration.orb_observations</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.ss_expected"><code class="docutils literal notranslate"><span class="pre">Calibration.ss_expected</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.eor_expected"><code class="docutils literal notranslate"><span class="pre">Calibration.eor_expected</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.ignore_outliers_above_percentile"><code class="docutils literal notranslate"><span class="pre">Calibration.ignore_outliers_above_percentile</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.min_rel_dist_mask_orb"><code class="docutils literal notranslate"><span class="pre">Calibration.min_rel_dist_mask_orb</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.save_orb_quality_indicators"><code class="docutils literal notranslate"><span class="pre">Calibration.save_orb_quality_indicators</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.bounds_eor"><code class="docutils literal notranslate"><span class="pre">Calibration.bounds_eor</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.bounds_eor_ior"><code class="docutils literal notranslate"><span class="pre">Calibration.bounds_eor_ior</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.bounds_eor_ior_center"><code class="docutils literal notranslate"><span class="pre">Calibration.bounds_eor_ior_center</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.x_center_expected"><code class="docutils literal notranslate"><span class="pre">Calibration.x_center_expected</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.y_center_expected"><code class="docutils literal notranslate"><span class="pre">Calibration.y_center_expected</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.optimize_eor"><code class="docutils literal notranslate"><span class="pre">Calibration.optimize_eor()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.optimize_eor_ior"><code class="docutils literal notranslate"><span class="pre">Calibration.optimize_eor_ior()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.optimize_eor_ior_center"><code class="docutils literal notranslate"><span class="pre">Calibration.optimize_eor_ior_center()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.calc_residual_eor_ior_center"><code class="docutils literal notranslate"><span class="pre">Calibration.calc_residual_eor_ior_center()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.calc_residual_eor_ior"><code class="docutils literal notranslate"><span class="pre">Calibration.calc_residual_eor_ior()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.calc_residual_eor"><code class="docutils literal notranslate"><span class="pre">Calibration.calc_residual_eor()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.angles_to_pixels"><code class="docutils literal notranslate"><span class="pre">Calibration.angles_to_pixels()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.angles_pixels_to_vector_deviation"><code class="docutils literal notranslate"><span class="pre">Calibration.angles_pixels_to_vector_deviation()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.get_deviation"><code class="docutils literal notranslate"><span class="pre">Calibration.get_deviation()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.find_orb_positions"><code class="docutils literal notranslate"><span class="pre">Calibration.find_orb_positions()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.get_all_orb_positions"><code class="docutils literal notranslate"><span class="pre">Calibration.get_all_orb_positions()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.Calibration.compute_and_save_azimuth_elevation"><code class="docutils literal notranslate"><span class="pre">Calibration.compute_and_save_azimuth_elevation()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.plot_orb_positions"><code class="docutils literal notranslate"><span class="pre">plot_orb_positions()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.get_background_img_and_plot"><code class="docutils literal notranslate"><span class="pre">get_background_img_and_plot()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.CenterDetector"><code class="docutils literal notranslate"><span class="pre">CenterDetector</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.CenterDetector.max_intensity"><code class="docutils literal notranslate"><span class="pre">CenterDetector.max_intensity</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.CenterDetector.max_threshold_value"><code class="docutils literal notranslate"><span class="pre">CenterDetector.max_threshold_value</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.CenterDetector.gaussian_blur_kernel"><code class="docutils literal notranslate"><span class="pre">CenterDetector.gaussian_blur_kernel</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.CenterDetector.find_best_threshold"><code class="docutils literal notranslate"><span class="pre">CenterDetector.find_best_threshold()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.CenterDetector.find_fisheye_circle_center"><code class="docutils literal notranslate"><span class="pre">CenterDetector.find_fisheye_circle_center()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.CenterDetector.visualize_center"><code class="docutils literal notranslate"><span class="pre">CenterDetector.visualize_center()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.CenterDetector.find_center_timerange"><code class="docutils literal notranslate"><span class="pre">CenterDetector.find_center_timerange()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.calibration.self_calibration.find_center_via_cam_model"><code class="docutils literal notranslate"><span class="pre">find_center_via_cam_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../process_self_calibration/index.html"
+                          title="previous chapter">asi_core.calibration.process_self_calibration</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../../camera/index.html"
+                          title="next chapter">asi_core.camera</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/autoapi/asi_core/calibration/self_calibration/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../camera/index.html" title="asi_core.camera"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../process_self_calibration/index.html" title="asi_core.calibration.process_self_calibration"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >asi_core</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" >asi_core.calibration</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.calibration.self_calibration</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>How to run the ASI self-calibration? &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Reference" href="../autoapi/index.html" />
+    <link rel="prev" title="Quick start guide on URL image receiver data acquisition program" href="docs_daq.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../autoapi/index.html" title="API Reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="docs_daq.html" title="Quick start guide on URL image receiver data acquisition program"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Manual</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">How to run the ASI self-calibration?</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="how-to-run-the-asi-self-calibration">
+<h1>How to run the ASI self-calibration?<a class="headerlink" href="#how-to-run-the-asi-self-calibration" title="Link to this heading">¶</a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>Make sure you have miniforge or similar installed</p></li>
+<li><p>Clone the asi_core or sky_imaging repository</p></li>
+<li><p>Change the working directory into the repository folder</p></li>
+<li><p>Create the asi-core conda environment:</p>
+<p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">environment.yml</span></code></p>
+<p>Using a conda environment is not strictly needed. Feel free to install the package
+in another environment with python 3.10 installed.</p>
+</li>
+<li><p>Activate the conda environment</p>
+<p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">asi_core</span></code></p>
+</li>
+<li><p>Install the asi-core package</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code></p>
+</li>
+</ul>
+</section>
+<section id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Link to this heading">¶</a></h2>
+<p>Open the conda environment in which asi-core is installed.</p>
+<p>Create a documentation folder in a suited location.</p>
+<p>Copy the following file to your documentation folder:</p>
+<p><code class="docutils literal notranslate"><span class="pre">asi_core/calibration/self_calibration_cfg.yaml</span></code></p>
+<p>Change the working dir to the documentation folder.</p>
+</section>
+<section id="prepare-a-preliminary-camera-data-file">
+<h2>Prepare a preliminary “camera_data” file<a class="headerlink" href="#prepare-a-preliminary-camera-data-file" title="Link to this heading">¶</a></h2>
+<p>In asi_core, each camera “sample” is described by an own camera_data file. Template see:</p>
+<p><code class="docutils literal notranslate"><span class="pre">asi_core/camera_data/ASI_Template.yaml</span></code></p>
+<p>Prepare a camera_data file based on this template with the information available before the calibration.</p>
+<ul>
+<li><p>Make sure the camera name matches with your camera.</p></li>
+<li><p>Make sure the period between the dates ‘mounted’ and ‘demounted’ includes your calibration period.</p></li>
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">internal_calibration</span></code> from a camera of the same type e.g. Mobotix Q26. If you are using a completely new camera
+type, the polynomial coefficients “ss” taken from another camera type should be scaled to the new camera’s image
+resolution. For some cameras it might be required to perform the calibration according to Scaramuzza for one sample of
+that camera model to receive suited start values for cameras of that type. In this case, you would notice large
+deviations remaining after the calibration.</p></li>
+<li><p>Make sure the specified width and height correspond to the actual width and height of the sky images. Diameter can be estimated as the smaller image side length</p></li>
+<li><p>The center of the camera lens (xc, yc) should be estimated as half of the image width and height respectively</p></li>
+<li><p>If possible each camera should be installed horizontally leveled, with the Sun in the upper image part at solar noon.
+In that case set</p>
+<p><code class="docutils literal notranslate"><span class="pre">external_orientation:</span> <span class="pre">[0.,</span>&#160;&#160; <span class="pre">3.14,</span>&#160;&#160; <span class="pre">1.57]</span></code> (northern hemisphere) or</p>
+<p><code class="docutils literal notranslate"><span class="pre">external_orientation:</span> <span class="pre">[0.,</span>&#160;&#160; <span class="pre">3.14,</span>&#160;&#160; <span class="pre">-1.57]</span></code> (southern hemisphere).</p>
+<p>(This is only a precaution. The calibration procedure should be able also to work with strongly
+deviating external orientations.)</p>
+</li>
+<li><p>Specify your camera’s exposure times under exposure settings exposure_settings/exposure_times.</p>
+<ul class="simple">
+<li><p>day and night indicate the exposure times (as list) used during day and night time respectively</p></li>
+<li><p>if taking image series, you can specify multiple exposure times. Images of the lowest exposure time specified will
+be used for the calibration.</p></li>
+<li><p>if you use WDR imaging or no fixed exposure time, set [0] as exposure time.</p></li>
+<li><p>In any case avoid that the tool will find multiple images (of the same exposure time if applicable) for the same
+timestamp (see img_path_structure in the config file section below).
+exposure_settings/tolerance_timestamp controls the tolerance between requested and found image timestamp
+(from image name)</p></li>
+</ul>
+</li>
+<li><p>Specify the path to the camera mask (see infos on mask below)</p></li>
+</ul>
+<p>As best practice, create a folder camera_cata in the documentation folder for your calibration.
+Store your camera_data file in that folder.</p>
+<section id="mask-creation">
+<h3>Mask creation<a class="headerlink" href="#mask-creation" title="Link to this heading">¶</a></h3>
+<p>You will need to create a camera mask. For this task, an automatic tool exists at DLR. With this
+calibration tool only a simple manual tool based on a graphical user interface is provided to create the camera mask:</p>
+<p><code class="docutils literal notranslate"><span class="pre">asi_core/calibration/mask_creation.py</span></code></p>
+<p>To use the tool copy the following config file to your working directory:</p>
+<p><code class="docutils literal notranslate"><span class="pre">asi_core/calibration/mask_creation_cfg.yaml</span></code></p>
+<p>and in the file specify the path to an image of the current camera in under:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ObstacleMaskDetection/img_path</span></code></p>
+<p>Install opencv <strong>with head</strong> (by default our pyproject.toml installs
+“opencv-python-headless”, i.e. GUI needed here not installed to save resources)</p>
+<p>Then run the mask creation tool, on a computer with desktop:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&lt;path</span> <span class="pre">to</span> <span class="pre">repository&gt;/asi_core/calibration/mask_creation.py</span> <span class="pre">-c</span> <span class="pre">mask_creation_cfg.yaml</span></code></p>
+<p>The usage of the tool is described at the top of the GUI window. The basic idea of the tool is to draw polygons which
+indicate areas that are added or removed from an initial rough guess of the camera mask.</p>
+<p>In your working directory, you will receive 2 files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mask_*.mat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">masked_*.jpg</span></code> (only to check/ document the result visually)</p></li>
+</ul>
+<p>As best practice, store the .mat file in your camera_data folder in a new sub folder camera_masks.
+Specify the relative path from camera_data file to camera mask in the camera_data file (entry <code class="docutils literal notranslate"><span class="pre">camera_mask_file</span></code>)</p>
+</section>
+</section>
+<section id="config-file">
+<h2>Config file<a class="headerlink" href="#config-file" title="Link to this heading">¶</a></h2>
+<p>Adapt <code class="docutils literal notranslate"><span class="pre">self_calibration_cfg.yaml</span></code> to your current calibration task.</p>
+<p>The config file contains comments to be self-explanatory. (If not contact niklas.blum&#64;dlr.de) Usually, you will need to
+adapt the following:</p>
+<ul class="simple">
+<li><p>camera_name</p></li>
+<li><p>camera_data_dir – comment this in to use the camera data folder you created in your working dir</p></li>
+<li><p>img_path_structure – path to the image of each timestamp and exposure time with placeholders for date/ time and</p></li>
+<li><p>mode – defines what task is performed calibration and validation or only one of the two. Additionally, if orb positions can either be detected from images are be taken from a csv file which was created in advance. <code class="docutils literal notranslate"><span class="pre">calibrate_validate_from_images</span></code> should be used as default.</p></li>
+<li><p>last_timestamp</p></li>
+<li><p>last_timestamp_validation</p></li>
+<li><p>moon_detection/number_days</p></li>
+<li><p>sun_validation/number_days</p></li>
+<li><p>The remaining parameters will usually remain unchanged at least for Mobotix.</p></li>
+</ul>
+<p>The period included in the calibration should be long enough to have orb observations in a wide
+range of sky areas regarding azimuth and zenith angle. Note that depending on location and season this can sometimes be
+difficult. In the best case use one of the following:</p>
+<ul class="simple">
+<li><p>Moon positions from at least half a year between summer and winter solstice</p></li>
+<li><p>Moon positions from at least one moon phase in winter</p></li>
+<li><p>Moon positions from at least one moon phase in summer AND sun positions from one month in summer</p></li>
+</ul>
+<p>A sampling time of 10 minutes will usually be enough to get all orb positions. If you want to save resource use a larger
+interval. If you work in very cloudy conditions you may want to detect Sun and Moon in every short cloud-free period,
+in that case consider reducing the sampling time. The visualization received from the calibration will help to estimate
+if a sufficient number of orb positions distributed rather homogeneously over a wide range of azimuth and zenith angles
+has been detected.</p>
+</section>
+<section id="execute-calibration-program">
+<h2>Execute calibration program<a class="headerlink" href="#execute-calibration-program" title="Link to this heading">¶</a></h2>
+<p>In the terminal run (path will be different on linux)</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&lt;path_to_repository&gt;/asi_core/calibration</span></code></p>
+<p>If you don’t include a field ‘last_timestamp’ in the config file, the self-calibration will use the previous full-moon date + 6 days as last timestamp.</p>
+<p>The calibration will take some time to run depending on the data connection to your image storage location,
+your computer’s ressources and the number of timestamps included in the calibration. While the calibration is running a
+log file <code class="docutils literal notranslate"><span class="pre">geometric_calib_processed_&lt;start</span> <span class="pre">date</span> <span class="pre">and</span> <span class="pre">time&gt;.log</span></code> is created. Check this file to see how the calibration
+progresses. You will see that the calibration’s orb detection loops through all timestamps once for the calibration once
+for the validation. Additionally, you will see that the iterative center detection usually takes some time.</p>
+</section>
+<section id="check-the-results">
+<h2>Check the results<a class="headerlink" href="#check-the-results" title="Link to this heading">¶</a></h2>
+<p>In the documentation folder you will receive the following files:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">calib_&lt;camera_name&gt;_&lt;start&gt;_&lt;end&gt;.yaml</span></code></p></td>
+<td><p>contains all results of the calibration. These should be transfered to the camera_data yaml`</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">calib_&lt;camera_name&gt;_&lt;start&gt;_&lt;end&gt;.mat</span></code></p></td>
+<td><p>same as the yaml file above. Stored for legacy matlab tools.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">moon_observations_&lt;start&gt;_&lt;end&gt;.csv</span></code></p></td>
+<td><p>contains all moon observations included in the validation or calibration. The observations can be used to reproduce the calibration/ validation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sun_&lt;start&gt;_&lt;end&gt;.csv</span></code></p></td>
+<td><p>contains all sun observations included in the validation or calibration. The observations can be used to reproduce the calibration/ validation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">calibrated_observations_&lt;start&gt;_&lt;end&gt;.csv</span></code></p></td>
+<td><p>contains all orb observations included in the calibration. In this file the final calibration parameters have already been applied.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">validation_observations_&lt;start&gt;_&lt;end&gt;.csv</span></code></p></td>
+<td><p>contains all orb observations included in the validation. In this file the final calibration parameters have already been applied.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">calibrated_observations_&lt;start&gt;_&lt;end&gt;.png</span></code></p></td>
+<td><p>visualizes the coincidence of expected and found orb positions in the calibration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">validation_observations_&lt;start&gt;_&lt;end&gt;.png</span></code></p></td>
+<td><p>visualizes the coincidence of expected and found orb positions in the validation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">azimuth_matrix_&lt;camera_name&gt;_&lt;timestamp_processed&gt;.npy</span></code></p></td>
+<td><p>contains a matrix of the azimuth angle viewed by each pixel</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">elevation_matrix_&lt;camera_name&gt;_&lt;timestamp_processed&gt;.npy</span></code></p></td>
+<td><p>contains a matrix of the elevation angle viewed by each pixel</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;start&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;end&gt;</span></code> indicate the timestamps bounding the period included in the calibration.</p>
+<p>In this case Moon positions were used for the calibration and Sun positions for the validation.
+To check the results, open both image files:</p>
+<p><img alt="calibrated_observations_20230205000000_20230804000000.png" src="../_images/calibrated_observations_20230205000000_20230804000000.png" /></p>
+<p>You should see that most moon positions (expected and detected) coincide well. This is expressed by the red and blue
+dots and by the RMSD values printed. Usually we have a small number of outliers. In outlier cases surrounding lights
+were detected as Moon. After filtering for outliers (1% of the data points), you should see a very small RMSD of
+typically less than 2 pixels. RMSD values larger than 4 pixels will indicate a rather low quality of your calibration.
+At the same time you should see a large number of visualized data points spread over a wide range of azimuth and
+elevation angles in one half of the hemisphere. If these conditions are not fulfilled, your calibration may be
+over-fitted to the sky region from which the observations were received.</p>
+<p><img alt="validation_observations_20230807063000_20240202163000.png" src="../_images/validation_observations_20230807063000_20240202163000.png" /></p>
+<p>Accordingly, you can evaluate the visualization of the Sun positions. In this case Sun positions were used for
+validation. This means they were only included to check if also for Sun positions small deviations between astronomic
+expectation and image processing are attested. In this case slightly larger deviations are possible if your validation
+interval includes a high fraction of turbid or cloudy situations in which the sun disk may still appear roundish while
+being disturbed by these influences. Usually you should receive an RMSD of around 3 pixels.</p>
+</section>
+<section id="refine-the-results">
+<h2>Refine the results<a class="headerlink" href="#refine-the-results" title="Link to this heading">¶</a></h2>
+<p>If you calibrate using Sun positions, stronger deviations in the orb positions from image processing are possible.
+This is caused in particular by lens soiling, increased turbidity, clouds near the sun, cirrus clouds in general. If
+calibrating with sun positions, it might sometimes be required to manually filter out low quality images.</p>
+<p>For this you can run the calibration once more adapting as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Calibration</span><span class="p">:</span>
+	<span class="n">mode</span><span class="p">:</span> <span class="n">calibrate_from_csv</span>  
+	<span class="n">sort_out_imgs_manually</span><span class="p">:</span> <span class="kc">True</span>
+	<span class="n">path_orb_observations</span><span class="p">:</span> <span class="s1">&#39;&lt;path_to_orb_observations_for_calibration&gt;.csv&#39;</span>  <span class="c1"># specify path to csv with orb observations from first run here</span>
+</pre></div>
+</div>
+<p>This will lead you through a dialog which requests you to delete invalid images from the subfolder used_imgs in your
+working directory (copied from the original image folder). Erased images will then be excluded from the calibration.</p>
+</section>
+<section id="store-results">
+<h2>Store results<a class="headerlink" href="#store-results" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Store results on the server: \asfs03/Group/PROJECTS/MeteoProj/Cameras/CloudCamera/CloudCamCalibration</p></li>
+<li><p>create a folder for each camera (e.g. Cloud_Cam_PVotSky)</p></li>
+<li><p>create a folder for each calibration (e.g. 202402_XX)</p></li>
+<li><p>Store all calibration results here (see table ## Check the results)</p></li>
+<li><p>If the calibration is suited, add it to camera_data</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">How to run the ASI self-calibration?</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#preparation">Preparation</a></li>
+<li><a class="reference internal" href="#prepare-a-preliminary-camera-data-file">Prepare a preliminary “camera_data” file</a><ul>
+<li><a class="reference internal" href="#mask-creation">Mask creation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#config-file">Config file</a></li>
+<li><a class="reference internal" href="#execute-calibration-program">Execute calibration program</a></li>
+<li><a class="reference internal" href="#check-the-results">Check the results</a></li>
+<li><a class="reference internal" href="#refine-the-results">Refine the results</a></li>
+<li><a class="reference internal" href="#store-results">Store results</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="docs_daq.html"
+                          title="previous chapter">Quick start guide on URL image receiver data acquisition program</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../autoapi/index.html"
+                          title="next chapter">API Reference</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/manual/geom_self_calibration.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../autoapi/index.html" title="API Reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="docs_daq.html" title="Quick start guide on URL image receiver data acquisition program"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User Manual</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">How to run the ASI self-calibration?</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

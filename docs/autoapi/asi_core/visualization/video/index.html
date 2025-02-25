@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>asi_core.visualization.video &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="mask_creation" href="../../../mask_creation/index.html" />
+    <link rel="prev" title="asi_core.visualization.timeseries" href="../timeseries/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../mask_creation/index.html" title="mask_creation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../timeseries/index.html" title="asi_core.visualization.timeseries"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >asi_core</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" accesskey="U">asi_core.visualization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.visualization.video</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-asi_core.visualization.video">
+<span id="asi-core-visualization-video"></span><h1>asi_core.visualization.video<a class="headerlink" href="#module-asi_core.visualization.video" title="Link to this heading">¶</a></h1>
+<p>This module provides functions to create videos from all-sky images.</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.visualization.video.OPENCV_VIDEO_CODECS" title="asi_core.visualization.video.OPENCV_VIDEO_CODECS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OPENCV_VIDEO_CODECS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo" title="asi_core.visualization.video.AllSkyVideo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllSkyVideo</span></code></a></p></td>
+<td><p>Handles the creation of videos from all-sky images.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.visualization.video.SaturationMaskSkyVideo" title="asi_core.visualization.video.SaturationMaskSkyVideo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SaturationMaskSkyVideo</span></code></a></p></td>
+<td><p>Generates videos of all-sky images with a mask overlay of saturated pixels.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.visualization.video.create_video_from_images" title="asi_core.visualization.video.create_video_from_images"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_video_from_images</span></code></a>(images, output_path[, fps, ...])</p></td>
+<td><p>Creates video from images.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="asi_core.visualization.video.OPENCV_VIDEO_CODECS">
+<span class="sig-prename descclassname"><span class="pre">asi_core.visualization.video.</span></span><span class="sig-name descname"><span class="pre">OPENCV_VIDEO_CODECS</span></span><a class="headerlink" href="#asi_core.visualization.video.OPENCV_VIDEO_CODECS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.visualization.video.</span></span><span class="sig-name descname"><span class="pre">AllSkyVideo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asi_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.mp4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asi_tfms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo" title="Link to this definition">¶</a></dt>
+<dd><p>Handles the creation of videos from all-sky images.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.output_dir">
+<span class="sig-name descname"><span class="pre">output_dir</span></span><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.output_dir" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.asi_files">
+<span class="sig-name descname"><span class="pre">asi_files</span></span><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.asi_files" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.timestamps">
+<span class="sig-name descname"><span class="pre">timestamps</span></span><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.timestamps" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.camera_name">
+<span class="sig-name descname"><span class="pre">camera_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.camera_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.fps">
+<span class="sig-name descname"><span class="pre">fps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.fps" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.format">
+<span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.mp4'</span></em><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.format" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.fourcc">
+<span class="sig-name descname"><span class="pre">fourcc</span></span><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.fourcc" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.asi_tfms">
+<span class="sig-name descname"><span class="pre">asi_tfms</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.asi_tfms" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.sky_imager">
+<span class="sig-name descname"><span class="pre">sky_imager</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.sky_imager" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.update_sky_imager_config">
+<span class="sig-name descname"><span class="pre">update_sky_imager_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.update_sky_imager_config" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the sky imager configuration based on the given timestamp.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.create_video">
+<span class="sig-name descname"><span class="pre">create_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.create_video" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a video from the given image timestamps.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.process_images">
+<span class="sig-name descname"><span class="pre">process_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asi_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.process_images" title="Link to this definition">¶</a></dt>
+<dd><p>Processes images by applying transformations and preparing them for video creation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>asi_files</strong> – Pandas Series containing image file paths.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of processed images.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo.create_daily_videos">
+<span class="sig-name descname"><span class="pre">create_daily_videos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo.create_daily_videos" title="Link to this definition">¶</a></dt>
+<dd><p>Creates daily videos based on available timestamps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename_prefix</strong> – Prefix for the output video filename.</p></li>
+<li><p><strong>dates</strong> – List of dates to generate videos for (optional).</p></li>
+<li><p><strong>num_workers</strong> – Number of parallel workers for processing.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.visualization.video.AllSkyVideo._create_video_task">
+<span class="sig-name descname"><span class="pre">_create_video_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.video.AllSkyVideo._create_video_task" title="Link to this definition">¶</a></dt>
+<dd><p>Helper method to unpack task and call create_video</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.visualization.video.SaturationMaskSkyVideo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.visualization.video.</span></span><span class="sig-name descname"><span class="pre">SaturationMaskSkyVideo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asi_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.mp4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asi_tfms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.video.SaturationMaskSkyVideo" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo" title="asi_core.visualization.video.AllSkyVideo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllSkyVideo</span></code></a></p>
+<p>Generates videos of all-sky images with a mask overlay of saturated pixels.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.visualization.video.SaturationMaskSkyVideo.process_images">
+<span class="sig-name descname"><span class="pre">process_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asi_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.video.SaturationMaskSkyVideo.process_images" title="Link to this definition">¶</a></dt>
+<dd><p>Processes images by applying a saturation mask overlay.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>asi_files</strong> – Pandas Series containing image file paths.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of processed images with saturation masks applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.visualization.video.create_video_from_images">
+<span class="sig-prename descclassname"><span class="pre">asi_core.visualization.video.</span></span><span class="sig-name descname"><span class="pre">create_video_from_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fourcc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rgb_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.visualization.video.create_video_from_images" title="Link to this definition">¶</a></dt>
+<dd><p>Creates video from images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> – list of images in numpy format.</p></li>
+<li><p><strong>output_path</strong> – path of output video.</p></li>
+<li><p><strong>fps</strong> – frames per second.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">asi_core.visualization.video</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#asi_core.visualization.video.OPENCV_VIDEO_CODECS"><code class="docutils literal notranslate"><span class="pre">OPENCV_VIDEO_CODECS</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.output_dir"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.output_dir</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.asi_files"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.asi_files</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.timestamps"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.timestamps</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.camera_name"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.camera_name</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.fps"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.fps</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.format"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.format</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.fourcc"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.fourcc</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.asi_tfms"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.asi_tfms</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.sky_imager"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.sky_imager</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.update_sky_imager_config"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.update_sky_imager_config()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.create_video"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.create_video()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.process_images"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.process_images()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo.create_daily_videos"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo.create_daily_videos()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.visualization.video.AllSkyVideo._create_video_task"><code class="docutils literal notranslate"><span class="pre">AllSkyVideo._create_video_task()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.visualization.video.SaturationMaskSkyVideo"><code class="docutils literal notranslate"><span class="pre">SaturationMaskSkyVideo</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.visualization.video.SaturationMaskSkyVideo.process_images"><code class="docutils literal notranslate"><span class="pre">SaturationMaskSkyVideo.process_images()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.visualization.video.create_video_from_images"><code class="docutils literal notranslate"><span class="pre">create_video_from_images()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../timeseries/index.html"
+                          title="previous chapter">asi_core.visualization.timeseries</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../../../mask_creation/index.html"
+                          title="next chapter">mask_creation</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/autoapi/asi_core/visualization/video/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../mask_creation/index.html" title="mask_creation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../timeseries/index.html" title="asi_core.visualization.timeseries"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >asi_core</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" >asi_core.visualization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.visualization.video</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

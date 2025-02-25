@@ -1,0 +1,52 @@
+mobotix
+=======
+
+.. py:module:: mobotix
+
+.. autoapi-nested-parse::
+
+   This module provides funtionality specific to mobotix cameras.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   mobotix.extract_mobotix_meta_data
+   mobotix.get_mobotix_meta_data
+   mobotix.search_header
+   mobotix.read_timestamp_from_header
+
+
+Module Contents
+---------------
+
+.. py:function:: extract_mobotix_meta_data(img_bytes)
+
+   Extract variables from image bytes.
+
+   :param img_bytes: byte array or filename of the image as str or subclass of Path
+   :return: Dictionary of image metadata variables
+
+
+.. py:function:: get_mobotix_meta_data(img_file, max_header_length=5000)
+
+   Load image and read variables from header of a Mobotix image.
+
+   :param img_file: filename of the image as str or subclass of Path
+   :param max_header_length: Expected maximum number of bytes in the image header (don't read image further)
+   :return: Dictionary of image metadata variables
+
+
+.. py:function:: search_header(search_pattern, header, dtype=np.float32)
+
+   Use re to extract a variable from the mobotix image header
+
+
+.. py:function:: read_timestamp_from_header(header)
+
+   Use re to extract image timestamp from the mobotix image header
+
+

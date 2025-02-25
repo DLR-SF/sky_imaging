@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>asi_core.basics &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="asi_core.calibration" href="../calibration/index.html" />
+    <link rel="prev" title="asi_core.asi_analysis" href="../asi_analysis/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../calibration/index.html" title="asi_core.calibration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../asi_analysis/index.html" title="asi_core.asi_analysis"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">asi_core</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.basics</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-asi_core.basics">
+<span id="asi-core-basics"></span><h1>asi_core.basics<a class="headerlink" href="#module-asi_core.basics" title="Link to this heading">¶</a></h1>
+<p>This module provides basic helper functions.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.basics.DailyH5" title="asi_core.basics.DailyH5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DailyH5</span></code></a></p></td>
+<td><p>Base class for DailyH5 file manipulation</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.basics.DailyH5Writer" title="asi_core.basics.DailyH5Writer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DailyH5Writer</span></code></a></p></td>
+<td><p>Base class for DailyH5 file manipulation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.basics.DailyH5Reader" title="asi_core.basics.DailyH5Reader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DailyH5Reader</span></code></a></p></td>
+<td><p>Base class for DailyH5 file manipulation</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.basics.ifnone" title="asi_core.basics.ifnone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ifnone</span></code></a>(var, otherwise)</p></td>
+<td><p>If a variable's original value is None, replace it with an alternative value</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.basics.get_absolute_path" title="asi_core.basics.get_absolute_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_absolute_path</span></code></a>(filepath[, root, as_string])</p></td>
+<td><p>Combine root and relative path and resolve to absolute path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.basics.replace_double_backslashes_with_slashes_in_path" title="asi_core.basics.replace_double_backslashes_with_slashes_in_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_double_backslashes_with_slashes_in_path</span></code></a>(str_path)</p></td>
+<td><p>Replace double backslashes from windows paths with slashes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.basics._get_files" title="asi_core.basics._get_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_files</span></code></a>(p, fs[, extensions, substring])</p></td>
+<td><p>Get all files in path with 'extensions' and a name containing a 'substring'.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.basics.get_files" title="asi_core.basics.get_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_files</span></code></a>(path[, extensions, substring, recursive, ...])</p></td>
+<td><p>Get all files in <cite>path</cite> with optional <cite>extensions</cite> or <cite>substring</cite>, optionally <cite>recursive</cite>, only in <cite>folders</cite>,</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.basics.get_image_files" title="asi_core.basics.get_image_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_image_files</span></code></a>(path[, recursive, folders, ...])</p></td>
+<td><p>Get image files in <cite>path</cite> recursively, only in <cite>folders</cite> and with <cite>substring</cite>, if specified.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.basics.copy_file" title="asi_core.basics.copy_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_file</span></code></a>(src_file[, tgt_file, tgt_dir, create_parents])</p></td>
+<td><p>Copies a file to a specified target file or directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.basics.copy_file_relative_to_directories" title="asi_core.basics.copy_file_relative_to_directories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_file_relative_to_directories</span></code></a>(rel_filepath, ...)</p></td>
+<td><p>Copies a file from the source directory to the target directory while preserving its relative path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.basics.parallel_copy_files" title="asi_core.basics.parallel_copy_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parallel_copy_files</span></code></a>(filepaths, src_dir, tgt_dir[, ...])</p></td>
+<td><p>Copies multiple files in parallel, optionally preserving directory structure.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.basics.get_number_of_nans" title="asi_core.basics.get_number_of_nans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_number_of_nans</span></code></a>(df)</p></td>
+<td><p>Count number of nans in a dataframe columns-wise and total number of rows with a NaN value in at least one column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.basics.get_ETC_GMT_timezone" title="asi_core.basics.get_ETC_GMT_timezone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ETC_GMT_timezone</span></code></a>([desired_timezone])</p></td>
+<td><p>Return a <cite>pytz</cite> timezone object corresponding to the desired Etc/GMT timezone.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.basics.parse_datetime" title="asi_core.basics.parse_datetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_datetime</span></code></a>(dt_string[, datetime_format])</p></td>
+<td><p>Extracts timestamp from filename.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.basics.get_temporal_resolution_from_timeseries" title="asi_core.basics.get_temporal_resolution_from_timeseries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_temporal_resolution_from_timeseries</span></code></a>(data)</p></td>
+<td><p>Get temporal resolution from a pandas DataFrame with a DatetimeIndex.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.basics.assemble_path" title="asi_core.basics.assemble_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assemble_path</span></code></a>(path_structure, camera_name, timestamp)</p></td>
+<td><p>Assemble path to images or other files and replace timestamp and camera name 'tags' with actual values</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.basics.fstring_to_re" title="asi_core.basics.fstring_to_re"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fstring_to_re</span></code></a>(string)</p></td>
+<td><p>Convert from f-string syntax to regular expression syntax</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.basics.adjust_gamma" title="asi_core.basics.adjust_gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjust_gamma</span></code></a>(image[, gamma])</p></td>
+<td><p>Only for improved visibility, for radiometric evaluations reconsider</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.ifnone">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">ifnone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otherwise</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.ifnone" title="Link to this definition">¶</a></dt>
+<dd><p>If a variable’s original value is None, replace it with an alternative value</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.get_absolute_path">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">get_absolute_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_string</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.get_absolute_path" title="Link to this definition">¶</a></dt>
+<dd><p>Combine root and relative path and resolve to absolute path.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.replace_double_backslashes_with_slashes_in_path">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">replace_double_backslashes_with_slashes_in_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.replace_double_backslashes_with_slashes_in_path" title="Link to this definition">¶</a></dt>
+<dd><p>Replace double backslashes from windows paths with slashes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics._get_files">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">_get_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">substring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics._get_files" title="Link to this definition">¶</a></dt>
+<dd><p>Get all files in path with ‘extensions’ and a name containing a ‘substring’.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.get_files">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">get_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">substring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">followlinks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.get_files" title="Link to this definition">¶</a></dt>
+<dd><p>Get all files in <cite>path</cite> with optional <cite>extensions</cite> or <cite>substring</cite>, optionally <cite>recursive</cite>, only in <cite>folders</cite>,
+if specified.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.get_image_files">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">get_image_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IMAGE_EXTENSIONS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">substring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.get_image_files" title="Link to this definition">¶</a></dt>
+<dd><p>Get image files in <cite>path</cite> recursively, only in <cite>folders</cite> and with <cite>substring</cite>, if specified.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.copy_file">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">copy_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tgt_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tgt_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.copy_file" title="Link to this definition">¶</a></dt>
+<dd><p>Copies a file to a specified target file or directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src_file</strong> – Path to the source file.</p></li>
+<li><p><strong>tgt_file</strong> – Path to the target file (optional if tgt_dir is provided).</p></li>
+<li><p><strong>tgt_dir</strong> – Path to the target directory (optional if tgt_file is provided).</p></li>
+<li><p><strong>create_parents</strong> – Whether to create parent directories if they do not exist (default: False).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.copy_file_relative_to_directories">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">copy_file_relative_to_directories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rel_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tgt_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.copy_file_relative_to_directories" title="Link to this definition">¶</a></dt>
+<dd><p>Copies a file from the source directory to the target directory while preserving its relative path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rel_filepath</strong> – File path relative to the source directory.</p></li>
+<li><p><strong>src_dir</strong> – Root source directory.</p></li>
+<li><p><strong>tgt_dir</strong> – Root target directory.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.parallel_copy_files">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">parallel_copy_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepaths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tgt_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_dir_structure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.parallel_copy_files" title="Link to this definition">¶</a></dt>
+<dd><p>Copies multiple files in parallel, optionally preserving directory structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepaths</strong> – List of file paths to copy.</p></li>
+<li><p><strong>src_dir</strong> – Source directory (used to determine relative paths).</p></li>
+<li><p><strong>tgt_dir</strong> – Target directory where files will be copied.</p></li>
+<li><p><strong>keep_dir_structure</strong> – Whether to maintain the original directory structure (default: False).</p></li>
+<li><p><strong>num_workers</strong> – Number of parallel workers for file copying (default: 0, meaning sequential execution).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.get_number_of_nans">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">get_number_of_nans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.get_number_of_nans" title="Link to this definition">¶</a></dt>
+<dd><p>Count number of nans in a dataframe columns-wise and total number of rows with a NaN value in at least one column.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.get_ETC_GMT_timezone">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">get_ETC_GMT_timezone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desired_timezone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GMT'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.get_ETC_GMT_timezone" title="Link to this definition">¶</a></dt>
+<dd><p>Return a <cite>pytz</cite> timezone object corresponding to the desired Etc/GMT timezone.</p>
+<p>Example: UTC+2: get_ETC_GMT_timezone(‘GMT+2’) returns pytz timezone object for “Etc/GMT-2”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>desired_timezone</strong> – (str) A string specifying the desired GMT timezone. It should be in the format ‘GMT+1’
+(in the case of UTC+1). If a ‘+’ sign is used, it will be replaced with ‘-’ to follow the Etc/GMT convention
+(<a class="reference external" href="https://en.wikipedia.org/wiki/Tz_database#Area">https://en.wikipedia.org/wiki/Tz_database#Area</a>).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pytz.timezone, Etc/GMT timezone</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.parse_datetime">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">parse_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datetime_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%Y%m%d%H%M%S'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.parse_datetime" title="Link to this definition">¶</a></dt>
+<dd><p>Extracts timestamp from filename.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.get_temporal_resolution_from_timeseries">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">get_temporal_resolution_from_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.get_temporal_resolution_from_timeseries" title="Link to this definition">¶</a></dt>
+<dd><p>Get temporal resolution from a pandas DataFrame with a DatetimeIndex.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.assemble_path">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">assemble_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_structure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_subday_to_wildcard</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exposure_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.assemble_path" title="Link to this definition">¶</a></dt>
+<dd><p>Assemble path to images or other files and replace timestamp and camera name ‘tags’ with actual values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_structure</strong> – (str) path to each image, containing {camera_name} where the camera name should be inserted
+and {timestamp:…} (e.g. {timestamp:%Y%m%d%H%M%S%f}) where the evaluated timestamp should be inserted</p></li>
+<li><p><strong>camera_name</strong> – (str) Name of the camera as specified in config file and used in (image) folder structure</p></li>
+<li><p><strong>timestamp</strong> – (datetime, tz-aware) Timestamp for which an (image) file is requested</p></li>
+<li><p><strong>set_subday_to_wildcard</strong> – (bool) If True, replace formatters indicating hours, minutes etc. with wildcards</p></li>
+<li><p><strong>exposure_time</strong> – (int) exposure time of images has to be set if set_subday_to_wildcard is False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return assemble_path<span class="colon">:</span></dt>
+<dd class="field-even"><p>(str) assembled path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.fstring_to_re">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">fstring_to_re</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.fstring_to_re" title="Link to this definition">¶</a></dt>
+<dd><p>Convert from f-string syntax to regular expression syntax</p>
+<p>Only a limited set of formatters supported so far, FSTRING_RE should be extended as needed.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">DailyH5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">products_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta_infos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5" title="Link to this definition">¶</a></dt>
+<dd><p>Base class for DailyH5 file manipulation</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5.products_path">
+<span class="sig-name descname"><span class="pre">products_path</span></span><a class="headerlink" href="#asi_core.basics.DailyH5.products_path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5.meta_infos">
+<span class="sig-name descname"><span class="pre">meta_infos</span></span><a class="headerlink" href="#asi_core.basics.DailyH5.meta_infos" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5.daily_h5">
+<span class="sig-name descname"><span class="pre">daily_h5</span></span><a class="headerlink" href="#asi_core.basics.DailyH5.daily_h5" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5.get_file">
+<span class="sig-name descname"><span class="pre">get_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5.get_file" title="Link to this definition">¶</a></dt>
+<dd><p>Get the path to the current daily h5 file. Initialize if not done yet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timestamp</strong> – Timestamp of the data to be stored</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Path to the current daily h5 file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5.init_h5file">
+<span class="sig-name descname"><span class="pre">init_h5file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5.init_h5file" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize daily h5 file for reading or writing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timestamp</strong> – Timestamp of the current data to be stored</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5.process_entry">
+<span class="sig-name descname"><span class="pre">process_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_forecasted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5.process_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Stores a dataset of one timestamp to the daily h5 file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> – Timestamp based on which dataset was created</p></li>
+<li><p><strong>mode</strong> – character, r/w/a, i.e. read, write or append</p></li>
+<li><p><strong>data</strong> – Dataset to be saved either dataset which can be stored by h5py or dict of such datasets</p></li>
+<li><p><strong>timestamp_forecasted</strong> – (Optional) timestamp forecasted by the dataset</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5.process_sub_entry">
+<span class="sig-name descname"><span class="pre">process_sub_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5.process_sub_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Defines the read/ write operation to be applied recursively</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> – Label of the current data to be stored/ read</p></li>
+<li><p><strong>data</strong> – Data to be processed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5Writer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">DailyH5Writer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">products_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta_infos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5Writer" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.basics.DailyH5" title="asi_core.basics.DailyH5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DailyH5</span></code></a></p>
+<p>Base class for DailyH5 file manipulation</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5Writer.store_entry">
+<span class="sig-name descname"><span class="pre">store_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_forecasted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5Writer.store_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Stores a dataset of one timestamp to the daily h5 file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> – Timestamp based on which dataset was created</p></li>
+<li><p><strong>timestamp_forecasted</strong> – (Optional) timestamp forecasted by the dataset</p></li>
+<li><p><strong>data</strong> – Dataset to be saved either dataset which can be stored by h5py or dict of such datasets</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5Writer.init_h5file">
+<span class="sig-name descname"><span class="pre">init_h5file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_not_overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5Writer.init_h5file" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize daily h5 file, create folders if required, store meta infos to a new h5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> – Timestamp of the current data to be stored</p></li>
+<li><p><strong>do_not_overwrite</strong> – If called and a daily file already exists, create additional file instead of
+overwriting the previous one.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5Writer.process_sub_entry">
+<span class="sig-name descname"><span class="pre">process_sub_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5Writer.process_sub_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Recursively store all datasets in data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> – Handle to an h5file or a group in an h5 file</p></li>
+<li><p><strong>label</strong> – Label under which data will be stored</p></li>
+<li><p><strong>data</strong> – dataset or dict of datasets</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5Reader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">DailyH5Reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">products_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta_infos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5Reader" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.basics.DailyH5" title="asi_core.basics.DailyH5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DailyH5</span></code></a></p>
+<p>Base class for DailyH5 file manipulation</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5Reader.list_entries">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">list_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h5_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5Reader.list_entries" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a dataframe of the keys and corresponding timestamps and forecasted timestamps in the h5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>h5_path</strong> – Path of the h5 file, the ke</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataframe with columns key, timestamp, forecasted_timestamp</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5Reader.init_from_path">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">init_from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h5_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5Reader.init_from_path" title="Link to this definition">¶</a></dt>
+<dd><p>Create a DailyH5Reader instance and initializes it from a specific h5 file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> – Timestamp based on which dataset was created</p></li>
+<li><p><strong>h5_path</strong> – Path of the h5 file to be read (naming can deviate from convention of DailyH5Writer)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DailyH5Reader instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5Reader.get_entry">
+<span class="sig-name descname"><span class="pre">get_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_forecasted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5Reader.get_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Stores a dataset of one timestamp to the daily h5 file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> – Timestamp based on which dataset was created</p></li>
+<li><p><strong>timestamp_forecasted</strong> – (Optional) timestamp forecasted by the dataset</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataset to be saved either dataset which can be stored by h5py or dict of such datasets</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5Reader.process_sub_entry">
+<span class="sig-name descname"><span class="pre">process_sub_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5Reader.process_sub_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Recursively get all datasets in handle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> – Handle to an h5file or a group in an h5 file</p></li>
+<li><p><strong>label</strong> – Label under which data will be stored</p></li>
+<li><p><strong>data</strong> – dataset or dict of datasets</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.basics.DailyH5Reader.init_h5file">
+<span class="sig-name descname"><span class="pre">init_h5file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_counter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.DailyH5Reader.init_h5file" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize daily h5 file, load meta data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> – Timestamp of the current data to be stored</p></li>
+<li><p><strong>file_counter</strong> – Appends counter suffix to file name. May be useful if multiple files created for a day.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.basics.adjust_gamma">
+<span class="sig-prename descclassname"><span class="pre">asi_core.basics.</span></span><span class="sig-name descname"><span class="pre">adjust_gamma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.basics.adjust_gamma" title="Link to this definition">¶</a></dt>
+<dd><p>Only for improved visibility, for radiometric evaluations reconsider</p>
+<p>Taken from <a class="reference external" href="https://pyimagesearch.com/2015/10/05/opencv-gamma-correction/">https://pyimagesearch.com/2015/10/05/opencv-gamma-correction/</a></p>
+<p>Build a lookup table mapping the pixel values [0, 255] to their adjusted gamma values and apply it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – Input RGB image</p></li>
+<li><p><strong>gamma</strong> – Gamma scalar parameter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gamma-corrected image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">asi_core.basics</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#asi_core.basics.ifnone"><code class="docutils literal notranslate"><span class="pre">ifnone()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.get_absolute_path"><code class="docutils literal notranslate"><span class="pre">get_absolute_path()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.replace_double_backslashes_with_slashes_in_path"><code class="docutils literal notranslate"><span class="pre">replace_double_backslashes_with_slashes_in_path()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics._get_files"><code class="docutils literal notranslate"><span class="pre">_get_files()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.get_files"><code class="docutils literal notranslate"><span class="pre">get_files()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.get_image_files"><code class="docutils literal notranslate"><span class="pre">get_image_files()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.copy_file"><code class="docutils literal notranslate"><span class="pre">copy_file()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.copy_file_relative_to_directories"><code class="docutils literal notranslate"><span class="pre">copy_file_relative_to_directories()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.parallel_copy_files"><code class="docutils literal notranslate"><span class="pre">parallel_copy_files()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.get_number_of_nans"><code class="docutils literal notranslate"><span class="pre">get_number_of_nans()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.get_ETC_GMT_timezone"><code class="docutils literal notranslate"><span class="pre">get_ETC_GMT_timezone()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.parse_datetime"><code class="docutils literal notranslate"><span class="pre">parse_datetime()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.get_temporal_resolution_from_timeseries"><code class="docutils literal notranslate"><span class="pre">get_temporal_resolution_from_timeseries()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.assemble_path"><code class="docutils literal notranslate"><span class="pre">assemble_path()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.fstring_to_re"><code class="docutils literal notranslate"><span class="pre">fstring_to_re()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5"><code class="docutils literal notranslate"><span class="pre">DailyH5</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5.products_path"><code class="docutils literal notranslate"><span class="pre">DailyH5.products_path</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5.meta_infos"><code class="docutils literal notranslate"><span class="pre">DailyH5.meta_infos</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5.daily_h5"><code class="docutils literal notranslate"><span class="pre">DailyH5.daily_h5</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5.get_file"><code class="docutils literal notranslate"><span class="pre">DailyH5.get_file()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5.init_h5file"><code class="docutils literal notranslate"><span class="pre">DailyH5.init_h5file()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5.process_entry"><code class="docutils literal notranslate"><span class="pre">DailyH5.process_entry()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5.process_sub_entry"><code class="docutils literal notranslate"><span class="pre">DailyH5.process_sub_entry()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5Writer"><code class="docutils literal notranslate"><span class="pre">DailyH5Writer</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5Writer.store_entry"><code class="docutils literal notranslate"><span class="pre">DailyH5Writer.store_entry()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5Writer.init_h5file"><code class="docutils literal notranslate"><span class="pre">DailyH5Writer.init_h5file()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5Writer.process_sub_entry"><code class="docutils literal notranslate"><span class="pre">DailyH5Writer.process_sub_entry()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5Reader"><code class="docutils literal notranslate"><span class="pre">DailyH5Reader</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5Reader.list_entries"><code class="docutils literal notranslate"><span class="pre">DailyH5Reader.list_entries()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5Reader.init_from_path"><code class="docutils literal notranslate"><span class="pre">DailyH5Reader.init_from_path()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5Reader.get_entry"><code class="docutils literal notranslate"><span class="pre">DailyH5Reader.get_entry()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5Reader.process_sub_entry"><code class="docutils literal notranslate"><span class="pre">DailyH5Reader.process_sub_entry()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.basics.DailyH5Reader.init_h5file"><code class="docutils literal notranslate"><span class="pre">DailyH5Reader.init_h5file()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.basics.adjust_gamma"><code class="docutils literal notranslate"><span class="pre">adjust_gamma()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../asi_analysis/index.html"
+                          title="previous chapter">asi_core.asi_analysis</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../calibration/index.html"
+                          title="next chapter">asi_core.calibration</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/autoapi/asi_core/basics/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../calibration/index.html" title="asi_core.calibration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../asi_analysis/index.html" title="asi_core.asi_analysis"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >asi_core</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.basics</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

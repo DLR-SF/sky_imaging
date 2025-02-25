@@ -1,0 +1,285 @@
+asi_core.constants
+==================
+
+.. py:module:: asi_core.constants
+
+.. autoapi-nested-parse::
+
+   Global constants of asi_core
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   asi_core.constants.IGNORED_PATTERNS_SUBDAY
+   asi_core.constants.FSTRING_RE
+   asi_core.constants.IMAGE_EXTENSIONS
+   asi_core.constants.MATLAB_TIMEDELTA
+   asi_core.constants.MATLAB_SUNEL
+   asi_core.constants.MATLAB_SUNAZ
+   asi_core.constants.MATLAB_LAT
+   asi_core.constants.MATLAB_LON
+   asi_core.constants.MATLAB_ALT
+   asi_core.constants.MATLAB_TZ
+   asi_core.constants.MATLAB_TAMB
+   asi_core.constants.MATLAB_PAMB
+   asi_core.constants.MATLAB_BP
+   asi_core.constants.MATLAB_RH
+   asi_core.constants.MATLAB_WS
+   asi_core.constants.MATLAB_WD
+   asi_core.constants.MATLAB_DATENUM
+   asi_core.constants.MATLAB_SDN
+   asi_core.constants.MATLAB_DNI
+   asi_core.constants.MATLAB_DNI2
+   asi_core.constants.MATLAB_GHI
+   asi_core.constants.MATLAB_GHI2
+   asi_core.constants.MATLAB_GHI_CALIB
+   asi_core.constants.MATLAB_DHI
+   asi_core.constants.MATLAB_DHI2
+   asi_core.constants.MATLAB_GTI
+   asi_core.constants.MATLAB_GTI_S30
+   asi_core.constants.MATLAB_GTI_S40
+   asi_core.constants.MATLAB_GTI_E45
+   asi_core.constants.MATLAB_Albedo
+   asi_core.constants.MATLAB_DNIVARCLASS
+   asi_core.constants.PYTHON_DT
+   asi_core.constants.PYTHON_LAT
+   asi_core.constants.PYTHON_LON
+   asi_core.constants.PYTHON_ALT
+   asi_core.constants.PYTHON_SUNEL
+   asi_core.constants.PYTHON_SUNAZ
+   asi_core.constants.PYTHON_TZ
+   asi_core.constants.PYTHON_TAMB
+   asi_core.constants.PYTHON_PAMB
+   asi_core.constants.PYTHON_RH
+   asi_core.constants.PYTHON_WS
+   asi_core.constants.PYTHON_WD
+   asi_core.constants.PYTHON_DNI
+   asi_core.constants.PYTHON_GHI
+   asi_core.constants.PYTHON_GHI_CALIB
+   asi_core.constants.PYTHON_DHI
+   asi_core.constants.PYTHON_GTI
+   asi_core.constants.PYTHON_GTI_S30
+   asi_core.constants.PYTHON_GTI_S40
+   asi_core.constants.PYTHON_GTI_E45
+   asi_core.constants.PYTHON_Albedo
+   asi_core.constants.PYTHON_DNIVARCLASS
+   asi_core.constants.PYTHON_RENAMING
+
+
+Module Contents
+---------------
+
+.. py:data:: IGNORED_PATTERNS_SUBDAY
+
+.. py:data:: FSTRING_RE
+
+.. py:data:: IMAGE_EXTENSIONS
+   :value: ('.png', '.jpg')
+
+
+.. py:data:: MATLAB_TIMEDELTA
+   :value: 719529
+
+
+.. py:data:: MATLAB_SUNEL
+   :value: 'EL'
+
+
+.. py:data:: MATLAB_SUNAZ
+   :value: 'AZ'
+
+
+.. py:data:: MATLAB_LAT
+   :value: 'latitudeDegN'
+
+
+.. py:data:: MATLAB_LON
+   :value: 'longitudeDegE'
+
+
+.. py:data:: MATLAB_ALT
+   :value: 'altitude'
+
+
+.. py:data:: MATLAB_TZ
+   :value: 'timezone'
+
+
+.. py:data:: MATLAB_TAMB
+   :value: 'Tamb'
+
+
+.. py:data:: MATLAB_PAMB
+   :value: 'p'
+
+
+.. py:data:: MATLAB_BP
+   :value: 'BP'
+
+
+.. py:data:: MATLAB_RH
+   :value: 'relHum'
+
+
+.. py:data:: MATLAB_WS
+   :value: 'WS'
+
+
+.. py:data:: MATLAB_WD
+   :value: 'WD'
+
+
+.. py:data:: MATLAB_DATENUM
+   :value: 'numericDate'
+
+
+.. py:data:: MATLAB_SDN
+   :value: 'SDN'
+
+
+.. py:data:: MATLAB_DNI
+   :value: 'DNI'
+
+
+.. py:data:: MATLAB_DNI2
+   :value: 'DHI_Ref'
+
+
+.. py:data:: MATLAB_GHI
+   :value: 'GHI'
+
+
+.. py:data:: MATLAB_GHI2
+   :value: 'GHI_Ref'
+
+
+.. py:data:: MATLAB_GHI_CALIB
+   :value: 'GHI_CALIB'
+
+
+.. py:data:: MATLAB_DHI
+   :value: 'DHI'
+
+
+.. py:data:: MATLAB_DHI2
+   :value: 'DHI_Ref'
+
+
+.. py:data:: MATLAB_GTI
+   :value: 'GTI'
+
+
+.. py:data:: MATLAB_GTI_S30
+   :value: 'GTI_t30_S'
+
+
+.. py:data:: MATLAB_GTI_S40
+   :value: 'GTI_t40_S'
+
+
+.. py:data:: MATLAB_GTI_E45
+   :value: 'GTI_t45_E'
+
+
+.. py:data:: MATLAB_Albedo
+   :value: 'Albedo'
+
+
+.. py:data:: MATLAB_DNIVARCLASS
+   :value: 'varClass'
+
+
+.. py:data:: PYTHON_DT
+   :value: 'timestamp'
+
+
+.. py:data:: PYTHON_LAT
+   :value: 'latitude'
+
+
+.. py:data:: PYTHON_LON
+   :value: 'longitude'
+
+
+.. py:data:: PYTHON_ALT
+   :value: 'altitude'
+
+
+.. py:data:: PYTHON_SUNEL
+   :value: 'sun_el'
+
+
+.. py:data:: PYTHON_SUNAZ
+   :value: 'sun_az'
+
+
+.. py:data:: PYTHON_TZ
+   :value: 'timezone'
+
+
+.. py:data:: PYTHON_TAMB
+   :value: 't_amb'
+
+
+.. py:data:: PYTHON_PAMB
+   :value: 'p_amb'
+
+
+.. py:data:: PYTHON_RH
+   :value: 'rel_humid'
+
+
+.. py:data:: PYTHON_WS
+   :value: 'wind_speed'
+
+
+.. py:data:: PYTHON_WD
+   :value: 'wind_dir'
+
+
+.. py:data:: PYTHON_DNI
+   :value: 'dni'
+
+
+.. py:data:: PYTHON_GHI
+   :value: 'ghi'
+
+
+.. py:data:: PYTHON_GHI_CALIB
+   :value: 'ghi_calib'
+
+
+.. py:data:: PYTHON_DHI
+   :value: 'dhi'
+
+
+.. py:data:: PYTHON_GTI
+   :value: 'gti'
+
+
+.. py:data:: PYTHON_GTI_S30
+   :value: 'gti_t30_south'
+
+
+.. py:data:: PYTHON_GTI_S40
+   :value: 'gti_t40_south'
+
+
+.. py:data:: PYTHON_GTI_E45
+   :value: 'gti_t45_east'
+
+
+.. py:data:: PYTHON_Albedo
+   :value: 'albedo'
+
+
+.. py:data:: PYTHON_DNIVARCLASS
+   :value: 'dni_var_class'
+
+
+.. py:data:: PYTHON_RENAMING
+

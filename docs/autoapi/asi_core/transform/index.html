@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>asi_core.transform &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="asi_core.visualization" href="../visualization/index.html" />
+    <link rel="prev" title="asi_core.real_time_utility_functions" href="../real_time_utility_functions/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../visualization/index.html" title="asi_core.visualization"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../real_time_utility_functions/index.html" title="asi_core.real_time_utility_functions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">asi_core</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.transform</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-asi_core.transform">
+<span id="asi-core-transform"></span><h1>asi_core.transform<a class="headerlink" href="#module-asi_core.transform" title="Link to this heading">¶</a></h1>
+<p>This module implements image transformations that can be applied to all-sky images.</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.transform.check_image_array_dimensions" title="asi_core.transform.check_image_array_dimensions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_image_array_dimensions</span></code></a>(array, height, width)</p></td>
+<td><p>Determines the dimensions (N, H, W, C) of an input array representing</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.transform.resize_image_batch" title="asi_core.transform.resize_image_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resize_image_batch</span></code></a>(image_batch, resize)</p></td>
+<td><p>Resize a batch of images.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.transform.resize_image" title="asi_core.transform.resize_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resize_image</span></code></a>(image, resize)</p></td>
+<td><p>Resize a single image.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.transform.mask_image_batch" title="asi_core.transform.mask_image_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mask_image_batch</span></code></a>(image_batch, camera_mask[, ...])</p></td>
+<td><p>Applies a camera mask to a batch of images.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.transform.mask_image" title="asi_core.transform.mask_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mask_image</span></code></a>(image, camera_mask[, assign_to_masked_pxls])</p></td>
+<td><p>Applies a camera mask to a single image.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.transform.asi_index_cropping" title="asi_core.transform.asi_index_cropping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asi_index_cropping</span></code></a>(asi, crop_x, crop_y[, channel_first])</p></td>
+<td><p>Crops a given array along the x and y dimensions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.transform.asi_undistortion" title="asi_core.transform.asi_undistortion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asi_undistortion</span></code></a>(asi, lookup_table)</p></td>
+<td><p>Undistorts ASI array according to mapping in lookup_table.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.transform.get_zenith_cropping" title="asi_core.transform.get_zenith_cropping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_zenith_cropping</span></code></a>(elevation_matrix[, min_ele])</p></td>
+<td><p>Generates a cropping mask based on the maximum elevation angle.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.transform.get_mask_cropping" title="asi_core.transform.get_mask_cropping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mask_cropping</span></code></a>(camera_mask)</p></td>
+<td><p>Crops ASI array according to camera mask.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.transform.check_image_array_dimensions">
+<span class="sig-prename descclassname"><span class="pre">asi_core.transform.</span></span><span class="sig-name descname"><span class="pre">check_image_array_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.transform.check_image_array_dimensions" title="Link to this definition">¶</a></dt>
+<dd><p>Determines the dimensions (N, H, W, C) of an input array representing
+a single image or a batch of images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> – np.ndarray, the input array to analyze.</p></li>
+<li><p><strong>height</strong> – int, the known height of the images.</p></li>
+<li><p><strong>width</strong> – int, the known width of the images.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple (N, H, W, C) where N and/or C may be None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.transform.resize_image_batch">
+<span class="sig-prename descclassname"><span class="pre">asi_core.transform.</span></span><span class="sig-name descname"><span class="pre">resize_image_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.transform.resize_image_batch" title="Link to this definition">¶</a></dt>
+<dd><p>Resize a batch of images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_batch</strong> – np.array of shape [N, H, W], [N, H, W, 1], or [N, H, W, C].</p></li>
+<li><p><strong>resize</strong> – tuple (H, W) representing the desired dimensions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array of resized batch.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.transform.resize_image">
+<span class="sig-prename descclassname"><span class="pre">asi_core.transform.</span></span><span class="sig-name descname"><span class="pre">resize_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.transform.resize_image" title="Link to this definition">¶</a></dt>
+<dd><p>Resize a single image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – np.array of shape [HxW], [HxWx1], or [HxWxC].</p></li>
+<li><p><strong>resize</strong> – tuple (H, W) representing the desired dimensions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array of resized image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.transform.mask_image_batch">
+<span class="sig-prename descclassname"><span class="pre">asi_core.transform.</span></span><span class="sig-name descname"><span class="pre">mask_image_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_to_masked_pxls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.transform.mask_image_batch" title="Link to this definition">¶</a></dt>
+<dd><p>Applies a camera mask to a batch of images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_batch</strong> – np.array of images [NxHxWxC] or [NxHxW].</p></li>
+<li><p><strong>camera_mask</strong> – np.array of camera mask [HxW].</p></li>
+<li><p><strong>assign_to_masked_pxls</strong> – value to assign to masked-out pixels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array of same shape as batch where non-masked region is set to zero.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.transform.mask_image">
+<span class="sig-prename descclassname"><span class="pre">asi_core.transform.</span></span><span class="sig-name descname"><span class="pre">mask_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_to_masked_pxls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.transform.mask_image" title="Link to this definition">¶</a></dt>
+<dd><p>Applies a camera mask to a single image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch</strong> – np.array of images [NxHxWxC] or [NxHxW].</p></li>
+<li><p><strong>camera_mask</strong> – np.array of camera mask [HxW].</p></li>
+<li><p><strong>assign_to_masked_pxls</strong> – value to assign to masked-out pixels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array of same shape as batch where non-masked region is set to zero.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.transform.asi_index_cropping">
+<span class="sig-prename descclassname"><span class="pre">asi_core.transform.</span></span><span class="sig-name descname"><span class="pre">asi_index_cropping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crop_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crop_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.transform.asi_index_cropping" title="Link to this definition">¶</a></dt>
+<dd><p>Crops a given array along the x and y dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asi</strong> – The input image to be cropped.</p></li>
+<li><p><strong>crop_x</strong> – The x-coordinates of the crop.</p></li>
+<li><p><strong>crop_y</strong> – The y-coordinates of the crop.</p></li>
+<li><p><strong>channel_first</strong> – Whether the color channel of the input image is the first dimension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cropped array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.transform.asi_undistortion">
+<span class="sig-prename descclassname"><span class="pre">asi_core.transform.</span></span><span class="sig-name descname"><span class="pre">asi_undistortion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookup_table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.transform.asi_undistortion" title="Link to this definition">¶</a></dt>
+<dd><p>Undistorts ASI array according to mapping in lookup_table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asi</strong> – np.array of image(s) [NxWxHxC] or [WxHxC]</p></li>
+<li><p><strong>look_up_table</strong> – dict
+lookup_table[‘mapx’]: ndarray [W’xH’]
+lookup_table[‘mapy’]: ndarray [W’xH’]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array of undistorted asi [NxW’xH’xC] (or [W’xH’xC])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.transform.get_zenith_cropping">
+<span class="sig-prename descclassname"><span class="pre">asi_core.transform.</span></span><span class="sig-name descname"><span class="pre">get_zenith_cropping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elevation_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_ele</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.transform.get_zenith_cropping" title="Link to this definition">¶</a></dt>
+<dd><p>Generates a cropping mask based on the maximum elevation angle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elevation_matrix</strong> – ndarray
+A matrix of elevation values for each pixel.</p></li>
+<li><p><strong>min_ele</strong> – float, optional
+The minimum elevation angle in degrees. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>crop_mask_x (slice)</dt><dd><p>The x-coordinate slice for cropping.</p>
+</dd>
+<dt>crop_mask_y (slice)</dt><dd><p>The y-coordinate slice for cropping.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.transform.get_mask_cropping">
+<span class="sig-prename descclassname"><span class="pre">asi_core.transform.</span></span><span class="sig-name descname"><span class="pre">get_mask_cropping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera_mask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.transform.get_mask_cropping" title="Link to this definition">¶</a></dt>
+<dd><p>Crops ASI array according to camera mask.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>camera_mask</strong> – ndarray of camera mask [WxH] (binary -&gt; 1 eqauls mask pixel)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>crop_mask_x (slice)</dt><dd><p>The x-coordinate slice for cropping.</p>
+</dd>
+<dt>crop_mask_y (slice)</dt><dd><p>The y-coordinate slice for cropping.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">asi_core.transform</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#asi_core.transform.check_image_array_dimensions"><code class="docutils literal notranslate"><span class="pre">check_image_array_dimensions()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.transform.resize_image_batch"><code class="docutils literal notranslate"><span class="pre">resize_image_batch()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.transform.resize_image"><code class="docutils literal notranslate"><span class="pre">resize_image()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.transform.mask_image_batch"><code class="docutils literal notranslate"><span class="pre">mask_image_batch()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.transform.mask_image"><code class="docutils literal notranslate"><span class="pre">mask_image()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.transform.asi_index_cropping"><code class="docutils literal notranslate"><span class="pre">asi_index_cropping()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.transform.asi_undistortion"><code class="docutils literal notranslate"><span class="pre">asi_undistortion()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.transform.get_zenith_cropping"><code class="docutils literal notranslate"><span class="pre">get_zenith_cropping()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.transform.get_mask_cropping"><code class="docutils literal notranslate"><span class="pre">get_mask_cropping()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../real_time_utility_functions/index.html"
+                          title="previous chapter">asi_core.real_time_utility_functions</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../visualization/index.html"
+                          title="next chapter">asi_core.visualization</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/autoapi/asi_core/transform/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../visualization/index.html" title="asi_core.visualization"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../real_time_utility_functions/index.html" title="asi_core.real_time_utility_functions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >asi_core</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.transform</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>
