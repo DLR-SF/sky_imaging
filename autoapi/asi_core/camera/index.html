@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>asi_core.camera &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="asi_core.config" href="../config/index.html" />
+    <link rel="prev" title="asi_core.calibration.self_calibration" href="../calibration/self_calibration/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../config/index.html" title="asi_core.config"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../calibration/self_calibration/index.html" title="asi_core.calibration.self_calibration"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">asi_core</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.camera</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-asi_core.camera">
+<span id="asi-core-camera"></span><h1>asi_core.camera<a class="headerlink" href="#module-asi_core.camera" title="Link to this heading">¶</a></h1>
+<p>This module provides functionality for all-sky imagers.</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.camera.CAMERA_DATA_FILE" title="asi_core.camera.CAMERA_DATA_FILE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CAMERA_DATA_FILE</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.camera.CAMERA_DATA_SCHEMA" title="asi_core.camera.CAMERA_DATA_SCHEMA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CAMERA_DATA_SCHEMA</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.camera.AllSkyImager" title="asi_core.camera.AllSkyImager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllSkyImager</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.camera.RadiometricImager" title="asi_core.camera.RadiometricImager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RadiometricImager</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.camera.GenericImager" title="asi_core.camera.GenericImager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericImager</span></code></a></p></td>
+<td><p>A generic version of RadiometricImager which can be used for cameras with unknown properties.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.camera.load_camera_data" title="asi_core.camera.load_camera_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_camera_data</span></code></a>([camera_data_file, camera_data_dir, ...])</p></td>
+<td><p>Load data corresponding to available all-sky imagers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.camera.load_camera_mask" title="asi_core.camera.load_camera_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_camera_mask</span></code></a>(mask_file[, struct_name, allow_failure])</p></td>
+<td><p>Load a camera mask as numpy array from a mat file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.camera.load_celestial_coordinate_masks" title="asi_core.camera.load_celestial_coordinate_masks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_celestial_coordinate_masks</span></code></a>(mask_file[, ...])</p></td>
+<td><p>Load elevation and azimuth masks from a mat file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.camera.get_camera_location" title="asi_core.camera.get_camera_location"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_camera_location</span></code></a>(camera_name)</p></td>
+<td><p>Get geolocation based on camera name from camera config.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="asi_core.camera.CAMERA_DATA_FILE">
+<span class="sig-prename descclassname"><span class="pre">asi_core.camera.</span></span><span class="sig-name descname"><span class="pre">CAMERA_DATA_FILE</span></span><a class="headerlink" href="#asi_core.camera.CAMERA_DATA_FILE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asi_core.camera.CAMERA_DATA_SCHEMA">
+<span class="sig-prename descclassname"><span class="pre">asi_core.camera.</span></span><span class="sig-name descname"><span class="pre">CAMERA_DATA_SCHEMA</span></span><a class="headerlink" href="#asi_core.camera.CAMERA_DATA_SCHEMA" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.camera.</span></span><span class="sig-name descname"><span class="pre">AllSkyImager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tfms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.img_paths_buffer">
+<span class="sig-name descname"><span class="pre">img_paths_buffer</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.img_paths_buffer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.tolerance_timestamp">
+<span class="sig-name descname"><span class="pre">tolerance_timestamp</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.tolerance_timestamp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.rel_exp_tol">
+<span class="sig-name descname"><span class="pre">rel_exp_tol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.1</span></em><a class="headerlink" href="#asi_core.camera.AllSkyImager.rel_exp_tol" title="Link to this definition">¶</a></dt>
+<dd><p>Class for All-Sky Imagers.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#asi_core.camera.AllSkyImager.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.latitude">
+<span class="sig-name descname"><span class="pre">latitude</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.latitude" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.longitude">
+<span class="sig-name descname"><span class="pre">longitude</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.longitude" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.altitude">
+<span class="sig-name descname"><span class="pre">altitude</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.altitude" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.img_timezone">
+<span class="sig-name descname"><span class="pre">img_timezone</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.img_timezone" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.start_recording">
+<span class="sig-name descname"><span class="pre">start_recording</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.start_recording" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.end_recording">
+<span class="sig-name descname"><span class="pre">end_recording</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.end_recording" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.external_orientation">
+<span class="sig-name descname"><span class="pre">external_orientation</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.external_orientation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.min_ele_evaluated">
+<span class="sig-name descname"><span class="pre">min_ele_evaluated</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.min_ele_evaluated" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.ocam_model">
+<span class="sig-name descname"><span class="pre">ocam_model</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.ocam_model" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.height">
+<span class="sig-name descname"><span class="pre">height</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.height" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.width">
+<span class="sig-name descname"><span class="pre">width</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.width" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.resize">
+<span class="sig-name descname"><span class="pre">resize</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.resize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.crop">
+<span class="sig-name descname"><span class="pre">crop</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.crop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.crop_min_ele">
+<span class="sig-name descname"><span class="pre">crop_min_ele</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.crop_min_ele" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.undistort">
+<span class="sig-name descname"><span class="pre">undistort</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.undistort" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.undistort_limit_angle">
+<span class="sig-name descname"><span class="pre">undistort_limit_angle</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.undistort_limit_angle" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.apply_camera_mask">
+<span class="sig-name descname"><span class="pre">apply_camera_mask</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.apply_camera_mask" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.apply_elevation_mask">
+<span class="sig-name descname"><span class="pre">apply_elevation_mask</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.apply_elevation_mask" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.cropping_indexes">
+<span class="sig-name descname"><span class="pre">cropping_indexes</span></span><a class="headerlink" href="#asi_core.camera.AllSkyImager.cropping_indexes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.from_file">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera_data_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tfms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.from_file" title="Link to this definition">¶</a></dt>
+<dd><p>Create a list of AllSkyImager instances</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>camera_data_file</strong> – File with a single camera parameter set (specifying camera and time period)</p></li>
+<li><p><strong>image_path</strong> – path from which AllSkyImager instances will load images</p></li>
+<li><p><strong>tfms</strong> – A dictionary of image transformations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of AllSkyImager instances</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.from_files">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera_data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tfms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.from_files" title="Link to this definition">¶</a></dt>
+<dd><p>Create a list of AllSkyImager instances</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>camera_data_dir</strong> – Directory containing camera data yaml files (one file per camera and period)</p></li>
+<li><p><strong>camera_name</strong> – Name of the camera for which AllSkyImager instances will be created</p></li>
+<li><p><strong>image_path</strong> – path from which AllSkyImager instances will load images</p></li>
+<li><p><strong>tfms</strong> – A dictionary of image transformations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of AllSkyImager instances</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.from_file_as_dict">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file_as_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera_data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.from_file_as_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Create a dictionary with camera_data parameter sets corresponding to multiple periods of a single camera id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>camera_data_dir</strong> – Path to folder with camera_data yamls (one parameter set per camera and period)</p></li>
+<li><p><strong>camera_name</strong> – Name of the camera in the camera_data_dir for which the parameters sets will be extracted</p></li>
+<li><p><strong>image_path</strong> – path from which AllSkyImager instances will load images</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of AllSkyImager/ camera_data parameter sets, one set valid per period indicated by the key,
+each key consists of a tuple of two dates (mounted, unmounted)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.from_config">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.from_config" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a list of AllSkyImager instances, based on the camera name from config file and the camera_data
+collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of AllSkyImager instances</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.from_config_and_period">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config_and_period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluated_timestamps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.from_config_and_period" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a single AllSkyImager instance, based on a config file and an evaluated period</p>
+<p>An error is returned if the evaluated period contains a change of the camera setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>evaluated_timestamps</strong> – timezone-aware datetime or pandas series of timezone-aware datetime</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>AllSkyImager instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.load_image">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.load_image" title="Link to this definition">¶</a></dt>
+<dd><p>Load image from file to numpy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image_file</strong> – Path to the image to be loaded</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded image as numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.save_image">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.save_image" title="Link to this definition">¶</a></dt>
+<dd><p>Save image from numpy array to file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – Image to be saved as numpy array</p></li>
+<li><p><strong>image_file</strong> – Path to save the image to</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Apply image transformations to all-sky images as specified during initialization.</p>
+<p>Can be used to preprocess images for deep learning models, e.g., to crop, resize or undistort an image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> – list or array of raw all-sky images or single image.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>array of transformed image(s).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.check_timestamp">
+<span class="sig-name descname"><span class="pre">check_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.check_timestamp" title="Link to this definition">¶</a></dt>
+<dd><p>Check if timestamp is within recording time range of camera.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timestamp</strong> – Timezone-aware datetime</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Boolean test result</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.get_cropping_indexes">
+<span class="sig-name descname"><span class="pre">get_cropping_indexes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.get_cropping_indexes" title="Link to this definition">¶</a></dt>
+<dd><p>Generate cropping indexes based on the selected cropping method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple of cropping indexes along x and y axes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.get_azimuth_elevation">
+<span class="sig-name descname"><span class="pre">get_azimuth_elevation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ocam_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_ele_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_orientation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.get_azimuth_elevation" title="Link to this definition">¶</a></dt>
+<dd><p>Get azimuth and elevation angle of every pixel in current image.</p>
+<p>The map depends on actual camera model, camera mask and projection function. Calls Scaramuzzas cam2world
+function to  get the 3-D coordinates of 2-D pixel points. The cartesian coordinates will be transformed to
+spherical ones.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ocam_model</strong> – Instance of OcamModel</p></li>
+<li><p><strong>min_ele_mask</strong> – [degree] Elevation angle over horizontal below which image is not evaluated (masked)</p></li>
+<li><p><strong>external_orientation</strong> – 3-entry array of angles indicating external_orientation, see cam2world_eor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Matrices indicating azimuth and elevation angle for each image pixel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.get_img_and_meta">
+<span class="sig-name descname"><span class="pre">get_img_and_meta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">160</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.get_img_and_meta" title="Link to this definition">¶</a></dt>
+<dd><p>Load an image and determine the image path if needed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> – timezone-aware datetime, timestamp of the image</p></li>
+<li><p><strong>exp_time</strong> – [microseconds] Integer, exposure time of the image</p></li>
+<li><p><strong>img_path</strong> – String, path to image: If None it will be determined.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict containing the image array (‘img’) and meta data (‘meta’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.get_meta">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_meta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_bytes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.get_meta" title="Link to this definition">¶</a></dt>
+<dd><p>Read metadata from an image byte array or a file.</p>
+<p>Note: This method currently only handles Mobotix cameras. It should be generalized as needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>img_bytes</strong> – Binary encoded image</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict, metadata read from image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.get_img">
+<span class="sig-name descname"><span class="pre">get_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.get_img" title="Link to this definition">¶</a></dt>
+<dd><p>Return an image which complies with the requested timestamp and exposure time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> – Timezone-aware datetime, requested timestamp</p></li>
+<li><p><strong>exp_time</strong> – [microseconds] requested exposure time</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy array, loaded image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.get_img_path">
+<span class="sig-name descname"><span class="pre">get_img_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">160</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance_timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.get_img_path" title="Link to this definition">¶</a></dt>
+<dd><p>Return the path to an image which complies with the requested timestamp and exposure time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> – Timezone-aware datetime, requested timestamp</p></li>
+<li><p><strong>exp_time</strong> – [microseconds] requested exposure time</p></li>
+<li><p><strong>tolerance_timestamp</strong> – Timedelta, acceptable temporal deviation between actual and requested timestamp of
+the image</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>String, path to a suited image if available, empty string if unavailable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.AllSkyImager.update_buffer">
+<span class="sig-name descname"><span class="pre">update_buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.AllSkyImager.update_buffer" title="Link to this definition">¶</a></dt>
+<dd><p>Update a collection of available image files from the same day as a requested timestamp.</p>
+<p>TODO: waive key ‘prev_date’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timestamp</strong> – datetime, requested timestamp</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict, collection of all available images from the same day as the requested timestamps with keys
+‘prev_date’ – date to which collection corresponds, ‘imgs’ – dataframe describing all images of the day
+with the columns ‘timestamp’, exposure time (‘exp_time’), image path (‘path’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.camera.RadiometricImager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.camera.</span></span><span class="sig-name descname"><span class="pre">RadiometricImager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tfms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.RadiometricImager" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.camera.AllSkyImager" title="asi_core.camera.AllSkyImager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllSkyImager</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.RadiometricImager.color_temperature">
+<span class="sig-name descname"><span class="pre">color_temperature</span></span><a class="headerlink" href="#asi_core.camera.RadiometricImager.color_temperature" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.RadiometricImager.weighting_luminosity">
+<span class="sig-name descname"><span class="pre">weighting_luminosity</span></span><a class="headerlink" href="#asi_core.camera.RadiometricImager.weighting_luminosity" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.RadiometricImager.satVal">
+<span class="sig-name descname"><span class="pre">satVal</span></span><a class="headerlink" href="#asi_core.camera.RadiometricImager.satVal" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.RadiometricImager.base_sensitivity">
+<span class="sig-name descname"><span class="pre">base_sensitivity</span></span><a class="headerlink" href="#asi_core.camera.RadiometricImager.base_sensitivity" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.RadiometricImager.rel_overest_with_DNI">
+<span class="sig-name descname"><span class="pre">rel_overest_with_DNI</span></span><a class="headerlink" href="#asi_core.camera.RadiometricImager.rel_overest_with_DNI" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.RadiometricImager.satur_cor">
+<span class="sig-name descname"><span class="pre">satur_cor</span></span><a class="headerlink" href="#asi_core.camera.RadiometricImager.satur_cor" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asi_core.camera.RadiometricImager.beta_planck">
+<span class="sig-name descname"><span class="pre">beta_planck</span></span><a class="headerlink" href="#asi_core.camera.RadiometricImager.beta_planck" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.RadiometricImager.invert_gamma_corr">
+<span class="sig-name descname"><span class="pre">invert_gamma_corr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.RadiometricImager.invert_gamma_corr" title="Link to this definition">¶</a></dt>
+<dd><p>This function so far only implements the trivial case when the gamma correction is inactive!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>img</strong> – Gamma-corrected image</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asi_core.camera.GenericImager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asi_core.camera.</span></span><span class="sig-name descname"><span class="pre">GenericImager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.GenericImager" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asi_core.camera.RadiometricImager" title="asi_core.camera.RadiometricImager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RadiometricImager</span></code></a></p>
+<p>A generic version of RadiometricImager which can be used for cameras with unknown properties.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="asi_core.camera.GenericImager.get_meta">
+<span class="sig-name descname"><span class="pre">get_meta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.GenericImager.get_meta" title="Link to this definition">¶</a></dt>
+<dd><p>Return generic image meta data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict of image meta data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.camera.load_camera_data">
+<span class="sig-prename descclassname"><span class="pre">asi_core.camera.</span></span><span class="sig-name descname"><span class="pre">load_camera_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera_data_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.load_camera_data" title="Link to this definition">¶</a></dt>
+<dd><p>Load data corresponding to available all-sky imagers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>camera_data_file</strong> – yaml file path containing camera data.</p></li>
+<li><p><strong>camera_data_dir</strong> – directory where camera data yaml files are located.</p></li>
+<li><p><strong>camera_name</strong> – specifies a camera by name to filter data from (multiple ids possible for single name).</p></li>
+<li><p><strong>timestamp</strong> – If not None, timestamp based on which the camera_id will be determined</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>camera data as dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.camera.load_camera_mask">
+<span class="sig-prename descclassname"><span class="pre">asi_core.camera.</span></span><span class="sig-name descname"><span class="pre">load_camera_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">struct_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Mask'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.load_camera_mask" title="Link to this definition">¶</a></dt>
+<dd><p>Load a camera mask as numpy array from a mat file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mask_file</strong> – file path of camera mask.</p></li>
+<li><p><strong>struct_name</strong> – name of matlab struct containing camera mask array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>camera mask as 2D numpy array.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.camera.load_celestial_coordinate_masks">
+<span class="sig-prename descclassname"><span class="pre">asi_core.camera.</span></span><span class="sig-name descname"><span class="pre">load_celestial_coordinate_masks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">struct_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AngleMatrix'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_el</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ELE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_az</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AZ'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.load_celestial_coordinate_masks" title="Link to this definition">¶</a></dt>
+<dd><p>Load elevation and azimuth masks from a mat file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mask_file</strong> – file path of mat file.</p></li>
+<li><p><strong>struct_name</strong> – name of matlab struct.</p></li>
+<li><p><strong>field_el</strong> – variable name of elevation angles array.</p></li>
+<li><p><strong>field_az</strong> – variable name of azimuth angles array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple of elevation angle mask and azimuth angle mask.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.camera.get_camera_location">
+<span class="sig-prename descclassname"><span class="pre">asi_core.camera.</span></span><span class="sig-name descname"><span class="pre">get_camera_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camera_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.camera.get_camera_location" title="Link to this definition">¶</a></dt>
+<dd><p>Get geolocation based on camera name from camera config.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">asi_core.camera</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#asi_core.camera.CAMERA_DATA_FILE"><code class="docutils literal notranslate"><span class="pre">CAMERA_DATA_FILE</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.CAMERA_DATA_SCHEMA"><code class="docutils literal notranslate"><span class="pre">CAMERA_DATA_SCHEMA</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager"><code class="docutils literal notranslate"><span class="pre">AllSkyImager</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.img_paths_buffer"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.img_paths_buffer</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.tolerance_timestamp"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.tolerance_timestamp</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.rel_exp_tol"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.rel_exp_tol</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.id"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.id</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.name"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.name</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.latitude"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.latitude</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.longitude"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.longitude</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.altitude"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.altitude</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.img_timezone"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.img_timezone</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.start_recording"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.start_recording</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.end_recording"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.end_recording</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.external_orientation"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.external_orientation</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.min_ele_evaluated"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.min_ele_evaluated</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.ocam_model"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.ocam_model</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.height"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.height</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.width"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.width</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.resize"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.resize</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.crop"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.crop</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.crop_min_ele"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.crop_min_ele</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.undistort"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.undistort</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.undistort_limit_angle"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.undistort_limit_angle</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.apply_camera_mask"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.apply_camera_mask</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.apply_elevation_mask"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.apply_elevation_mask</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.cropping_indexes"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.cropping_indexes</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.from_file"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.from_file()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.from_files"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.from_files()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.from_file_as_dict"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.from_file_as_dict()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.from_config"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.from_config()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.from_config_and_period"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.from_config_and_period()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.load_image"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.load_image()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.save_image"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.save_image()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.transform"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.transform()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.check_timestamp"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.check_timestamp()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.get_cropping_indexes"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.get_cropping_indexes()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.get_azimuth_elevation"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.get_azimuth_elevation()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.get_img_and_meta"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.get_img_and_meta()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.get_meta"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.get_meta()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.get_img"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.get_img()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.get_img_path"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.get_img_path()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.AllSkyImager.update_buffer"><code class="docutils literal notranslate"><span class="pre">AllSkyImager.update_buffer()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.camera.RadiometricImager"><code class="docutils literal notranslate"><span class="pre">RadiometricImager</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.camera.RadiometricImager.color_temperature"><code class="docutils literal notranslate"><span class="pre">RadiometricImager.color_temperature</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.RadiometricImager.weighting_luminosity"><code class="docutils literal notranslate"><span class="pre">RadiometricImager.weighting_luminosity</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.RadiometricImager.satVal"><code class="docutils literal notranslate"><span class="pre">RadiometricImager.satVal</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.RadiometricImager.base_sensitivity"><code class="docutils literal notranslate"><span class="pre">RadiometricImager.base_sensitivity</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.RadiometricImager.rel_overest_with_DNI"><code class="docutils literal notranslate"><span class="pre">RadiometricImager.rel_overest_with_DNI</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.RadiometricImager.satur_cor"><code class="docutils literal notranslate"><span class="pre">RadiometricImager.satur_cor</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.RadiometricImager.beta_planck"><code class="docutils literal notranslate"><span class="pre">RadiometricImager.beta_planck</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.RadiometricImager.invert_gamma_corr"><code class="docutils literal notranslate"><span class="pre">RadiometricImager.invert_gamma_corr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.camera.GenericImager"><code class="docutils literal notranslate"><span class="pre">GenericImager</span></code></a><ul>
+<li><a class="reference internal" href="#asi_core.camera.GenericImager.get_meta"><code class="docutils literal notranslate"><span class="pre">GenericImager.get_meta()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asi_core.camera.load_camera_data"><code class="docutils literal notranslate"><span class="pre">load_camera_data()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.load_camera_mask"><code class="docutils literal notranslate"><span class="pre">load_camera_mask()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.load_celestial_coordinate_masks"><code class="docutils literal notranslate"><span class="pre">load_celestial_coordinate_masks()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.camera.get_camera_location"><code class="docutils literal notranslate"><span class="pre">get_camera_location()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../calibration/self_calibration/index.html"
+                          title="previous chapter">asi_core.calibration.self_calibration</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../config/index.html"
+                          title="next chapter">asi_core.config</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/autoapi/asi_core/camera/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../config/index.html" title="asi_core.config"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../calibration/self_calibration/index.html" title="asi_core.calibration.self_calibration"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >asi_core</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.camera</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    </div>
+  </body>
+</html>

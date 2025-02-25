@@ -1,0 +1,134 @@
+asi_core.visualization.asi_keogram
+==================================
+
+.. py:module:: asi_core.visualization.asi_keogram
+
+.. autoapi-nested-parse::
+
+   This module provides functions to create keograms from all-sky images.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   asi_core.visualization.asi_keogram.get_full_hour_indices
+   asi_core.visualization.asi_keogram.get_image_slice
+   asi_core.visualization.asi_keogram.compose_keogram
+   asi_core.visualization.asi_keogram.plot_keogram
+   asi_core.visualization.asi_keogram.plot_ceilometer_data
+   asi_core.visualization.asi_keogram.create_and_save_keogram
+
+
+Module Contents
+---------------
+
+.. py:function:: get_full_hour_indices(datetimes)
+
+   Get the indices of the full hours in a list of datetimes.
+
+   :param datetimes: A list of datetimes.
+   :type datetimes: list
+   :param sampling_rate: The sampling rate used to round the datetimes. Default is '30s'.
+   :type sampling_rate: str
+   :return: An array containing the indices of the full hours in the list of datetimes.
+   :rtype: numpy.ndarray
+
+
+.. py:function:: get_image_slice(image, slice_pos, strip_size)
+
+   Get a slice of the image based on the given slice position and strip size.
+
+   :param image: The image to slice.
+   :type image: ndarray
+   :param slice_pos: The position of the slice.
+   :type slice_pos: int
+   :param strip_size: The size of the strip.
+   :type strip_size: int
+   :return: The sliced image.
+   :rtype: ndarray
+
+
+.. py:function:: compose_keogram(image_files, slice_pos, strip_size)
+
+   Compose a keogram from a list of image files.
+
+   :param image_files: A list of paths to image files.
+   :type image_files: List[str]
+   :param slice_pos: The position of the slice to extract from each image.
+   :type slice_pos: int
+   :param strip_size: The width of the image slice.
+   :type strip_size: int
+   :return: A tuple containing the concatenated image slices as a NumPy array and the timestamps as a Pandas DatetimeIndex.
+   :rtype: tuple
+   :raises Exception: If an error occurs while reading or processing an image file.
+
+
+.. py:function:: plot_keogram(keogram, datetimes_slices, strip_size, camera_name='', title=None, ax=None)
+
+   Plot a keogram.
+
+   :param keogram: The keogram data to be plotted.
+   :type keogram: ndarray
+   :param datetimes_slices: The datetime slices corresponding to each column of the keogram.
+   :type datetimes_slices: ndarray
+   :param strip_size: The size of each strip in the keogram.
+   :type strip_size: int
+   :param camera_name: The name of the camera. (optional)
+   :type camera_name: str, default=''
+   :param title: The title of the plot. (optional)
+   :type title: str, default=None
+   :param ax: The matplotlib axes to plot on. (optional)
+   :type ax: AxesSubplot, default=None
+
+   :return: The matplotlib figure object. If `ax` is provided, returns None.
+   :rtype: Figure
+
+
+.. py:function:: plot_ceilometer_data(ceilometer_data_path, start_time, end_time, ax=None, tz_convert=None)
+
+   Plots ceilometer data within a specified time range.
+
+   :param ceilometer_data_path: The path to the ceilometer data file.
+   :type ceilometer_data_path: str
+   :param start_time: The start time of the time range.
+   :type start_time: datetime
+   :param end_time: The end time of the time range.
+   :type end_time: datetime
+   :param ax: The axes to plot on. If not provided, a new figure and axes will be created.
+   :type ax: matplotlib.axes.Axes, optional
+   :param tz_convert: The timezone to convert the data to.
+   :type tz_convert: str, optional
+
+   :return: The figure containing the plot.
+   :rtype: matplotlib.figure.Figure
+
+
+.. py:function:: create_and_save_keogram(image_path, path_save, tz='+0100', camera_name='resolve', strip_size=7, dpi_fig=1200, slice_pos=1056, increase_brightness=30, exposure_time=160, ceilometer_data_path=None)
+
+   Create and save a keogram image.
+
+   :param image_path: The path to the directory containing the images.
+   :type image_path: [str, pathlib.Path]
+   :param path_save: The path to save the keogram image.
+   :type path_save: [str, pathlib.Path]
+   :param tz: The time zone to localize the timestamps. (default: "+0100")
+   :type tz: str, optional
+   :param camera_name: The name of the camera. (default: "resolve")
+   :type camera_name: str, optional
+   :param strip_size: The size of the strip in the keogram. (default: 7)
+   :type strip_size: int, optional
+   :param dpi_fig: The DPI (dots per inch) of the saved keogram image. (default: 1200)
+   :type dpi_fig: int, optional
+   :param slice_pos: The position of the slice in the keogram. (default: 1056)
+   :type slice_pos: int, optional
+   :param increase_brightness: The amount to increase the brightness of the keogram image. (default: 30)
+   :type increase_brightness: int, optional
+   :param ceilometer_data_path: The path to the ceilometer data file. (default: None)
+   :type ceilometer_data_path: str, optional
+   :raises AssertionError: If the image_path is not a directory.
+   :returns: None
+
+

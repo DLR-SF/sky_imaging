@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>asi_core.make_dataset &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="asi_core.matlab_converters" href="../matlab_converters/index.html" />
+    <link rel="prev" title="asi_core.logger" href="../logger/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../matlab_converters/index.html" title="asi_core.matlab_converters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../logger/index.html" title="asi_core.logger"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">asi_core</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.make_dataset</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-asi_core.make_dataset">
+<span id="asi-core-make-dataset"></span><h1>asi_core.make_dataset<a class="headerlink" href="#module-asi_core.make_dataset" title="Link to this heading">¶</a></h1>
+<p>This module provides functions to create ASI datasets, e.g., for machine learning applications.</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.make_dataset.Q25_LEFT_CENTRATION_THRESHOLD" title="asi_core.make_dataset.Q25_LEFT_CENTRATION_THRESHOLD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Q25_LEFT_CENTRATION_THRESHOLD</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.make_dataset.Q25_RIGHT_CENTRATION_THRESHOLD" title="asi_core.make_dataset.Q25_RIGHT_CENTRATION_THRESHOLD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Q25_RIGHT_CENTRATION_THRESHOLD</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.make_dataset.load_asi_list" title="asi_core.make_dataset.load_asi_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_asi_list</span></code></a>(csv_files[, asi_root, col_timestamp, ...])</p></td>
+<td><p>Loads list of ASI from csv files. If asi_root is passed, the absolute path of each ASI image is appended to the</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.make_dataset.read_asi_meta_data" title="asi_core.make_dataset.read_asi_meta_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_asi_meta_data</span></code></a>(filename[, is_mobotix, ...])</p></td>
+<td><p>Extracts meta data of an all-sky image from its name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.make_dataset.check_asi_list" title="asi_core.make_dataset.check_asi_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_asi_list</span></code></a>(asi_list[, tz, limit_exp_time, ...])</p></td>
+<td><p>Checks a list of all-sky image files for corruption and returns dataframe with additional data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.make_dataset.check_asi" title="asi_core.make_dataset.check_asi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_asi</span></code></a>(filename[, tz, is_mobotix, limit_exp_time, ...])</p></td>
+<td><p>Checks a single ASI (All-Sky Image) file for corruption and extracts metadata.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.make_dataset.load_transform_save_asi" title="asi_core.make_dataset.load_transform_save_asi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_transform_save_asi</span></code></a>(rel_path, all_sky_imager, ...)</p></td>
+<td><p>Loads, transforms and saves transformed all-sky image.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.make_dataset.create_asi_list" title="asi_core.make_dataset.create_asi_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_asi_list</span></code></a>(asi_root[, do_check, name_convention, ...])</p></td>
+<td><p>Gets all asi within asi_root and save the list to csv.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.make_dataset.create_asi_dataset" title="asi_core.make_dataset.create_asi_dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_asi_dataset</span></code></a>(asi_series, source_dir, target_dir, ...)</p></td>
+<td><p>Creates an ASI dataset from all passed filenames in target_dir.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.make_dataset.read_asi_dataset" title="asi_core.make_dataset.read_asi_dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_asi_dataset</span></code></a>(csv_file[, img_dir, asi_path_col, ...])</p></td>
+<td><p>Reads an ASI dataset from a CSV file and optionally filters by date.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.make_dataset.merge_meteo_and_asi_data" title="asi_core.make_dataset.merge_meteo_and_asi_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_meteo_and_asi_data</span></code></a>(df_meteo, df_asi[, ...])</p></td>
+<td><p>Merges meteorological data with ASI data based on timestamps.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.make_dataset.map_asi_to_timestamps" title="asi_core.make_dataset.map_asi_to_timestamps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_asi_to_timestamps</span></code></a>(df[, round_to, max_delta_t, ...])</p></td>
+<td><p>Maps asi acqusition time to a rounded timestamp.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.make_dataset.select_by_dni_var_classes" title="asi_core.make_dataset.select_by_dni_var_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_by_dni_var_classes</span></code></a>(dni_var_classes, ...[, ...])</p></td>
+<td><p>Selects timestamp by dni variability class. A timestamp is selected if the timestamp itself or the included time</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.make_dataset.check_Q25_asi_cropping" title="asi_core.make_dataset.check_Q25_asi_cropping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_Q25_asi_cropping</span></code></a>(rel_path_to_image, asi_root)</p></td>
+<td><p>This function can be used to determine how asis from the Q25 all sky imager have been cropped for custom</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.make_dataset.get_dates_from_csv" title="asi_core.make_dataset.get_dates_from_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dates_from_csv</span></code></a>(csv_file[, col_name])</p></td>
+<td><p>Extracts unique dates from a specified column in a CSV file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.make_dataset.filter_timestamps_by_sun_elevation" title="asi_core.make_dataset.filter_timestamps_by_sun_elevation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_timestamps_by_sun_elevation</span></code></a>(ts, min_el[, ...])</p></td>
+<td><p>Filters timestamps based on minimum solar elevation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="asi_core.make_dataset.Q25_LEFT_CENTRATION_THRESHOLD">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">Q25_LEFT_CENTRATION_THRESHOLD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">200</span></em><a class="headerlink" href="#asi_core.make_dataset.Q25_LEFT_CENTRATION_THRESHOLD" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asi_core.make_dataset.Q25_RIGHT_CENTRATION_THRESHOLD">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">Q25_RIGHT_CENTRATION_THRESHOLD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">400</span></em><a class="headerlink" href="#asi_core.make_dataset.Q25_RIGHT_CENTRATION_THRESHOLD" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.load_asi_list">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">load_asi_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asi_root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_timestamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'timestamp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_rel_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rel_path'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'file_name'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.load_asi_list" title="Link to this definition">¶</a></dt>
+<dd><p>Loads list of ASI from csv files. If asi_root is passed, the absolute path of each ASI image is appended to the
+resulting dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csv_files</strong> – list of csv files (full paths).</p></li>
+<li><p><strong>asi_root</strong> – root directory of asi images.</p></li>
+<li><p><strong>col_timestamp</strong> – column name of timestamps of ASI.</p></li>
+<li><p><strong>col_rel_path</strong> – column name of relative path of ASI wrt root directory.</p></li>
+<li><p><strong>col_filename</strong> – column name of asi file names.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe of merged csv files.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.read_asi_meta_data">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">read_asi_meta_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_mobotix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_convention</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dlr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTC+0100'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.read_asi_meta_data" title="Link to this definition">¶</a></dt>
+<dd><p>Extracts meta data of an all-sky image from its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – file path of all-sky image.</p></li>
+<li><p><strong>name_convention</strong> – determines naming convention of all-sky images.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>meta data as dict.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.check_asi_list">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">check_asi_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asi_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit_exp_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_convention</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dlr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.check_asi_list" title="Link to this definition">¶</a></dt>
+<dd><p>Checks a list of all-sky image files for corruption and returns dataframe with additional data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asi_list</strong> – list of asi files.</p></li>
+<li><p><strong>tz</strong> – timezone as int (+/- UTC).</p></li>
+<li><p><strong>limit_exp_time</strong> – limit of valid exposure time.</p></li>
+<li><p><strong>name_convention</strong> – asi file name convention.</p></li>
+<li><p><strong>n_workers</strong> – number of workers to use for parallel processing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>meta data of asi files as dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.check_asi">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">check_asi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTC+0100'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_mobotix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit_exp_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_convention</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dlr'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.check_asi" title="Link to this definition">¶</a></dt>
+<dd><p>Checks a single ASI (All-Sky Image) file for corruption and extracts metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – Path to the ASI image file.</p></li>
+<li><p><strong>tz</strong> – Timezone for parsing metadata timestamps. Default is “UTC+0100”.</p></li>
+<li><p><strong>is_mobotix</strong> – Boolean indicating whether the image follows the Mobotix format. Default is True.</p></li>
+<li><p><strong>limit_exp_time</strong> – Optional threshold for maximum exposure time. If exceeded, a warning is logged.</p></li>
+<li><p><strong>name_convention</strong> – Naming convention used for parsing metadata. Default is ‘dlr’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing:
+- ‘name’: Extracted image name from metadata (or NaN if unavailable).
+- ‘timestamp’: Extracted timestamp from metadata (or NaN if unavailable).
+- ‘exposure_time’: Extracted exposure time from metadata (or NaN if unavailable).
+- ‘illuminance’: Extracted illuminance value from metadata (or NaN if unavailable).
+- ‘width’: Image width in pixels.
+- ‘height’: Image height in pixels.
+- ‘corrupted’: Boolean indicating if the image is corrupted (True if corrupted, False otherwise).</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Warning</strong> – Logs a warning if the exposure time exceeds <cite>limit_exp_time</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.load_transform_save_asi">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">load_transform_save_asi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rel_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_sky_imager</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.load_transform_save_asi" title="Link to this definition">¶</a></dt>
+<dd><p>Loads, transforms and saves transformed all-sky image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rel_path</strong> – relative file path of image.</p></li>
+<li><p><strong>all_sky_imager</strong> (<em>AllSkyImager.</em>) – camera used to take image.</p></li>
+<li><p><strong>source_dir</strong> – directory of raw images.</p></li>
+<li><p><strong>target_dir</strong> – directory of transformed images.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True/False depending on success.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.create_asi_list">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">create_asi_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asi_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_convention</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dlr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csv_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.create_asi_list" title="Link to this definition">¶</a></dt>
+<dd><p>Gets all asi within asi_root and save the list to csv.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asi_root</strong> – root folder where images are stored.</p></li>
+<li><p><strong>do_check</strong> – if true, all images are checked for validity.</p></li>
+<li><p><strong>name_convention</strong> – asi file name convention.</p></li>
+<li><p><strong>csv_file</strong> – csv file to save results.</p></li>
+<li><p><strong>n_workers</strong> – number of workers to use for parallel processing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.create_asi_dataset">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">create_asi_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asi_series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera_data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asi_tfms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.create_asi_dataset" title="Link to this definition">¶</a></dt>
+<dd><p>Creates an ASI dataset from all passed filenames in target_dir.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asi_series</strong> – pd.Series of all-sky images, with timestamp of acquisition as index and camera name as name.</p></li>
+<li><p><strong>source_dir</strong> – directory of raw images.</p></li>
+<li><p><strong>target_dir</strong> – directory of transformed images.</p></li>
+<li><p><strong>camera_data_dir</strong> – directory of yaml files containing camera data.</p></li>
+<li><p><strong>n_workers</strong> – number of workers to use for parallel processing.</p></li>
+<li><p><strong>kwargs</strong> – kwargs for applying transformation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pd.Series of successfully saved (transformed) images.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.read_asi_dataset">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">read_asi_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asi_path_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rel_path'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_asi_filepath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_dates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.read_asi_dataset" title="Link to this definition">¶</a></dt>
+<dd><p>Reads an ASI dataset from a CSV file and optionally filters by date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csv_file</strong> – Path to the CSV file containing ASI metadata.</p></li>
+<li><p><strong>img_dir</strong> – Optional directory path where ASI images are stored. If provided, file paths will be adjusted accordingly.</p></li>
+<li><p><strong>asi_path_col</strong> – Column name in the CSV that contains the relative file paths of ASI images. Default is ‘rel_path’.</p></li>
+<li><p><strong>drop_asi_filepath</strong> – Whether to drop the ASI file path column from the returned DataFrame. Default is True.</p></li>
+<li><p><strong>filter_dates</strong> – Optional list of dates to filter the dataset. Only entries matching these dates will be retained.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>asi_files: A Pandas Series containing file paths to ASI images.</p></li>
+<li><p>df: A Pandas DataFrame with metadata, optionally filtered and with the ASI path column removed.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.merge_meteo_and_asi_data">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">merge_meteo_and_asi_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_meteo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_asi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temporal_resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'30s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_delta_t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters_to_cast</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.merge_meteo_and_asi_data" title="Link to this definition">¶</a></dt>
+<dd><p>Merges meteorological data with ASI data based on timestamps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df_meteo</strong> – Pandas DataFrame containing meteorological data indexed by timestamp.</p></li>
+<li><p><strong>df_asi</strong> – Pandas DataFrame containing ASI metadata indexed by timestamp.</p></li>
+<li><p><strong>temporal_resolution</strong> – Time rounding resolution for ASI timestamps (e.g., ’30s’ for 30 seconds). Default is ’30s’.</p></li>
+<li><p><strong>max_delta_t</strong> – Maximum allowed time difference (in seconds) for matching ASI data to meteorological data. Default is 15 seconds.</p></li>
+<li><p><strong>parameters_to_cast</strong> – Optional dictionary specifying data types for certain parameters after merging.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Pandas DataFrame with meteorological and ASI data merged, indexed by timestamp.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.map_asi_to_timestamps">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">map_asi_to_timestamps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'60s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_delta_t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_exp_times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_delta_exp_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_exposure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.map_asi_to_timestamps" title="Link to this definition">¶</a></dt>
+<dd><p>Maps asi acqusition time to a rounded timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – dataframe containing a column ‘timestamp’.</p></li>
+<li><p><strong>round_to</strong> – string of resolution to round timestamps to.</p></li>
+<li><p><strong>max_delta_t</strong> – maximal allowed deviation to rounded timestamp in seconds.</p></li>
+<li><p><strong>valid_exp_times</strong> – tuple of valid exposure times to be considered.</p></li>
+<li><p><strong>inplace</strong> – if true, overwrites existing dataframe.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe with rounded timestamp as index.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.select_by_dni_var_classes">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">select_by_dni_var_classes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dni_var_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'H'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.select_by_dni_var_classes" title="Link to this definition">¶</a></dt>
+<dd><p>Selects timestamp by dni variability class. A timestamp is selected if the timestamp itself or the included time
+frame has a dni variability class contained in selected_classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dni_var_classes</strong> – pd.Series of dni var classes with DatetimeIndex</p></li>
+<li><p><strong>selected_classes</strong> – list of dni var classes to filter by.</p></li>
+<li><p><strong>include_by</strong> – determines size of time frame (e.g., ‘H’ means hour)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>selected timestamps as DatetimeIndex.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.check_Q25_asi_cropping">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">check_Q25_asi_cropping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rel_path_to_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asi_root</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.check_Q25_asi_cropping" title="Link to this definition">¶</a></dt>
+<dd><p>This function can be used to determine how asis from the Q25 all sky imager have been cropped for custom
+resolution. The function is used for images of the Kontas camera in the interval from ‘20160920’ to ‘20190612’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rel_path_to_image</strong> – path to asi image, relative to asi root directory</p></li>
+<li><p><strong>asi_root</strong> – absolute path to asi root directory</p></li>
+</ul>
+</dd>
+</dl>
+<p>:return string specifying how image has been cropped (left, center, right). If the image can’t be opened the
+function returns nan.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.get_dates_from_csv">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">get_dates_from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'date'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.get_dates_from_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Extracts unique dates from a specified column in a CSV file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csv_file</strong> – Path to the CSV file containing date information.</p></li>
+<li><p><strong>col_name</strong> – Column name in the CSV that contains date values. Default is ‘date’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A NumPy array of unique dates extracted from the specified column.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.make_dataset.filter_timestamps_by_sun_elevation">
+<span class="sig-prename descclassname"><span class="pre">asi_core.make_dataset.</span></span><span class="sig-name descname"><span class="pre">filter_timestamps_by_sun_elevation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_el</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sun_el</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.make_dataset.filter_timestamps_by_sun_elevation" title="Link to this definition">¶</a></dt>
+<dd><p>Filters timestamps based on minimum solar elevation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ts</strong> – Pandas DatetimeIndex of timestamps to be filtered.</p></li>
+<li><p><strong>min_el</strong> – Minimum solar elevation angle (in degrees) required for timestamps to be retained.</p></li>
+<li><p><strong>sun_el</strong> – Optional Pandas Series containing precomputed solar elevations for the timestamps.
+If None, solar elevation will be computed using latitude, longitude, and altitude.</p></li>
+<li><p><strong>latitude</strong> – Latitude of the location (required if sun_el is not provided).</p></li>
+<li><p><strong>longitude</strong> – Longitude of the location (required if sun_el is not provided).</p></li>
+<li><p><strong>altitude</strong> – Altitude of the location in meters (optional, used when computing solar elevation).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A filtered Pandas DatetimeIndex containing only timestamps where solar elevation exceeds min_el.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">asi_core.make_dataset</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#asi_core.make_dataset.Q25_LEFT_CENTRATION_THRESHOLD"><code class="docutils literal notranslate"><span class="pre">Q25_LEFT_CENTRATION_THRESHOLD</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.Q25_RIGHT_CENTRATION_THRESHOLD"><code class="docutils literal notranslate"><span class="pre">Q25_RIGHT_CENTRATION_THRESHOLD</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.load_asi_list"><code class="docutils literal notranslate"><span class="pre">load_asi_list()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.read_asi_meta_data"><code class="docutils literal notranslate"><span class="pre">read_asi_meta_data()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.check_asi_list"><code class="docutils literal notranslate"><span class="pre">check_asi_list()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.check_asi"><code class="docutils literal notranslate"><span class="pre">check_asi()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.load_transform_save_asi"><code class="docutils literal notranslate"><span class="pre">load_transform_save_asi()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.create_asi_list"><code class="docutils literal notranslate"><span class="pre">create_asi_list()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.create_asi_dataset"><code class="docutils literal notranslate"><span class="pre">create_asi_dataset()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.read_asi_dataset"><code class="docutils literal notranslate"><span class="pre">read_asi_dataset()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.merge_meteo_and_asi_data"><code class="docutils literal notranslate"><span class="pre">merge_meteo_and_asi_data()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.map_asi_to_timestamps"><code class="docutils literal notranslate"><span class="pre">map_asi_to_timestamps()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.select_by_dni_var_classes"><code class="docutils literal notranslate"><span class="pre">select_by_dni_var_classes()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.check_Q25_asi_cropping"><code class="docutils literal notranslate"><span class="pre">check_Q25_asi_cropping()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.get_dates_from_csv"><code class="docutils literal notranslate"><span class="pre">get_dates_from_csv()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.make_dataset.filter_timestamps_by_sun_elevation"><code class="docutils literal notranslate"><span class="pre">filter_timestamps_by_sun_elevation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../logger/index.html"
+                          title="previous chapter">asi_core.logger</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../matlab_converters/index.html"
+                          title="next chapter">asi_core.matlab_converters</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/autoapi/asi_core/make_dataset/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../matlab_converters/index.html" title="asi_core.matlab_converters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../logger/index.html" title="asi_core.logger"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >asi_core</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.make_dataset</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    </div>
+  </body>
+</html>

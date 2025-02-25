@@ -1,0 +1,181 @@
+asi_core.matlab_converters
+==========================
+
+.. py:module:: asi_core.matlab_converters
+
+.. autoapi-nested-parse::
+
+   This module provides functions to convert data structures from matlab into python.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   asi_core.matlab_converters.MatlabCamera
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   asi_core.matlab_converters.map_data_columns
+   asi_core.matlab_converters.load_matlab_struct
+   asi_core.matlab_converters.get_mat_dict
+   asi_core.matlab_converters.load_matlab_mesor_file
+   asi_core.matlab_converters.load_matlab_linke_turbidity_per_day
+   asi_core.matlab_converters.load_matlab_dni_classes
+   asi_core.matlab_converters.load_matlab_persistence_values
+   asi_core.matlab_converters.load_matlab_ceilometer_data
+   asi_core.matlab_converters.pandas_datetime_to_matlab_datenum
+   asi_core.matlab_converters.matlab_datenum_to_pandas_datetime
+
+
+Module Contents
+---------------
+
+.. py:function:: map_data_columns(matlab_column_names)
+
+   Maps MATLAB-style column names to their corresponding Python-style names using a predefined renaming dictionary.
+
+   :param matlab_column_names: List of column names from MATLAB data.
+   :return: A dictionary mapping MATLAB column names to their Python-equivalent names.
+
+
+.. py:function:: load_matlab_struct(mat_file, struct_name, return_df=False)
+
+   Loads matlab struct from mat-file and stores it to python dict or pd.DataFrame.
+
+   :param mat_file: full path of mat-file.
+   :param struct_name: name of struct variable in mat-file.
+   :param return_df: if true, parameters are renamed to new format.
+   :return: python dict or pd.DataFrame of data stored in struct variable of mat-file.
+
+
+.. py:function:: get_mat_dict(mat_file_path, suffix=None)
+
+   Import Matlab structure (.mat file) into python dictionary using scipy loadmat.
+
+   The method is very similar to load_matlab_struct and is deprecated.
+
+   :param mat_file_path (string): Path to Matlab file
+   :param suffix (string, optional): Add suffix to key names
+   :return: Dictionary containing Matlab struture data
+
+
+.. py:function:: load_matlab_mesor_file(mat_file, struct_name='MesorDat', param_tz=MATLAB_TZ, param_datenum=MATLAB_DATENUM, convert_timezone=None, rename_params=False, drop_datenum=True)
+
+   Loads matlab mesor file. Function for loading irradiance measurements and other meteorological measurements from
+    a mat-file containing single struct ('MesorDat') to python dict or pandas dataframe.
+
+   :param mat_file: full path of mat-file.
+   :param struct_name: name of struct variable in mat-file.
+   :param param_tz: name of timezone parameter.
+   :param param_datenum: name of matlab datenum parameter.
+   :param convert_timezone: timezone value (+/- UTC) to convert date times.
+   :param rename_params: if true, parameters are renamed to new format.
+   :param drop_datenum: drop matlab datenum data.
+   :return: python dict  of mesor data.
+
+
+.. py:function:: load_matlab_linke_turbidity_per_day(tl_files, struct_name='tl_data', param_name_tl='tl_per_day', param_name_dt='SDN_per_day')
+
+   Loads daily linke turbidity values from mat-files.
+
+   :param tl_files: list of full paths of mat-files containing turbidity data.
+   :param struct_name: name of struct variable in mat-files.
+   :param param_name_tl: name of daily turbididty parameter.
+   :param param_name_dt: name of datetime (datenum) parameter.
+   :return: pd.Series of daily Linke turbidity values.
+
+
+
+.. py:function:: load_matlab_dni_classes(mat_files, struct_name='DNIClass', param_dni_class=MATLAB_DNIVARCLASS, param_dt=MATLAB_SDN, param_tz=MATLAB_TZ, convert_timezone=None, rename_params=False)
+
+   Loads dni variability classes from mat-files. Precomupted DNI variability classes for each measurement timestamo
+   (https://doi.org/10.1127/metz/2018/0875) are loaded from mat-files and concatenated into single pandas dataframe.
+
+   :param mat_files: list of full paths of mat-files.
+   :param struct_name: name of struct variable in mat-files.
+   :param param_dni_class: name of dni variability class parameter.
+   :param param_dt: name of datetime (datenum) parameter.
+   :param param_tz: name of timezone parameter.
+   :param convert_timezone: timezone value (+/- UTC) to convert date times.
+   :param rename_params: if true, parameters are renamed to new format.
+   :return: pd.DataFrame of DNI variabilty classes.
+
+
+.. py:function:: load_matlab_persistence_values(mat_files, norm_max=None, norm_min=None, stand_mean=None, stand_std=None, param_dt=MATLAB_SDN, persist_col='nowGHIPer', timezone=1, convert_timezone=None)
+
+   Loads matlab persistence values.
+
+   :param mat_files: list of full paths of mat-files.
+   :param norm_max: max value to normalize persistence values (optional).
+   :param norm_min: min value to standardize persistence values (optional).
+   :param stand_mean: mean value to standardize persistence values (optional).
+   :param stand_std: std value to standardize persistence values (optional).
+   :param param_dt: name of datetime (datenum) parameter.
+   :param persist_col: name of persistence column.
+   :param timezone: timezone as integer (+/- UTC).
+   :param convert_timezone: timezone value (+/- UTC) to convert date times.
+   :return: pd.DataFrame of persistence values.
+
+
+.. py:function:: load_matlab_ceilometer_data(mat_file, timestamp_col='time', cloud_base_height_col='cloud_base_height', timezone=pytz.UTC)
+
+   Loads matlab ceilometer values (only the 3 channels for the cloud base height measurement).
+
+   :param mat_file: full path of mat file.
+   :param timestamp_col: name of column with timestamps
+   :param cloud_base_height_col: name of column with cloud base height measurements
+   :param timezone as pytz timezone or as integer (+/- UTC).
+
+
+.. py:function:: pandas_datetime_to_matlab_datenum(date)
+
+   Converts a Python datetime object to a MATLAB datenum.
+
+   :param date: Pandas datetime series to be converted.
+   :return: Pandas series with MATLAB datenum floats.
+
+
+.. py:function:: matlab_datenum_to_pandas_datetime(datenum, round_to='s', timezone=None, convert_timezone=None)
+
+   Convert matlab datenum to pandas datetime.
+
+   :param datenum: matlab datenum values.
+   :param round_to: abbreviation to round values (default: 's' -> second).
+   :param timezone: implicit timezone of inserted matlab datenum timestamps or pytz.timezone. If not provided, the returned timestamps
+                    will be timezone unaware: UTC --> 0; CET --> +1; CEST --> +2
+   :param convert_timezone: timestamps will be returned in this timezone if specified: UTC --> 0; CET --> +1;
+                    CEST --> +2
+   :return: pd.DatetimeIndex of timestamps.
+
+
+.. py:class:: MatlabCamera(path_matlab_workspace)
+
+   Bases: :py:obj:`asi_core.camera.RadiometricImager`
+
+
+   Used calibrations etc. are initialized via MATLAB
+
+   This class can be useful for testing.
+
+
+   .. py:attribute:: camera_mask
+
+
+   .. py:attribute:: rel_exp_tol
+      :value: 0.1
+
+
+
+   .. py:method:: load_ocam(ocam_path)
+
+      Load ocam model from mat-file.
+
+
+

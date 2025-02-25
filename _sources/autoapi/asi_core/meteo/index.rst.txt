@@ -1,0 +1,441 @@
+asi_core.meteo
+==============
+
+.. py:module:: asi_core.meteo
+
+.. autoapi-nested-parse::
+
+   This module is for handling and organizing meteorological measurement data.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   asi_core.meteo.MeteoData
+   asi_core.meteo.MesorMat
+   asi_core.meteo.CSOnline
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   asi_core.meteo.linke_turbidity_ineichen_dlr
+   asi_core.meteo.compute_dni_variability_classes
+   asi_core.meteo.aggregate_temporal_resolution
+   asi_core.meteo.compute_earth_sun_distance_correction_factor
+   asi_core.meteo.time_dependent_envelope_curve
+   asi_core.meteo.find_valid_extrema
+   asi_core.meteo.trapezoidal_integral_over_time_window
+   asi_core.meteo.variability_index
+   asi_core.meteo.variability_index_indicator
+   asi_core.meteo.plot_series
+   asi_core.meteo.check_daily_index_continuity
+   asi_core.meteo.read_mesor_txt_file
+   asi_core.meteo.convert_invalid_values_to_nan
+   asi_core.meteo.get_missing_timestamps
+
+
+Module Contents
+---------------
+
+.. py:class:: MeteoData(name=None, latitude=None, longitude=None, altitude=None, tz=None, data=None, temporal_resolution=None)
+
+   Bases: :py:obj:`object`
+
+
+   Class for meteo time series data.
+
+
+   .. py:attribute:: columns
+      :value: ['ghi', 'dni', 'dhi', 't_amb', 'p_amb', 'rel_humid', 'wind_dir', 'wind_speed', 'sun_el',...
+
+
+
+   .. py:attribute:: units
+
+
+   .. py:attribute:: data
+
+
+   .. py:attribute:: name
+      :value: None
+
+
+
+   .. py:attribute:: latitude
+      :value: None
+
+
+
+   .. py:attribute:: longitude
+      :value: None
+
+
+
+   .. py:attribute:: altitude
+      :value: None
+
+
+
+   .. py:attribute:: tz
+      :value: None
+
+
+
+   .. py:attribute:: temporal_resolution
+      :value: None
+
+
+
+   .. py:method:: get_p_amb(use_default_for_nans=True)
+
+      Gets ambient pressure from self.data
+
+
+
+   .. py:method:: get_solar_pos(recompute=False)
+
+      Gets solar position from self.data
+
+
+
+   .. py:method:: get_airmass(absolute=True, recompute=False)
+
+      Gets airmass from self.data
+
+
+
+   .. py:method:: get_linke_turbidity(recompute=False, method_linke_turbidity='mcclear')
+
+      Gets linke turbidity from self.data
+
+
+
+   .. py:method:: get_clear_sky_irradiance(recompute=False, method_clear_sky_irradiance='ineichen', method_linke_turbidity='mcclear')
+
+      Gets clear sky irradiance from self.data.
+
+
+
+   .. py:method:: get_dni_variability_classes()
+
+      Gets dni variability classes from self.data.
+
+
+
+   .. py:method:: remove_duplicates(keep='first', inplace=False)
+
+      Removes rows in dataframes with duplicated indexes.
+
+
+
+   .. py:method:: insert_missing_timestamps(inplace=False, min_ele=None, method_solar_pos='nrel_numpy')
+
+      Inserts missing timestamps
+
+
+
+   .. py:method:: compute()
+
+
+   .. py:method:: compute_solar_position(method='nrel_numpy', apparent_elevation=True)
+
+      Computes solar position using pvlib.
+
+
+
+   .. py:method:: compute_airmass(method_airmass='kastenyoung1989', fill_default_pressure=True)
+
+      Computes airmass using pvlib.
+
+
+
+   .. py:method:: compute_linke_turbidity(method_linke_turbidity='mcclear', solar_constant=1361.1, limit_sun_elevation=20, limit_dni=300, variability_tl_lim=0.01, tl_cloud_limit=8)
+
+      Computes linke turbidity using pvlib.
+
+
+
+   .. py:method:: compute_clear_sky_irradiance(method_clear_sky_irradiance='ineichen', method_linke_turbidity='mcclear')
+
+      Computes clear sky irradiance using pvlib.
+
+
+
+   .. py:method:: compute_dni_var_class(time_period='15T')
+
+      DNI variability procedure for time series in 1 min resolution  according to: Schroedter-Homscheidt et al.,
+      Classifying ground-measured 1 minute temporal variability within hourly intervals for direct normal irradiances,
+      Meteorologische Zeitschrift, (2018)
+      :param time_period: used for classification
+      :return: self.data['dni_var_class']: (pd series)
+
+
+
+   .. py:method:: interpolate(limit, columns=None, method='index', limit_area='inside', limit_direction='both', inplace=False)
+
+      Interpolates missing data in dataframe.
+
+
+
+   .. py:method:: filter_by_sun_el(min_sun_el, inplace=False)
+
+      Filters data by sun elevation.
+
+
+
+   .. py:method:: get_temporal_resolution()
+
+      Gets temporal resolution of dataframe
+
+
+
+   .. py:method:: get_number_of_nans()
+
+
+   .. py:method:: plot_distributions(columns=None, n_rows=2, df_ref=None, figsize=(20, 12))
+
+
+   .. py:method:: reduce_temporal_resolution(new_freq, min_fraction=60 / 60)
+
+      Averages meteo data to lower time resolution rejecting all low-resolution periods with incomplete data.
+
+      :param new_freq: (str, datetime.timedelta, or DateOffset), new temporal resolution, to be understood as
+                 "freq" by pandas
+      :param min_fraction: (float) Minimum fraction of valid readings required to retain average of a period.
+
+
+
+   .. py:method:: check_daily_index_continuity()
+
+
+   .. py:method:: from_csv(csv_file, **kwargs)
+      :classmethod:
+
+
+      Initialize MeteoData object from csv file.
+
+
+
+   .. py:method:: from_mesor_txt(txt_file)
+      :classmethod:
+
+
+      Initialize MeteoData object from mesor txt file.
+
+
+
+.. py:class:: MesorMat(mesor_files: list, remove_duplicates=True, insert_missing_timestamps=True, min_sun_el=0, interpolate=True, interpolate_limit=10, temporal_resolution=None, mesor_nan=-9999, compute_solar_position=True, compute_clear_sky_irradiance=True, compute_dni_var_class=False, time_period_dni_var_class='15T', tl_files=None, dni_var_class_files=None, method_clear_sky_irradiance='ineichen', method_linke_turbidity='mcclear', file_type_dni_var_class='.mat')
+
+   Bases: :py:obj:`MeteoData`
+
+
+   Class for creating MeteoData objects from Mesor files.
+
+
+   .. py:attribute:: mesor_files
+
+
+   .. py:method:: add_linke_turbidity(tl_files)
+
+      Adds linke turbidity from mat files to data.
+
+
+
+   .. py:method:: add_dni_variability_classes(dnivc_files, file_type_dni_var_class='.mat')
+
+      Adds dni variability classes from mat files to data.
+
+
+
+.. py:class:: CSOnline(url_cs_logger_table: str, latitude, longitude, altitude, timezone, name_desired_columns_cs_table=None)
+
+   Bases: :py:obj:`MeteoData`
+
+
+   Class for retrieving real time meteo data from CS logger 
+
+
+   .. py:attribute:: url_cs_logger_table
+
+
+   .. py:attribute:: latitude
+
+
+   .. py:attribute:: longitude
+
+
+   .. py:attribute:: altitude
+
+
+   .. py:attribute:: tz
+
+
+   .. py:attribute:: name_desired_columns_cs_table
+      :value: None
+
+
+
+   .. py:method:: update_meteo_data_real_time(compute_solar_position=True, compute_clear_sky_irradiance=True)
+
+      This method updates the meteorological data stored in the object in real-time by fetching
+      data from a CS logger table and optionally computing solar position and clear sky irradiance.
+
+      :param compute_solar_position: (bool, optional) Whether to compute solar position data (default is True)
+      :param compute_clear_sky_irradiance: (bool, optional) Whether to compute clear sky irradiance (default is True)
+      :return:
+
+
+
+.. py:function:: linke_turbidity_ineichen_dlr(dni, altitude, sun_el, airmass_abs, solar_constant=1361.1, limit_sun_elevation=20, limit_dni=300, variability_tl_lim=0.01, tl_cloud_limit=8)
+
+   Computes the Linke turbidity factor using the Ineichen DLR method.
+   This method estimates the Linke turbidity, which describes atmospheric turbidity based on DNI
+   and atmospheric conditions, and applies various filters and adjustments to derive a daily mean turbidity.
+
+   :param dni: (pd.Series) Direct normal irradiance (DNI) values, indexed by datetime.
+   :param altitude: (float) Altitude of the location in meters above sea level.
+   :param sun_el: (pd.Series) Solar elevation angle in degrees, indexed by datetime.
+   :param airmass_abs: (pd.Series) Absolute airmass values, indexed by datetime.
+   :param solar_constant: (float) Solar constant in W/m^2
+   :param limit_sun_elevation: (float) Minimum sun elevation angle in degrees for filtering
+   :param limit_dni: (float) Minimum DNI threshold for filtering
+   :param variability_tl_lim: (float) Maximum allowed variability in turbidity factor
+   :param tl_cloud_limit: (float) Maximum Linke turbidity threshold for clear-sky filtering
+   :return: linke_turbidity: (pd.Series) Processed and filtered Linke turbidity, indexed by datetime.
+
+
+.. py:function:: compute_dni_variability_classes(dni, clear_sky_dni, time_period='15T')
+
+   DNI variability procedure for time series in 1 min resolution  according to: Schroedter-Homscheidt et al.,
+   Classifying ground-measured 1 minute temporal variability within hourly intervals for direct normal irradiances,
+   Meteorologische Zeitschrift, (2018)
+   :param dni: (pd.Series) Series of dni values with pd.DatetimeIndex.
+   :param clear_sky_dni: (pd.Series) Series of clear-sky dni values with pd.DatetimeIndex.
+   :param time_period: (str) Time period used for classification.
+   :return: dni_var_class: (pd series) Series of dni variability classes with pd.DatetimeIndex
+
+
+.. py:function:: aggregate_temporal_resolution(meteo_data, new_freq, old_freq, min_fraction=60 / 60)
+
+   Averages meteo data to lower time resolution rejecting all low-resolution periods with incomplete data.
+
+   Based on pyranocam/validation_thesis -- data_post_preprocessing.generate_dif_time_res
+
+   :param meteo_data: (pd DataFrame) define the dataframe, which contains the data in a specific time frequency
+              (defined by 'new_freq'-argument).
+   :param new_freq: (str, datetime.timedelta, or DateOffset), new temporal resolution, to be understood as "freq" by
+               pandas
+   :param old_freq: (str, datetime.timedelta, or DateOffset), old temporal resolution, to be understood as "freq" by
+               pandas
+   :param min_fraction: (float) Minimum fraction of valid readings required to retain average of a period.
+
+
+.. py:function:: compute_earth_sun_distance_correction_factor(day_of_year)
+
+   Calculate distance between sun and earth acoording to Liou, An Introduction to Atmospheric Radiation,
+   2002, p.49
+   :param day_of_year: (int, np.ndarray) (vector of) day(s) of year as Integer [1,366]
+   :return:
+       - earth_sun_distance: Earth to Sun distance in meters
+       - earth_sun_corr_factor: Correction factor for Earth to Sun distance depending on the day of the year.
+       - solar_disk_radius: Angular radius of solar disk
+
+
+.. py:function:: time_dependent_envelope_curve(dni_series)
+
+   Get upper and lower DNI envelope curves according toSchroedter-Homscheidt et al. 2018
+   :param dni_series: (pd series) dni with datetimeindex in 1 min resolution
+   :return: upper_envelope: (pd series) upper envelope curve fitting to dni_series
+   :return: upper_envelope: (pd series) lower envelope curve fitting to dni_series
+
+
+.. py:function:: find_valid_extrema(dni_series, local_extrema_series, extrema_type='maxima', lower_time_limit=4, upper_time_limit=10)
+
+   Function to detect valid maxima or minima within a lower and upper time limit for a time window. This is according
+   to the procedure described in Schroedter-Homscheidt et al. 2018
+   :param dni_series: (pd series) dni with datetimeindex in 1 min resolution
+   :param local_extrema_series: (pd series) The series with local extrema (maxima or minima) filled.
+   :param extrema_type: (string) either 'maxima' or 'minima' to specify the type of extrema to detect.
+   :return: extrema_series (pd series) valid extrema
+
+
+.. py:function:: trapezoidal_integral_over_time_window(window)
+
+   Function to compute the trapezoidal integral over a given time window. The time window must have
+   a datetime index with 1-minute resolution.
+
+   :param window: (pd.Series) A time series with a datetime index and corresponding values for integration.
+   :return: (float) The computed integral value over the time window in hours, or NaN .
+
+
+.. py:function:: variability_index(k_dni_diff, time_period)
+
+   Calculates the Variability Index (V) over a specified time period, according to Coimbra et al. (2013)
+   This index provides insights on the variability of direct normal irradiance (DNI) compared to clear sky conditions.
+
+   :param k_dni_diff: (pd.Series) The difference in clearness index (K) values over time.
+   :param time_period: (str) A time-based window string (e.g., '15T') used for rolling window calculations.
+
+   :return: v (pd.Series) variability index V: according to Coimbra et al. (2013)
+
+
+.. py:function:: variability_index_indicator(dni_diff, clear_sky_dni_diff, time_period)
+
+   Calculates the Variability Index Indicator (VI) over a specified time period, according to Stein et al. (2012)
+   This index provides insights on the variability of direct normal irradiance (DNI) compared to clear sky conditions.
+
+   :param dni_diff: (pd.Series) The difference in DNI values over time.
+   :param clear_sky_dni_diff: (pd.Series) The difference in clear-sky DNI values over time.
+   :param time_period: (str) A time-based window string (e.g., '15T') used for rolling window calculations.
+
+   :return: vi (pd.Series) variability index indicator VI: according to Stein et al. (2012)
+
+
+.. py:function:: plot_series(series)
+
+   Function to plot a time series with a datetime index. It generates a simple line plot of the series
+    (helpful for debugging).
+   :param series: (pd.Series) A time series with a datetime index.
+
+
+.. py:function:: check_daily_index_continuity(ts, temporal_res=None)
+
+   Check if index (pd.DatetimeIndex) has gaps.
+
+
+.. py:function:: read_mesor_txt_file(file_path)
+
+   Read meteo data from mesor txt file.
+
+
+.. py:function:: convert_invalid_values_to_nan(data, invalid_value, condition='equals', columns=None, inplace=False)
+
+   Converts invalid values in dataframe to nans.
+
+
+.. py:function:: get_missing_timestamps(dt, temporal_resolution, tz, min_ele=None, latitude=None, longitude=None, altitude=None, method_solar_pos='nrel_numpy', bounds_from_dt=False)
+
+   Identifies missing timestamps within a given datetime range based on a specified temporal resolution.
+
+   :param dt: Array-like of existing timestamps (pandas DatetimeIndex or list of timestamps).
+   :param temporal_resolution: String representing the desired time frequency (e.g., '30S' for 30 seconds).
+   :param tz: Time zone information for the generated timestamps.
+   :param min_ele: (Optional) Minimum solar elevation angle to filter timestamps. Default is None.
+   :param latitude: (Optional) Latitude of the location for solar position calculations. Required if `min_ele` is set.
+   :param longitude: (Optional) Longitude of the location for solar position calculations. Required if `min_ele` is set.
+   :param altitude: (Optional) Altitude of the location for solar position calculations. Default is None.
+   :param method_solar_pos: (Optional) Method used for solar position calculations (default: 'nrel_numpy').
+   :param bounds_from_dt: (Optional) If True, uses the first and last timestamps from `dt` as the range bounds.
+                          If False, expands the range to include the entire day (00:00:00 to 23:59:59).
+
+   :return:
+       - dt_missing (pandas DatetimeIndex): Timestamps that are missing from `dt` within the expected range.
+       - dr (pandas DatetimeIndex): The full expected timestamp range.
+
+

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>asi_core.real_time_utility_functions &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="asi_core.transform" href="../transform/index.html" />
+    <link rel="prev" title="asi_core.ocam" href="../ocam/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../transform/index.html" title="asi_core.transform"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../ocam/index.html" title="asi_core.ocam"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">asi_core</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.real_time_utility_functions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-asi_core.real_time_utility_functions">
+<span id="asi-core-real-time-utility-functions"></span><h1>asi_core.real_time_utility_functions<a class="headerlink" href="#module-asi_core.real_time_utility_functions" title="Link to this heading">¶</a></h1>
+<p>Utility functions for real time applications.</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.real_time_utility_functions.parse_logger_data" title="asi_core.real_time_utility_functions.parse_logger_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_logger_data</span></code></a>(url_cs_logger_table, timezone[, ...])</p></td>
+<td><p>This function access the table of a campbell scientific logger via its URL. All channels and the time stamp are</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.real_time_utility_functions.parse_latest_image_ssh" title="asi_core.real_time_utility_functions.parse_latest_image_ssh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_latest_image_ssh</span></code></a>(asi_img_fmt, host[, interval, ...])</p></td>
+<td><p>Function to load latest images from remote server</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.real_time_utility_functions.parse_logger_data">
+<span class="sig-prename descclassname"><span class="pre">asi_core.real_time_utility_functions.</span></span><span class="sig-name descname"><span class="pre">parse_logger_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url_cs_logger_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timezone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_desired_columns_cs_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.real_time_utility_functions.parse_logger_data" title="Link to this definition">¶</a></dt>
+<dd><p>This function access the table of a campbell scientific logger via its URL. All channels and the time stamp are
+retrieved from the HTML string and placed in a data frame. If desired some channels can be renamed.
+:param url_cs_logger_table: (str) url of table as string
+:param timezone: (str) desired time zone (e.g. “GMT+1” = UTC+1)
+:param name_desired_columns_cs_table: (dict) List with 2 columns and n rows. First column holds the original names of channels</p>
+<blockquote>
+<div><p>which shall be renamed. The second column holds the new names for the channels.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Return df<span class="colon">:</span></dt>
+<dd class="field-odd"><p>data frame single row with n columns for each channel + timestamp index as datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.real_time_utility_functions.parse_latest_image_ssh">
+<span class="sig-prename descclassname"><span class="pre">asi_core.real_time_utility_functions.</span></span><span class="sig-name descname"><span class="pre">parse_latest_image_ssh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asi_img_fmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.real_time_utility_functions.parse_latest_image_ssh" title="Link to this definition">¶</a></dt>
+<dd><p>Function to load latest images from remote server
+:param asi_img_fmt: (str) filename format of image to load from server (absolute path).</p>
+<blockquote>
+<div><p>Requires identifier for timestamp (dt, e.g. {dt:%Y%m%d%H%M%S})</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – (str) host name to be accessed via ssh</p></li>
+<li><p><strong>interval</strong> – (int, optional, default=30) Interval for image acquisition</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return img, dt<span class="colon">:</span></dt>
+<dd class="field-even"><p>image + timestamp (datetime64)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">asi_core.real_time_utility_functions</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#asi_core.real_time_utility_functions.parse_logger_data"><code class="docutils literal notranslate"><span class="pre">parse_logger_data()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.real_time_utility_functions.parse_latest_image_ssh"><code class="docutils literal notranslate"><span class="pre">parse_latest_image_ssh()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../ocam/index.html"
+                          title="previous chapter">asi_core.ocam</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../transform/index.html"
+                          title="next chapter">asi_core.transform</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/autoapi/asi_core/real_time_utility_functions/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../transform/index.html" title="asi_core.transform"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../ocam/index.html" title="asi_core.ocam"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >asi_core</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.real_time_utility_functions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    </div>
+  </body>
+</html>

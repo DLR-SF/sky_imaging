@@ -1,0 +1,79 @@
+asi_core.calibration.process_self_calibration
+=============================================
+
+.. py:module:: asi_core.calibration.process_self_calibration
+
+.. autoapi-nested-parse::
+
+   Tools to process and validate the all-sky imager geometric self calibration
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   asi_core.calibration.process_self_calibration.calibrate_from_images
+   asi_core.calibration.process_self_calibration.validate_from_images
+   asi_core.calibration.process_self_calibration.calibrate_from_csv
+   asi_core.calibration.process_self_calibration.validate_from_csv
+   asi_core.calibration.process_self_calibration.sort_out_imgs_manually
+   asi_core.calibration.process_self_calibration.filter_detected_orbs
+
+
+Module Contents
+---------------
+
+.. py:function:: calibrate_from_images(last_timestamp_calibration)
+
+   Main function for ASI self calibration (when used as a batch processing tool).
+
+   Instantiate the self calibration process and determine the ASI's calibration (IOR + EOR).
+
+   :param last_timestamp_calibration: Timestamp indicating the end of the calibration period
+
+
+.. py:function:: validate_from_images(last_timestamp_calibration, path_calib_results=None)
+
+   Test a camera's IOR and EOR based on a csv of orb positions which were detected in advance
+
+   :param last_timestamp_calibration: tz-aware datetime, last timestamp included in the calibration to be validated
+   :param path_calib_results: str, path to mat file of calibration results to be validated
+
+
+.. py:function:: calibrate_from_csv()
+
+   Determine a camera's IOR and EOR based on a csv of orb positions which were detected in advance
+
+
+.. py:function:: validate_from_csv()
+
+   Test a camera's IOR and EOR based on a csv of orb positions which were detected in advance
+
+
+.. py:function:: sort_out_imgs_manually(calib, orb_data)
+
+   Use this function to copy images in which orbs were detected to the working dir. Then manually erase invalid images.
+
+   If you may run calibrate_from_csv twice on the same set of images and you have already sorted out the images
+   manually in the first run answer 'no' to the question 'Do you really want to copy images to used_imgs folder?'.
+
+   If the RMSD is larger then around 6 consider manually sorting out images with clouds in the area around the sun and
+   images where the sun disk would be cut/ obscured by the mask boundary. Otherwise you can save time and skip the
+   manual sorting.
+
+   :param calib: Calibration instance
+   :param orb_data: Dataframe of astronomically expected and image-processing-based orb positions
+   :return: Dataframe orb_data without rows for which the corresponding images were sorted out manually
+
+
+.. py:function:: filter_detected_orbs(cfg_calib, orb_data)
+
+   Filter out low-quality orb observations.
+
+   :param cfg_calib: Dictionary with configuration parameters
+   :param orb_data: Dataframe of orb observations
+   :return: Filtered of with orb observations
+
+

@@ -1,0 +1,49 @@
+asi_core.io
+===========
+
+.. py:module:: asi_core.io
+
+.. autoapi-nested-parse::
+
+   This module provides input/output functionalities, e.g. reading and writing from/to files.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   asi_core.io.load_image
+   asi_core.io.load_images
+
+
+Module Contents
+---------------
+
+.. py:function:: load_image(img_file, format='rgb')
+
+   Loads an image from a file and converts it to the specified format.
+
+   :param img_file: Path to the image file.
+   :param format: Desired image format ('bgr', 'rgb', or 'gray'). Default is 'rgb'.
+   :return: Loaded image as a NumPy array.
+   :raises FileNotFoundError: If the file does not exist.
+   :raises IOError: If the file cannot be read.
+   :raises NotImplementedError: If the specified format is not supported.
+
+
+.. py:function:: load_images(img_files, format='rgb', ignore_errors=False)
+
+   Loads multiple images from a list of file paths.
+
+   :param img_files: List of image file paths.
+   :param format: Desired image format ('bgr', 'rgb', or 'gray'). Default is 'rgb'.
+   :param ignore_errors: If True, ignores missing or unreadable files and logs warnings.
+                         If False, raises exceptions for such cases. Default is False.
+   :return: List of successfully loaded images as NumPy arrays.
+   :raises FileNotFoundError: If a file does not exist (unless ignore_errors is True).
+   :raises IOError: If a file cannot be read (unless ignore_errors is True).
+   :raises Exception: If an unexpected error occurs during loading.
+
+

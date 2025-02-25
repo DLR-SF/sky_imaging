@@ -1,0 +1,146 @@
+asi_core.visualization.video
+============================
+
+.. py:module:: asi_core.visualization.video
+
+.. autoapi-nested-parse::
+
+   This module provides functions to create videos from all-sky images.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   asi_core.visualization.video.OPENCV_VIDEO_CODECS
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   asi_core.visualization.video.AllSkyVideo
+   asi_core.visualization.video.SaturationMaskSkyVideo
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   asi_core.visualization.video.create_video_from_images
+
+
+Module Contents
+---------------
+
+.. py:data:: OPENCV_VIDEO_CODECS
+
+.. py:class:: AllSkyVideo(output_dir, asi_files, camera_name=None, fps=10, format='.mp4', asi_tfms=None)
+
+   Handles the creation of videos from all-sky images.
+
+
+   .. py:attribute:: output_dir
+
+
+   .. py:attribute:: asi_files
+
+
+   .. py:attribute:: timestamps
+
+
+   .. py:attribute:: camera_name
+      :value: None
+
+
+
+   .. py:attribute:: fps
+      :value: 10
+
+
+
+   .. py:attribute:: format
+      :value: '.mp4'
+
+
+
+   .. py:attribute:: fourcc
+
+
+   .. py:attribute:: asi_tfms
+      :value: None
+
+
+
+   .. py:attribute:: sky_imager
+      :value: None
+
+
+
+   .. py:method:: update_sky_imager_config(timestamp)
+
+      Updates the sky imager configuration based on the given timestamp.
+
+
+
+   .. py:method:: create_video(filename, timestamps=None)
+
+      Creates a video from the given image timestamps.
+
+
+
+   .. py:method:: process_images(asi_files)
+
+      Processes images by applying transformations and preparing them for video creation.
+
+      :param asi_files: Pandas Series containing image file paths.
+      :return: List of processed images.
+
+
+
+   .. py:method:: create_daily_videos(filename_prefix='', dates=None, num_workers=0)
+
+      Creates daily videos based on available timestamps.
+
+      :param filename_prefix: Prefix for the output video filename.
+      :param dates: List of dates to generate videos for (optional).
+      :param num_workers: Number of parallel workers for processing.
+
+
+
+   .. py:method:: _create_video_task(task)
+
+      Helper method to unpack task and call create_video
+
+
+
+.. py:class:: SaturationMaskSkyVideo(output_dir, asi_files, camera_name, fps=10, format='.mp4', asi_tfms=None)
+
+   Bases: :py:obj:`AllSkyVideo`
+
+
+   Generates videos of all-sky images with a mask overlay of saturated pixels.
+
+
+   .. py:method:: process_images(asi_files)
+
+      Processes images by applying a saturation mask overlay.
+
+      :param asi_files: Pandas Series containing image file paths.
+      :return: List of processed images with saturation masks applied.
+
+
+
+.. py:function:: create_video_from_images(images, output_path, fps=10, fourcc=0, rgb_format=True)
+
+   Creates video from images.
+
+   :param images: list of images in numpy format.
+   :param output_path: path of output video.
+   :param fps: frames per second.
+
+

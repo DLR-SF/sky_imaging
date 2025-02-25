@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>asi_core.calibration.process_self_calibration &#8212; asi_core 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    
+    <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="asi_core.calibration.self_calibration" href="../self_calibration/index.html" />
+    <link rel="prev" title="asi_core.calibration.mask_creation" href="../mask_creation/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../self_calibration/index.html" title="asi_core.calibration.self_calibration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../mask_creation/index.html" title="asi_core.calibration.mask_creation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >asi_core</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" accesskey="U">asi_core.calibration</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.calibration.process_self_calibration</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-asi_core.calibration.process_self_calibration">
+<span id="asi-core-calibration-process-self-calibration"></span><h1>asi_core.calibration.process_self_calibration<a class="headerlink" href="#module-asi_core.calibration.process_self_calibration" title="Link to this heading">¶</a></h1>
+<p>Tools to process and validate the all-sky imager geometric self calibration</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.process_self_calibration.calibrate_from_images" title="asi_core.calibration.process_self_calibration.calibrate_from_images"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calibrate_from_images</span></code></a>(last_timestamp_calibration)</p></td>
+<td><p>Main function for ASI self calibration (when used as a batch processing tool).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.process_self_calibration.validate_from_images" title="asi_core.calibration.process_self_calibration.validate_from_images"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_from_images</span></code></a>(last_timestamp_calibration[, ...])</p></td>
+<td><p>Test a camera's IOR and EOR based on a csv of orb positions which were detected in advance</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.process_self_calibration.calibrate_from_csv" title="asi_core.calibration.process_self_calibration.calibrate_from_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calibrate_from_csv</span></code></a>()</p></td>
+<td><p>Determine a camera's IOR and EOR based on a csv of orb positions which were detected in advance</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.process_self_calibration.validate_from_csv" title="asi_core.calibration.process_self_calibration.validate_from_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_from_csv</span></code></a>()</p></td>
+<td><p>Test a camera's IOR and EOR based on a csv of orb positions which were detected in advance</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asi_core.calibration.process_self_calibration.sort_out_imgs_manually" title="asi_core.calibration.process_self_calibration.sort_out_imgs_manually"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_out_imgs_manually</span></code></a>(calib, orb_data)</p></td>
+<td><p>Use this function to copy images in which orbs were detected to the working dir. Then manually erase invalid images.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asi_core.calibration.process_self_calibration.filter_detected_orbs" title="asi_core.calibration.process_self_calibration.filter_detected_orbs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_detected_orbs</span></code></a>(cfg_calib, orb_data)</p></td>
+<td><p>Filter out low-quality orb observations.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.calibration.process_self_calibration.calibrate_from_images">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.process_self_calibration.</span></span><span class="sig-name descname"><span class="pre">calibrate_from_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">last_timestamp_calibration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.process_self_calibration.calibrate_from_images" title="Link to this definition">¶</a></dt>
+<dd><p>Main function for ASI self calibration (when used as a batch processing tool).</p>
+<p>Instantiate the self calibration process and determine the ASI’s calibration (IOR + EOR).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>last_timestamp_calibration</strong> – Timestamp indicating the end of the calibration period</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.calibration.process_self_calibration.validate_from_images">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.process_self_calibration.</span></span><span class="sig-name descname"><span class="pre">validate_from_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">last_timestamp_calibration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_calib_results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.process_self_calibration.validate_from_images" title="Link to this definition">¶</a></dt>
+<dd><p>Test a camera’s IOR and EOR based on a csv of orb positions which were detected in advance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>last_timestamp_calibration</strong> – tz-aware datetime, last timestamp included in the calibration to be validated</p></li>
+<li><p><strong>path_calib_results</strong> – str, path to mat file of calibration results to be validated</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.calibration.process_self_calibration.calibrate_from_csv">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.process_self_calibration.</span></span><span class="sig-name descname"><span class="pre">calibrate_from_csv</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.process_self_calibration.calibrate_from_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Determine a camera’s IOR and EOR based on a csv of orb positions which were detected in advance</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.calibration.process_self_calibration.validate_from_csv">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.process_self_calibration.</span></span><span class="sig-name descname"><span class="pre">validate_from_csv</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.process_self_calibration.validate_from_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Test a camera’s IOR and EOR based on a csv of orb positions which were detected in advance</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.calibration.process_self_calibration.sort_out_imgs_manually">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.process_self_calibration.</span></span><span class="sig-name descname"><span class="pre">sort_out_imgs_manually</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">calib</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orb_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.process_self_calibration.sort_out_imgs_manually" title="Link to this definition">¶</a></dt>
+<dd><p>Use this function to copy images in which orbs were detected to the working dir. Then manually erase invalid images.</p>
+<p>If you may run calibrate_from_csv twice on the same set of images and you have already sorted out the images
+manually in the first run answer ‘no’ to the question ‘Do you really want to copy images to used_imgs folder?’.</p>
+<p>If the RMSD is larger then around 6 consider manually sorting out images with clouds in the area around the sun and
+images where the sun disk would be cut/ obscured by the mask boundary. Otherwise you can save time and skip the
+manual sorting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>calib</strong> – Calibration instance</p></li>
+<li><p><strong>orb_data</strong> – Dataframe of astronomically expected and image-processing-based orb positions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataframe orb_data without rows for which the corresponding images were sorted out manually</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asi_core.calibration.process_self_calibration.filter_detected_orbs">
+<span class="sig-prename descclassname"><span class="pre">asi_core.calibration.process_self_calibration.</span></span><span class="sig-name descname"><span class="pre">filter_detected_orbs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_calib</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orb_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asi_core.calibration.process_self_calibration.filter_detected_orbs" title="Link to this definition">¶</a></dt>
+<dd><p>Filter out low-quality orb observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cfg_calib</strong> – Dictionary with configuration parameters</p></li>
+<li><p><strong>orb_data</strong> – Dataframe of orb observations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered of with orb observations</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">asi_core.calibration.process_self_calibration</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#asi_core.calibration.process_self_calibration.calibrate_from_images"><code class="docutils literal notranslate"><span class="pre">calibrate_from_images()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.process_self_calibration.validate_from_images"><code class="docutils literal notranslate"><span class="pre">validate_from_images()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.process_self_calibration.calibrate_from_csv"><code class="docutils literal notranslate"><span class="pre">calibrate_from_csv()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.process_self_calibration.validate_from_csv"><code class="docutils literal notranslate"><span class="pre">validate_from_csv()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.process_self_calibration.sort_out_imgs_manually"><code class="docutils literal notranslate"><span class="pre">sort_out_imgs_manually()</span></code></a></li>
+<li><a class="reference internal" href="#asi_core.calibration.process_self_calibration.filter_detected_orbs"><code class="docutils literal notranslate"><span class="pre">filter_detected_orbs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../mask_creation/index.html"
+                          title="previous chapter">asi_core.calibration.mask_creation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../self_calibration/index.html"
+                          title="next chapter">asi_core.calibration.self_calibration</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/autoapi/asi_core/calibration/process_self_calibration/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../self_calibration/index.html" title="asi_core.calibration.self_calibration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../mask_creation/index.html" title="asi_core.calibration.mask_creation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">asi_core 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >asi_core</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" >asi_core.calibration</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">asi_core.calibration.process_self_calibration</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    </div>
+  </body>
+</html>

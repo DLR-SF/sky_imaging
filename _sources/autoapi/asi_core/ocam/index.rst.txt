@@ -1,0 +1,288 @@
+asi_core.ocam
+=============
+
+.. py:module:: asi_core.ocam
+
+.. autoapi-nested-parse::
+
+   This module provides functionality related to geometric transformations of ASI images in particular image undistortion.
+
+   The internal camera model used here was described by:
+   Scaramuzza, D., et al. (2006). A Toolbox for Easily Calibrating Omnidirectional Cameras. RSJ International Conference
+   on Intelligent Robots and Systems  Beijing, China.
+
+   The external camera orientation used here is defined according to:
+   Luhmann, T. (2000). Nahbereichsphotogrammetrie: Grundlagen, Methoden und Anwendungen. Heidelberg, Germany, Wichmann
+   Verlag.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   asi_core.ocam.UndistortionParameters
+   asi_core.ocam.OcamModel
+
+
+Module Contents
+---------------
+
+.. py:class:: UndistortionParameters
+
+   This dataclass contains all configurable parameters for the undistortion lookup table calculation. The parameters
+   are stored with every call of create_undistortion_with_zenith_cropping_LUT to avoid unnecessary recalculations of
+   the same lookup table for equal undistortion parameters.
+
+
+   .. py:attribute:: eor
+      :type:  numpy.ndarray
+      :value: None
+
+
+
+   .. py:attribute:: camera_mask
+      :type:  numpy.ndarray
+      :value: None
+
+
+
+   .. py:attribute:: undistorted_resolution
+      :type:  Tuple
+      :value: None
+
+
+
+   .. py:attribute:: limit_angle
+      :type:  float
+      :value: 78.0
+
+
+
+   .. py:attribute:: subgrid_factor
+      :type:  int
+      :value: 4
+
+
+
+   .. py:method:: __eq__(other)
+
+      Compare the object's parameter set the one of another object
+
+      :param other: UndistortionParameters instance
+      :return: Check result, True if equal
+
+
+
+.. py:class:: OcamModel(ss, invpol, x_center, y_center, c, d, e, width, height, diameter=None)
+
+   Defines transformations based on the ocam camera model and stores corresponding parameters and lookup tables for an
+   individual camera sample
+
+
+   .. py:attribute:: ss
+
+
+   .. py:attribute:: invpol
+
+
+   .. py:attribute:: x_center
+
+
+   .. py:attribute:: y_center
+
+
+   .. py:attribute:: diameter
+      :value: None
+
+
+
+   .. py:attribute:: c
+
+
+   .. py:attribute:: d
+
+
+   .. py:attribute:: e
+
+
+   .. py:attribute:: width
+
+
+   .. py:attribute:: height
+
+
+   .. py:attribute:: undistortion_parameters
+      :value: None
+
+
+
+   .. py:attribute:: undistortion_lookup_table
+      :value: None
+
+
+
+   .. py:method:: get_ocam_model_from_mat(filename)
+      :staticmethod:
+
+
+      Create OcamModel instance loading ocam parameters from .mat file, e.g. generated via Matlab OcamCalib Toolbox
+
+      Remarks:
+
+      - The order of "pol" needs to be flipped such that the coefficients fulfill the polynomial order
+                 P(x)=invpol[0]*x^0+...+invpol[N-1]*x^N-2
+      - The coordinates of the image center need to be subtracted by 1 to fulfill the C convention (start
+                 from 0)
+
+      :param filename: path to .mat file containing ocam model struct
+      :return: OcamModel object
+
+
+
+   .. py:method:: get_ocam_model_from_dict(ocam_dict)
+      :staticmethod:
+
+
+      Create OcamModel instance loading ocam parameters from a dictionary, as read from camera_data.yaml
+
+      All parameters in camera_data.yaml are stored in the right format for usage in Python.
+
+      :param ocam_dict: Dictionary with ocam calibration parameters
+      :return: OcamModel object
+
+
+
+   .. py:method:: cam2world(point_2d)
+
+      Transform pixel coordinates to specific external cartesian coordinates
+
+      Based on the sfmt matlab function cam2world
+
+      :param point_2d: 2d pixel coordinates
+      :type point_2d: np.ndarray, shape (N,2)
+      :return: 3d cartesian coordinates
+      :rtype: np.ndarray, shape (N,3)
+
+
+
+   .. py:method:: world2cam(point3D)
+
+      Map a set of 3-D points in world coordinates to pixels in the camera image.
+
+      :param point3D: Vector of 3D-points in world coordinates
+      :type point3D: np.ndarray, shape (N,3)
+      :return: Vector of 2D points in camera coordinates (pixel)
+      :rtype: np.ndarray, shape (N,2)
+
+
+
+   .. py:method:: world2cam_ss(point3D)
+
+      Convert 3D world coordinates to 2D pixel coordinates in the camera image using the omni3d2pixel function
+
+      Apply an affine transformation to map the coordinates to the final pixel locations.
+
+      :param point3D: tuple or list, x, y, and z coordinates in world space.
+      :return: numpy.ndarray, x and y pixel coordinates of the points in the camera image.
+
+
+
+   .. py:method:: omni3d2pixel(ss, xx, width, height)
+
+      Convert 3D world coordinates to 2D pixel coordinates in the camera image.
+
+      :param ss: numpy.ndarray, coefficients for the polynomial function that relates the image pixel coordinates to
+          the 3D world coordinates
+      :param xx: numpy.ndarray (2D), world coordinates, where each row corresponds to a point in the 3D space
+      :param width: int, width of the camera image
+      :param height: int, height of the camera image
+      :return: 1D numpy arrays containing the x and y pixel coordinates of the points in the camera image
+
+
+
+   .. py:method:: world2cam_eor(eor, object_coo, cam_pos=np.zeros((3, )), use_ss=False)
+
+      Transform coordinates from an external cartesian coordinate system to pixel coordinates.
+
+      :param eor: Vector containing the camera position and orientation.
+      :param object_coo: 3D object coordinates with or without point numbers. Either shape (N,3) with (Y, X, Z) in
+                         each row or shape (N,4) with (Point_Id, Y, X, Z) in each row.
+                         If cam_pos is zero, the origin is in the camera and the following applies:
+                              North (1, 0, 0)
+                              East (0, 1, 0)
+                              Zenith (0, 0, 1)
+      :param cam_pos: Offset in world coordinates between camera and origin
+      :param use_ss: If True, the slower method using the "forward" polynomial ss is used.
+      :return: 2D image coordinates in pixels with or without point numbers depending on input. Origin is located in
+               the upper left corner. If shape is (N,2) data  is interpreted as (X, Y); if (N, 3), data  is
+               interpreted as (Point_Id, X, Y). Increasing X means moving right in image. Increasing Y means moving
+               down in image
+
+
+
+   .. py:method:: cam2world_eor(eor, image_coo, cam_pos=np.zeros((3, )))
+
+       Transform pixel coordinates to coordinates in an external cartesian coordinate system.
+
+       Note: based on sfmt_matlab function call_cam2world
+
+      :param eor: External orientation as a list or 1-D array of 3 entries with the angles roll, pitch, yaw
+           (order and relation to axes should be documented).
+      :param image_coo: 2D image coordinates in pixels with or without point numbers depending on input. Origin is
+           located in the upper left corner. If shape is (N,2) data  is interpreted as (X, Y); if (N, 3), data is
+           interpreted as (Point_Id, X, Y). Increasing X means moving right in image. Increasing Y means moving down
+           in image
+      :param cam_pos: Offset in world coordinates between camera and origin
+      :return: 3D object coordinates with or without point numbers depending on input data. Either shape (N,3) with
+           (Y, X, Z) in each row or shape (N,4) with (Point_Id, Y, X, Z) in each row. If cam_pos is zero, the origin is
+           in the camera and the following applies:
+               North (1, 0, 0)
+               East (0, 1, 0)
+               Zenith (0, 0, 1)
+       
+
+
+
+   .. py:method:: create_undistortion_with_zenith_cropping_LUT(eor, camera_mask, undistorted_resolution=None, limit_angle=78.0, subgrid_factor=4)
+
+      Create a look-up table between pixels of the ASI image and pixels of a undistorted georeferenced map.
+
+      This functions doesn't only undistort images, it also does the EOR correction and cropping around the zenith as
+      specified in the function arguments.
+
+      The returned map's size and the map grid cell's size is not defined by this function. It depends on the height
+      of the observed object relative to the camera (i.e. cloud base height).
+
+      :param eor: ndarray, shape(3,)
+          3-D array with external orientation (euler angles) [Rx, Ry, Rz].
+      :param camera_mask: ndarray, shape(H,W)
+          Defines masked pixels in origin image. True means that the pixel is mapped onto a valid pixel.
+      :param undistorted_resolution: array_like, shape(2,)
+          Resolution of undistorted image [H,W].
+      :param limit_angle: Angle in degrees from zenith that shall be visible in the undistorted image.
+      :param subgrid_factor: Factor by which to increase the resolution of the grid used for undistortion.
+          Higher values result in finer grids, improving the precision of the undistortion process.
+      :return: lookup_table: dict, look-up table from georeferenced map, centered around camera, to image pixels
+               lookup_table['mapx']: ndarray, shape(H,W), ascending south-north (1st dim) and west-east (2nd dim),
+                   each element contains the x-coord (2nd dim) of the image pixel monitoring the grid cell's location
+               lookup_table['mapy']: ndarray, shape(H,W), ascending south-north (1st dim) and west-east (2nd dim),
+                   each element contains the y-coord (1st dim) of the image pixel monitoring the grid cell's location
+               lookup_table['is_inside_mask']: ndarray, shape(H,W),
+
+
+
+   .. py:method:: findinvpoly(ss, width, height)
+      :staticmethod:
+
+
+      Approximate pol from ss. Adapted from Scaramuzza Matlab toolbox.
+
+      :param ss: list-like, ss polynomial coefficients of ocam model
+      :param width: int, image width from ocam model
+      :param height: int, image height from ocam model
+      :return: numpy 1-D array of polynomial coefficients of inverse polynomial to be used in world2cam
+
+
+
