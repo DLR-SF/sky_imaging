@@ -1,0 +1,238 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/DLR-SF/sky_imaging/blob/main/NOTICE.txt
+
+$id: https://schema.pyrano.cam/asi-core/camera_data.schema.json
+$schema: https://json-schema.org/draft/2020-12/schema
+
+title: ASI-Core Camera Definition
+description: Description of the camera attributes that where used for taking pictures
+  in a given time frame.
+
+type: object
+properties:
+  camera_mask_file:
+    type: string
+
+  camera_model:
+    description: Descriptive name of the camera model in use.
+    type: string
+
+  camera_name:
+    description: Descriptive name that uniquely identifies this camera
+    type: string
+
+  mounted:
+    description: Timestamp from which on the given set of parameters becomes 
+      valid for the camera. This may be later than the physical installation
+      due to changes of the camera orientation, configuration etc.
+
+  demounted:
+    description: Timestamp from which on the given set of parameters becomes 
+      invalid for the camera due to dismantling, disturbances etc.
+
+  celestial_coordinate_masks:
+    type: string
+
+  exposure_settings:
+    $ref: '#/$defs/exposure_settings_type'
+
+  external_orientation:
+    $ref: '#/$defs/numeric_array'
+    minItems: 3
+    maxItems: 3
+    description: Three angles in radians, indicating a rotation of the camera 
+      lens over each axis
+
+  internal_calibration:
+    $ref: '#/$defs/internal_calibration_type'
+
+  latitude:
+    description: Latitude of the camera position in [deg], northing positive.
+    type: number
+    minimum: -90.0
+    maximum: 90.0
+
+  longitude:
+    description: Longitude of the camera position in [deg], easting positive.
+    type: number
+    minimum: -180.0
+    maximum: 180.0
+
+  altitude:
+    description: Altitude of the camera position in [m] above sea level, as indicated by GoogleEarth.
+    type: number
+    minimum: -150 # Quattara depression
+    maximum: 9000 # Mount everest
+
+  min_ele_evaluated:
+    description: Minimum elevation of the image that is evaluated in [deg].
+    type: number
+    minimum: 0.0
+    maximum: 90.0
+
+  ocam_mask:
+    type: string
+
+  radiometric_model:
+    $ref: '#/$defs/radiometric_model_type'
+
+  timezone:
+    description: Timezone used in the camera's data acquisition. The timezone should be given as GMT+/-X or UTC+/-X. Timezone changes such as daylight saving are not recommended.
+    type: string
+    pattern: (Europe/Berlin|GMT|UTC)[+-]?(1[0-2]|[0-9])?([0-5][0-9])?
+
+  # This attribute is added automatically when the camera_data file is read
+  _basedir:
+    type: string
+
+required: [
+  camera_name, mounted, camera_model, camera_mask_file,
+  min_ele_evaluated, latitude, longitude, altitude, timezone
+]
+
+# General definitions that are used as types further down.
+$defs:
+  numeric_array:
+    type: array
+    items:
+      type: number
+
+  exposure_settings_type:
+    type: object
+    properties:
+      properties:
+        tolerance_timestamp:
+          description: Bounds of interval of accepted deviations between requested and image timestamp in seconds
+          type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            type: integer
+            minimum: -610
+            maximum: 610
+
+      color_temperature:
+        description: Color temparature set in the camera in [Kelvin].
+        type: number
+
+      exposure_times:
+        type: object
+        properties:
+          day:
+            description: Exposure times evaluated during day time
+            $ref: '#/$defs/numeric_array'
+          night:
+            description: Exposure times evaluated during night time e.g. in calibration tasks
+            $ref: '#/$defs/numeric_array'
+
+      rel_exp_tol:
+        description: Relative deviation of exposure time tolerated (unit-less).
+        type: number
+        minimum: 0
+        maximum: 1
+
+  internal_calibration_type:
+    description: Result of the calibration procedure
+    type: object
+    properties:
+      diameter:
+        description: Diameter of the image area which is illuminated through the lens.
+        type: integer
+        minimum: 1
+        maximum: 20000
+
+      c:
+        description: Affine transformation parameter 'c'.
+        type: number
+
+      d:
+        description: Affine transformation parameter 'd'.
+        type: number
+
+      e:
+        description: Affine transformation parameter 'e'.
+        type: number
+
+      height:
+        description: Total height of the camera image in [pixel].
+        type: integer
+        minimum: 1
+        maximum: 20000
+
+      ss:
+        description: Polynomial coefficients F(p) = ss[0] * p^0 + ... + ss[3] * p^3,
+          that are needed to map pixel point from the image coordinate system (2D)
+          onto a point in the camera coordinate system (3D).
+        $ref: '#/$defs/numeric_array'
+        minItems: 4
+        maxItems: 4
+
+      width:
+        description: Total width of the camera image in [pixel].
+        type: integer
+        minimum: 1
+        maximum: 20000
+
+      xc:
+        description: X coordinate of the center point of camera, starting at 0 (C
+          convention).
+        type: number
+        minimum: 0
+        maximum: 20000
+
+      yc:
+        description: X coordinate of the center point of camera, starting at 0 (C
+          convention).
+        type: number
+        minimum: 0
+        maximum: 20000
+
+    required: [ss, xc, yc, width, height, c, d, e]
+
+  radiometric_model_type:
+    type: object
+    properties:
+      base_sensitivity:
+        description: camera sensitivity determined by comparison to pyranometer in 
+          conditions without direct irradiance.
+        type: number
+        minimum: 0.00001
+        maximum: 1
+
+      beta_planck:
+        $ref: '#/$defs/numeric_array'
+        description: Weighting applied to each color channel 0=R, 1=G, 2=B for uniform 
+          sensitivity in visible spectrum.
+        minItems: 3
+        maxItems: 3
+        minimum: 0
+        maximum: 1
+
+      rel_overest_with_DNI:
+        description: Expected overestimation of DHI caused by direct irradiance, factor 
+          normalized with DNI. I.e. overestimation_DHI = rel_overest_with_DNI * DNI
+        type: number
+        minimum: 0
+        maximum: 0.2
+
+      saturation_corr:
+        description: Expected DHI underestimation caused by each saturated pixel
+        type: number
+        minimum: -0.01
+        maximum: 0
+
+      saturation_val:
+        description: Intensity from which on a grey scale image's pixel is treated as 
+          saturated.
+        type: number
+        minimum: 0
+        maximum: 66000
+
+      weighting_luminosity:
+        description: Weighting applied to each color channel 0=R, 1=G, 2=B for  
+          luminescence calculation.
+        $ref: '#/$defs/numeric_array'
+        minItems: 3
+        maxItems: 3
+        minimum: 0
+        maximum: 3

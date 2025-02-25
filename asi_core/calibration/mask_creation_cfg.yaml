@@ -1,0 +1,14 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/DLR-SF/sky_imaging/blob/main/NOTICE.txt
+
+ObstacleMaskDetection:
+  max_intensity: 255
+  image_pxl_size: 900  # size of visualized images
+  img_path: '\\129.247.24.131\Meteo\MeteoCamera\2023\Cloud_Cam_PVotSky\02\05\16\20230205160245_00160.jpg'
+
+  cv_detection:
+    gaussian_kernel: [11, 11]  # size of kernel applied before mask creation to smoothen image noise
+    adaptive_thres_block_size: 29  # block size applied in adaptiveThreshold to detect bright sky area
+    adaptive_thres_mean_offset: 0.1  # offset/ constant applied in adaptiveThreshold to detect bright sky area
+    erode_dilate_kernel: [9, 9]  # kernel size for the erode-dilate which removes small objects etc.
+    margin_horizon: 500  # this margin is cut off inside the detected circular horizon shape

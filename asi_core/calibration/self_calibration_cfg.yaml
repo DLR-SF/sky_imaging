@@ -1,0 +1,65 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/DLR-SF/sky_imaging/blob/main/NOTICE.txt
+
+Camera:
+  camera_name: Cloud_Cam_PVotSky  # name of the camera to be calibrated (as used in camera_data yaml)
+  # camera_data_dir: 'F:/Local/calib_test/camera_data'  # path to the camera_data yamls, if commented out, taken from
+  # asi-core/asi_core/camera_data
+  img_path_structure: '\\129.247.24.3/Meteo/MeteoCamera/{timestamp:%Y}/{camera_name}/{timestamp:%m}/{timestamp:%d}/{timestamp:%H}/{timestamp:%Y%m%d%H%M%S}_{exposure_time:d}.jpg'
+  # path to each image, containing {camera_name} where the camera name should be inserted, {timestamp:...} (e.g.
+  # {timestamp:%Y%m%d%H%M%S%f}) where the evaluated timestamp should be inserted and {exposure_time:d} for exposure time
+  transforms:
+    apply_camera_mask: True
+
+Calibration:  # parameters defining the calibration procedure
+  mode: 'calibrate_validate_from_images'  # one of the following: 'calibrate_validate_from_images',
+  # 'validate_from_images', 'calibrate_from_csv', 'validate_from_csv'
+  path_orb_observations: ''  # only relevant if calibrate_from_csv, path to csv with orb observations from first run
+  path_calib_results: ''  # Path to calibration results to be used in a validation
+  last_timestamp: !!timestamp '2024-04-04T14:00:00+01:00'  # last timestamp to be included in the calibration
+  last_timestamp_validation: !!timestamp '2024-04-04T14:00:00+01:00'  # last timestamp to be included in the calibration
+  target_calibration: 'optimize_eor_ior_center'  # what should be optimized?
+  # Choose from optimize_eor_ior_center, optimize_eor_ior, optimize_eor
+  orb_types: ['Moon']  # Orb types used for calibration 'Sun' or 'Moon' or 'Sun', 'Moon'
+  orb_types_validation: ['Sun']  # Orb types used for validation 'Sun' or 'Moon' or 'Sun', 'Moon'
+  save_orb_quality_indicators: True
+  sort_out_imgs_manually: False
+  filter_detected_orbs: True
+  min_rel_dist_mask_orb: 1.5
+  compute_and_save_azimuth_elevation: True
+  ignore_outliers_above_percentile: 99  # If number between 0 and 100 is provided, observations with deviation
+    # above corresponding percentile are excluded from calculation of deviation/ optimization
+  center_detection:
+    x_samples: 6  # number of samples on grid of potential center points
+    max_rel_center_dev: 0.25  # fraction of the image side length, maximum expected deviation of the lens center from the image center
+    number_iterations: 11  # number of iterations in each of which a grid of test points is evaluated
+  moon_detection:
+    number_days: 28  # number of days prior to 'last_timestamp' to be included
+    sampling_time: 10  # minutes, use one sky image every 'sampling_time' minutes
+    thresholds:
+      min_area: 10 # pixels, minimum area of valid orb observation; small enough to detect the orb but large enough not
+      # to detect other lights
+      max_area: 10000 # pixels, maximum area of valid orb observation; small enough to reject objects which would be
+      # unusually large for a moon observation
+      intensity_threshold: 100
+      aspect_ratio_tolerance: 0.2
+      circularity_threshold: 0.8
+  sun_detection:
+    number_days: 30  # number of days prior to 'last_timestamp' to be included
+    sampling_time: 10 # minutes, use one sky image every 'sampling_time' minutes
+    thresholds:
+      min_area: 100 # pixels, minimum area of valid orb observation; small enough to detect the orb but large enough not to
+      # detect other lights
+      max_area: 10000 # pixels, maximum area of valid orb observation; small enough to reject very turbid situations
+      intensity_threshold: 240
+      aspect_ratio_tolerance: 0.2
+      circularity_threshold: 0.6
+  moon_validation:
+    sampling_time: 10 # minutes, use one sky image every 'sampling_time' minutes
+    number_days: 28  # number of days prior to 'last_timestamp' to be included
+  sun_validation:
+    sampling_time: 10 # minutes, use one sky image every 'sampling_time' minutes
+    number_days: 30  # number of days prior to 'last_timestamp' to be included
+  ss_statistics:
+    mean: !!python/tuple [-653.3, 2.677e-4, 4.498e-07]
+    std: !!python/tuple [5.4, 2.89e-05, 3.066e-08]

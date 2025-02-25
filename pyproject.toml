@@ -1,0 +1,67 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/DLR-SF/sky_imaging/blob/main/NOTICE.txt
+
+[build-system]
+requires = ["setuptools"]
+bulid-backend = "setuptools.build_meta"
+
+[project]
+name = "asi_core"
+version = "0.1.0"
+description = "Python software for common ASI processing"
+requires-python = ">=3.8"
+
+dependencies = [
+    "opencv-python-headless",
+    "numpy",
+    "Pillow",
+    "pandas",
+    "scipy",
+    "pathlib",
+    "notebook",
+    "pvlib",
+    "matplotlib",
+    "seaborn",
+    "fastcore",
+    "jsonschema",
+    "click",
+    "coverage",
+    "flake8",
+    "flake8-pyproject",
+    "python-dotenv",
+    "requests",
+    "ephem",
+]
+
+[[project.authors]]
+name = "Yann Fabel"
+email = "yann.fabel@dlr.de"
+
+[project.optional-dependencies]
+test = [
+    "pytest"
+]
+docs = [
+    "sphinx",
+    "myst-parser",
+    "sphinx-autoapi"
+]
+progress_bar = [
+    "tqdm"
+]
+read_excel = [
+    "openpyxl"
+]
+
+anomaly_detection = [
+    "ultralytics",
+    "pytorch",
+    "lightning"
+]
+
+[tool.setuptools.packages]
+find = {}
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 10
